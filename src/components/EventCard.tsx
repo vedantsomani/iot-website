@@ -1,0 +1,79 @@
+import Link from "next/link";
+import Image from "next/image";
+import { Calendar, MapPin, Clock } from "lucide-react";
+
+interface EventProps {
+    id: string;
+    title: string;
+    date: string; // e.g., "2026-01-30"
+    time: string;
+    location: string;
+    description: string;
+    image: string;
+    type: string; // "Workshop", "Hackathon", "Seminar"
+    isPast?: boolean;
+}
+
+export default function EventCard({ event }: { event: EventProps }) {
+    const eventDate = new Date(event.date);
+    const day = eventDate.getDate();
+    const month = eventDate.toLocaleString('default', { month: 'short' });
+
+    return (
+        <div className={`group glass-panel rounded-xl overflow-hidden border border-white/10 hover:border-neon-blue/50 transition-all duration-300 flex flex-col h-full ${event.isPast ? 'opacity-70 hover:opacity-100' : ''}`}>
+            <div className="relative h-48 overflow-hidden">
+                <Image
+                    src={event.image}
+                    alt={event.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {!event.isPast && (
+                    <div className="absolute top-0 right-0 bg-neon-purple text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10">
+                        {event.type}
+                    </div>
+                )}
+            </div>
+
+            <div className="p-6 flex flex-col flex-grow">
+                <div className="flex items-start gap-4 mb-4">
+                    <div className={`rounded-lg text-center min-w-[60px] p-2 ${event.isPast ? 'bg-white/5 text-gray-400' : 'bg-neon-blue/10 text-neon-blue'}`}>
+                        <span className="block text-2xl font-bold font-orbitron">{day}</span>
+                        <span className="block text-xs uppercase font-bold">{month}</span>
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors line-clamp-2">
+                            {event.title}
+                        </h3>
+                    </div>
+                </div>
+
+                <div className="space-y-2 mb-4 text-sm text-gray-400 flex-grow">
+                    <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4 text-neon-blue" />
+                        <span>{event.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <MapPin className="h-4 w-4 text-neon-purple" />
+                        <span>{event.location}</span>
+                    </div>
+                    <p className="mt-3 line-clamp-3 text-gray-400">
+                        {event.description}
+                    </p>
+                </div>
+
+                <div className="mt-auto">
+                    {event.isPast ? (
+                        <button className="w-full py-2 rounded border border-white/10 text-gray-400 text-sm cursor-not-allowed">
+                            Event Canceled / Ended
+                        </button>
+                    ) : (
+                        <button className="w-full py-2 rounded bg-white/5 border border-white/10 hover:bg-neon-blue hover:text-black hover:border-transparent transition-all text-sm font-semibold box-glow">
+                            Register Now
+                        </button>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+}

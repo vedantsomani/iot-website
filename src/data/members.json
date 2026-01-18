@@ -1,0 +1,144 @@
+[
+    {
+        "id": "aarav-sharma",
+        "name": "Aarav Sharma",
+        "role": "President",
+        "team": "Executive",
+        "image": "/images/member-placeholder.png",
+        "bio": "Leading the club's vision and strategy.",
+        "linkedin": "#",
+        "instagram": "#"
+    },
+    {
+        "id": "sneha-gupta",
+        "name": "Sneha Gupta",
+        "role": "Vice President",
+        "team": "Executive",
+        "image": "/images/member-placeholder.png",
+        "bio": "Coordinating club activities and partnerships.",
+        "linkedin": "#",
+        "github": "#"
+    },
+    {
+        "id": "rohan-verma",
+        "name": "Rohan Verma",
+        "role": "Tech Lead",
+        "team": "Executive",
+        "image": "/images/member-placeholder.png",
+        "bio": "Driving technical innovation and project development.",
+        "linkedin": "#",
+        "github": "#",
+        "website": "#"
+    },
+    {
+        "id": "priya-patel",
+        "name": "Priya Patel",
+        "role": "General Secretary",
+        "team": "Executive",
+        "image": "/images/member-placeholder.png",
+        "bio": "Managing communications and documentation.",
+        "linkedin": "#",
+        "instagram": "#"
+    },
+    {
+        "id": "vikram-singh",
+        "name": "Vikram Singh",
+        "role": "Drone Lead",
+        "team": "Tech",
+        "image": "/images/member-placeholder.png",
+        "bio": "Specializing in drone technology and autonomous flight.",
+        "linkedin": "#"
+    },
+    {
+        "id": "ananya-roy",
+        "name": "Ananya Roy",
+        "role": "IoT Specialist",
+        "team": "Tech",
+        "image": "/images/member-placeholder.png",
+        "bio": "Building smart connected devices and systems.",
+        "github": "#"
+    },
+    {
+        "id": "karan-malhotra",
+        "name": "Karan Malhotra",
+        "role": "Robotics Engineer",
+        "team": "Tech",
+        "image": "/images/member-placeholder.png",
+        "bio": "Designing and building robot hardware.",
+        "linkedin": "#"
+    },
+    {
+        "id": "siddharth-jain",
+        "name": "Siddharth Jain",
+        "role": "Operations Head",
+        "team": "Management",
+        "image": "/images/member-placeholder.png",
+        "bio": "Managing club operations and logistics.",
+        "linkedin": "#"
+    },
+    {
+        "id": "meera-iyer",
+        "name": "Meera Iyer",
+        "role": "Treasurer",
+        "team": "Management",
+        "image": "/images/member-placeholder.png",
+        "bio": "Handling club finances and budgets.",
+        "linkedin": "#"
+    },
+    {
+        "id": "neha-kaplan",
+        "name": "Neha Kaplan",
+        "role": "PR Head",
+        "team": "PR",
+        "image": "/images/member-placeholder.png",
+        "bio": "Managing public relations and partnerships.",
+        "linkedin": "#",
+        "instagram": "#"
+    },
+    {
+        "id": "arjun-reddy",
+        "name": "Arjun Reddy",
+        "role": "Outreach Lead",
+        "team": "PR",
+        "image": "/images/member-placeholder.png",
+        "bio": "Building collaborations with other organizations.",
+        "linkedin": "#"
+    },
+    {
+        "id": "zara-khan",
+        "name": "Zara Khan",
+        "role": "Social Media Head",
+        "team": "Social Media",
+        "image": "/images/member-placeholder.png",
+        "bio": "Crafting our digital presence and engagement.",
+        "instagram": "#"
+    },
+    {
+        "id": "kabir-bedi",
+        "name": "Kabir Bedi",
+        "role": "Content Creator",
+        "team": "Social Media",
+        "image": "/images/member-placeholder.png",
+        "bio": "Creating engaging content for all platforms.",
+        "linkedin": "#"
+    },
+    {
+        "id": "sanya-mehra",
+        "name": "Sanya Mehra",
+        "role": "Design Head",
+        "team": "Multimedia",
+        "image": "/images/member-placeholder.png",
+        "bio": "Leading visual design and branding.",
+        "instagram": "#",
+        "website": "#"
+    },
+    {
+        "id": "rahul-das",
+        "name": "Rahul Das",
+        "role": "Video Editor",
+        "team": "Multimedia",
+        "image": "/images/member-placeholder.png",
+        "bio": "Producing high-quality video content.",
+        "instagram": "#"
+    }
+]

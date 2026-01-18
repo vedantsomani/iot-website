@@ -1,0 +1,85 @@
+[
+    {
+        "id": "roboweek-2026",
+        "title": "RoboWeek 2026",
+        "date": "2026-02-15",
+        "time": "10:00 AM - 6:00 PM",
+        "location": "Bennett University, Main Auditorium",
+        "description": "A week-long celebration of robotics featuring workshops, competitions, and exhibitions.",
+        "image": "/images/event-placeholder.png",
+        "type": "upcoming",
+        "registrationLink": "#",
+        "tags": [
+            "Competition",
+            "Workshop",
+            "Exhibition"
+        ]
+    },
+    {
+        "id": "iot-workshop-jan",
+        "title": "IoT Fundamentals Workshop",
+        "date": "2026-01-28",
+        "time": "2:00 PM - 5:00 PM",
+        "location": "IoT Lab (L-103)",
+        "description": "Learn the basics of IoT development with ESP32 and Arduino.",
+        "image": "/images/event-placeholder.png",
+        "type": "upcoming",
+        "registrationLink": "#",
+        "tags": [
+            "Workshop",
+            "Beginner"
+        ]
+    },
+    {
+        "id": "drone-racing-2025",
+        "title": "Drone Racing Championship",
+        "date": "2025-11-20",
+        "time": "11:00 AM - 4:00 PM",
+        "location": "Sports Complex",
+        "description": "An exciting drone racing competition with teams from across India.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [
+            "/images/event-placeholder.png",
+            "/images/event-placeholder.png"
+        ],
+        "tags": [
+            "Competition",
+            "Drones"
+        ]
+    },
+    {
+        "id": "hackathon-2025",
+        "title": "IoT Hackathon 2025",
+        "date": "2025-10-05",
+        "time": "24 Hours",
+        "location": "Innovation Hub",
+        "description": "A 24-hour hackathon focused on building IoT solutions for smart cities.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [
+            "/images/event-placeholder.png"
+        ],
+        "tags": [
+            "Hackathon",
+            "IoT"
+        ]
+    },
+    {
+        "id": "robotics-bootcamp-2025",
+        "title": "Robotics Bootcamp",
+        "date": "2025-08-15",
+        "time": "9:00 AM - 5:00 PM (3 Days)",
+        "location": "Robotics Lab",
+        "description": "Intensive 3-day bootcamp covering robot design, programming, and control systems.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [
+            "/images/event-placeholder.png"
+        ],
+        "tags": [
+            "Workshop",
+            "Robotics"
+        ]
+    }
+]

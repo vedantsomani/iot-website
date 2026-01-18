@@ -1,0 +1,92 @@
+[
+    {
+        "slug": "fire-drone",
+        "title": "Autonomous Firefighting Drone",
+        "shortDesc": "A quadcopter that autonomously detects and extinguishes fires.",
+        "description": "Our flagship project: a quadcopter equipped with thermal cameras and a ball-drop extinguishing mechanism. It can autonomously navigate to fire sources and deploy fire suppression agents.",
+        "image": "/images/project-drone.png",
+        "gallery": [
+            "/images/project-drone.png"
+        ],
+        "techStack": [
+            "ESP32",
+            "ROS2",
+            "Python",
+            "OpenCV",
+            "PX4"
+        ],
+        "team": [
+            "Rohan Verma",
+            "Vikram Singh",
+            "Karan Malhotra"
+        ],
+        "demoLink": "#",
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "smart-greenhouse",
+        "title": "Smart Greenhouse System",
+        "shortDesc": "IoT-based automated greenhouse monitoring and control.",
+        "description": "An automated greenhouse system that monitors temperature, humidity, soil moisture, and light levels. It automatically controls irrigation, ventilation, and lighting for optimal plant growth.",
+        "image": "/images/project-drone.png",
+        "gallery": [
+            "/images/project-drone.png"
+        ],
+        "techStack": [
+            "Arduino",
+            "MQTT",
+            "Node-RED",
+            "Sensors"
+        ],
+        "team": [
+            "Ananya Roy",
+            "Priya Patel"
+        ],
+        "demoLink": "#",
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "line-follower",
+        "title": "Line Following Robot",
+        "shortDesc": "A beginner-friendly autonomous line-following robot.",
+        "description": "A classic robotics project that teaches fundamental concepts of sensors, motors, and control algorithms. Built as part of our beginner workshop series.",
+        "image": "/images/project-drone.png",
+        "gallery": [
+            "/images/project-drone.png"
+        ],
+        "techStack": [
+            "Arduino",
+            "IR Sensors",
+            "L298N Motor Driver"
+        ],
+        "team": [
+            "Tech Team"
+        ],
+        "githubLink": "#",
+        "featured": false
+    },
+    {
+        "slug": "voice-assistant",
+        "title": "Offline Voice Assistant",
+        "shortDesc": "A privacy-focused voice assistant that runs entirely offline.",
+        "description": "An IoT device that processes voice commands locally without sending data to the cloud. Perfect for smart home automation with privacy in mind.",
+        "image": "/images/project-drone.png",
+        "gallery": [
+            "/images/project-drone.png"
+        ],
+        "techStack": [
+            "Raspberry Pi",
+            "Vosk",
+            "Python",
+            "Home Assistant"
+        ],
+        "team": [
+            "Sneha Gupta",
+            "Ananya Roy"
+        ],
+        "githubLink": "#",
+        "featured": false
+    }
+]
