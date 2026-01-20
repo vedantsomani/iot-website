@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Target, Eye, Users, Cpu, Palette, TrendingUp, Megaphone, Camera, ArrowRight } from 'lucide-react';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Button } from "@/components/ui/Button";
 
 const teams = [
     {
@@ -50,26 +53,28 @@ const milestones = [
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen pb-20">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="bg-gradient-to-b from-black to-panel-bg py-24 px-4 text-center border-b border-white/5">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6 text-glow">
-                        ABOUT <span className="text-neon-purple">US</span>
-                    </h1>
-                    <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                        Learn about who we are, what we do, and why the IoT & Robotics Club is the place to be.
-                    </p>
-                </motion.div>
-            </section>
+            <Section className="bg-gradient-to-b from-black to-panel-bg border-b border-white/5" spacing="small">
+                <Container className="text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6">
+                            ABOUT <span className="text-neon-purple">US</span>
+                        </h1>
+                        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                            Learn about who we are, what we do, and why the IoT & Robotics Club is the place to be.
+                        </p>
+                    </motion.div>
+                </Container>
+            </Section>
 
             {/* Mission & Vision */}
-            <section className="py-24">
-                <div className="max-w-7xl mx-auto px-4">
+            <Section>
+                <Container>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <ScrollReveal>
                             <motion.div
@@ -109,12 +114,12 @@ export default function AboutPage() {
                             </motion.div>
                         </ScrollReveal>
                     </div>
-                </div>
-            </section>
+                </Container>
+            </Section>
 
             {/* What We Do */}
-            <section className="py-24 bg-panel-bg border-y border-white/5">
-                <div className="max-w-7xl mx-auto px-4">
+            <Section className="bg-panel-bg border-y border-white/5">
+                <Container>
                     <ScrollReveal className="text-center mb-16">
                         <h2 className="text-4xl font-bold font-orbitron text-white mb-4">
                             What We <span className="text-neon-blue">Do</span>
@@ -154,12 +159,12 @@ export default function AboutPage() {
                             </ScrollReveal>
                         ))}
                     </div>
-                </div>
-            </section>
+                </Container>
+            </Section>
 
             {/* Our Teams */}
-            <section className="py-24">
-                <div className="max-w-7xl mx-auto px-4">
+            <Section>
+                <Container>
                     <ScrollReveal className="text-center mb-16">
                         <h2 className="text-4xl font-bold font-orbitron text-white mb-4">
                             Our <span className="text-neon-purple">Teams</span>
@@ -185,20 +190,19 @@ export default function AboutPage() {
                     </StaggerContainer>
 
                     <div className="text-center mt-12">
-                        <Link
-                            href="/members"
-                            className="inline-flex items-center gap-2 text-neon-blue hover:text-white transition-colors group"
-                        >
-                            Meet Our Team
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
+                        <Button asChild variant="link" className="text-lg">
+                            <Link href="/members">
+                                Meet Our Team
+                                <ArrowRight className="ml-2 w-4 h-4" />
+                            </Link>
+                        </Button>
                     </div>
-                </div>
-            </section>
+                </Container>
+            </Section>
 
             {/* Timeline */}
-            <section className="py-24 bg-black">
-                <div className="max-w-4xl mx-auto px-4">
+            <Section className="bg-black">
+                <Container className="max-w-4xl">
                     <ScrollReveal className="text-center mb-16">
                         <h2 className="text-4xl font-bold font-orbitron text-white mb-4">
                             Our <span className="text-neon-blue">Journey</span>
@@ -233,12 +237,12 @@ export default function AboutPage() {
                             ))}
                         </div>
                     </div>
-                </div>
-            </section>
+                </Container>
+            </Section>
 
             {/* CTA */}
-            <ScrollReveal className="py-24">
-                <div className="max-w-4xl mx-auto px-4 text-center">
+            <Section>
+                <Container className="max-w-4xl text-center">
                     <div className="glass-panel p-8 md:p-12 rounded-2xl border border-neon-blue/30">
                         <h2 className="text-3xl font-bold font-orbitron text-white mb-4">
                             Want to be part of our story?
@@ -246,18 +250,15 @@ export default function AboutPage() {
                         <p className="text-gray-400 mb-8">
                             Join us and write the next chapter together.
                         </p>
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Link
-                                href="/join"
-                                className="inline-flex items-center gap-2 px-8 py-4 bg-neon-blue text-black font-bold rounded-lg hover:bg-white transition-colors"
-                            >
+                        <Button asChild size="lg">
+                            <Link href="/join">
                                 Join the Club
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="ml-2 w-5 h-5" />
                             </Link>
-                        </motion.div>
+                        </Button>
                     </div>
-                </div>
-            </ScrollReveal>
+                </Container>
+            </Section>
         </div>
     );
 }

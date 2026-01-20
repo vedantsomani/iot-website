@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle, Users, Cpu, Trophy, Calendar, MessageCircle, Zap } from 'lucide-react';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Button } from "@/components/ui/Button";
 
 const benefits = [
     {
@@ -82,41 +85,41 @@ const faqs = [
 
 export default function JoinPage() {
     return (
-        <div className="min-h-screen pb-20">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="bg-gradient-to-b from-black to-panel-bg py-24 px-4 text-center border-b border-white/5 relative overflow-hidden">
+            <Section className="bg-gradient-to-b from-black to-panel-bg border-b border-white/5 relative overflow-hidden" spacing="small">
                 <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 to-neon-purple/10" />
 
-                <motion.div
-                    className="relative z-10"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6 text-glow">
-                        JOIN <span className="text-neon-blue">US</span>
-                    </h1>
-                    <p className="text-gray-300 max-w-2xl mx-auto text-lg mb-8">
-                        Ready to build autonomous robots, smart IoT systems, and be part of an amazing tech community?
-                    </p>
-
-                    <motion.a
-                        href="https://forms.google.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 px-10 py-5 bg-neon-blue text-black font-bold text-lg rounded-xl hover:bg-white transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                <Container className="relative z-10 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
                     >
-                        Apply for Membership
-                        <ArrowRight className="w-6 h-6" />
-                    </motion.a>
-                </motion.div>
-            </section>
+                        <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6">
+                            JOIN <span className="text-neon-blue">US</span>
+                        </h1>
+                        <p className="text-gray-300 max-w-2xl mx-auto text-lg mb-8">
+                            Ready to build autonomous robots, smart IoT systems, and be part of an amazing tech community?
+                        </p>
+
+                        <Button asChild size="lg" className="bg-neon-blue text-black hover:bg-white border-none">
+                            <a
+                                href="https://forms.google.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Apply for Membership
+                                <ArrowRight className="ml-2 w-6 h-6" />
+                            </a>
+                        </Button>
+                    </motion.div>
+                </Container>
+            </Section>
 
             {/* Benefits */}
-            <section className="py-24">
-                <div className="max-w-7xl mx-auto px-4">
+            <Section>
+                <Container>
                     <ScrollReveal className="text-center mb-16">
                         <h2 className="text-4xl font-bold font-orbitron text-white mb-4">
                             Why Join the <span className="text-neon-purple">Club?</span>
@@ -141,12 +144,12 @@ export default function JoinPage() {
                             </StaggerItem>
                         ))}
                     </StaggerContainer>
-                </div>
-            </section>
+                </Container>
+            </Section>
 
             {/* How to Join */}
-            <section className="py-24 bg-panel-bg border-y border-white/5">
-                <div className="max-w-7xl mx-auto px-4">
+            <Section className="bg-panel-bg border-y border-white/5">
+                <Container>
                     <ScrollReveal className="text-center mb-16">
                         <h2 className="text-4xl font-bold font-orbitron text-white mb-4">
                             How to <span className="text-neon-blue">Join</span>
@@ -177,12 +180,12 @@ export default function JoinPage() {
                             </ScrollReveal>
                         ))}
                     </div>
-                </div>
-            </section>
+                </Container>
+            </Section>
 
             {/* FAQ */}
-            <section className="py-24">
-                <div className="max-w-4xl mx-auto px-4">
+            <Section>
+                <Container className="max-w-4xl">
                     <ScrollReveal className="text-center mb-16">
                         <h2 className="text-4xl font-bold font-orbitron text-white mb-4">
                             Frequently Asked <span className="text-neon-purple">Questions</span>
@@ -205,43 +208,43 @@ export default function JoinPage() {
                             </ScrollReveal>
                         ))}
                     </div>
-                </div>
-            </section>
+                </Container>
+            </Section>
 
             {/* Final CTA */}
-            <section className="py-24 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 relative overflow-hidden">
+            <Section className="bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/50" />
 
-                <ScrollReveal className="max-w-4xl mx-auto px-4 text-center relative z-10">
-                    <h2 className="text-4xl md:text-5xl font-bold font-orbitron text-white mb-6">
-                        Ready to Start Your Journey?
-                    </h2>
-                    <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                        Fill out the membership form and we'll reach out with next steps.
-                    </p>
+                <Container className="max-w-4xl text-center relative z-10">
+                    <ScrollReveal>
+                        <h2 className="text-4xl md:text-5xl font-bold font-orbitron text-white mb-6">
+                            Ready to Start Your Journey?
+                        </h2>
+                        <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                            Fill out the membership form and we'll reach out with next steps.
+                        </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <motion.a
-                            href="https://forms.google.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-black font-bold text-lg rounded-xl hover:bg-neon-blue transition-colors"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Apply Now
-                            <ArrowRight className="w-6 h-6" />
-                        </motion.a>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Button asChild size="lg" className="bg-white text-black hover:bg-neon-blue border-none">
+                                <a
+                                    href="https://forms.google.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Apply Now
+                                    <ArrowRight className="ml-2 w-6 h-6" />
+                                </a>
+                            </Button>
 
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center justify-center gap-2 px-10 py-5 border border-white/20 text-white font-bold text-lg rounded-xl hover:border-white hover:bg-white/10 transition-colors"
-                        >
-                            Have Questions? Contact Us
-                        </Link>
-                    </div>
-                </ScrollReveal>
-            </section>
+                            <Button asChild size="lg" variant="outline">
+                                <Link href="/contact">
+                                    Have Questions? Contact Us
+                                </Link>
+                            </Button>
+                        </div>
+                    </ScrollReveal>
+                </Container>
+            </Section>
         </div>
     );
 }

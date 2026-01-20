@@ -41,8 +41,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${orbitron.variable} ${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
     >
-      <body className="antialiased min-h-screen flex flex-col bg-background text-foreground">
+      <body
+        className="antialiased min-h-screen flex flex-col bg-background text-foreground"
+        suppressHydrationWarning
+      >
         <Navbar />
         <main className="flex-grow pt-16">{children}</main>
         <Footer />

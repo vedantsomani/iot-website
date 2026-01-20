@@ -22,18 +22,19 @@ export default function ProjectCard({ project }: { project: ProjectProps }) {
                     alt={project.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-panel-bg via-transparent to-transparent opacity-80" />
 
-                <div className="absolute bottom-4 left-4 right-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent pt-12">
                     <div className="flex gap-2 flex-wrap mb-2">
                         {project.tags.map(tag => (
-                            <span key={tag} className="text-[10px] uppercase font-bold px-2 py-1 bg-neon-blue/20 text-neon-blue rounded-full backdrop-blur-md">
+                            <span key={tag} className="text-[10px] uppercase font-bold px-2 py-0.5 bg-neon-blue/20 text-neon-blue rounded-full backdrop-blur-md border border-neon-blue/20">
                                 {tag}
                             </span>
                         ))}
                     </div>
-                    <h3 className="text-2xl font-bold text-white font-orbitron group-hover:text-neon-blue transition-colors">
+                    <h3 className="text-xl font-bold text-white font-orbitron group-hover:text-neon-blue transition-colors">
                         {project.title}
                     </h3>
                 </div>

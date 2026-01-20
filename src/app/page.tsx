@@ -9,6 +9,10 @@ import dynamic from 'next/dynamic';
 
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
 import ParticleBackground from '@/components/ParticleBackground';
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 
 // Dynamic import for 3D mascot (client-only)
 const RobotMascot = dynamic(() => import('@/components/RobotMascot'), {
@@ -56,7 +60,7 @@ export default function HomePage() {
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black z-[1]" />
 
-        <div className="max-w-7xl mx-auto px-4 py-32 relative z-10 w-full">
+        <Container className="relative z-10 w-full py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left: Text Content */}
             <motion.div
@@ -65,16 +69,18 @@ export default function HomePage() {
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neon-blue/30 bg-neon-blue/10 text-neon-blue text-sm mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
+                className="mb-6"
               >
-                <Zap className="w-4 h-4" />
-                <span>Bennett University</span>
+                <Badge variant="default" className="px-4 py-1.5 text-sm">
+                  <Zap className="w-3.5 h-3.5 mr-2" />
+                  Bennett University
+                </Badge>
               </motion.div>
 
-              <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6 leading-tight">
+              <h1 className="text-4xl md:text-7xl font-bold font-orbitron text-white mb-6 leading-tight">
                 IoT &{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple">
                   Robotics
@@ -87,21 +93,27 @@ export default function HomePage() {
                 Where innovation meets passion. Build smart devices, autonomous robots, and shape the future of technology.
               </p>
 
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/join"
-                  className="group inline-flex items-center gap-2 px-8 py-4 bg-neon-blue text-black font-bold rounded-lg hover:bg-white transition-all duration-300 hover:scale-105"
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  asChild
+                  size="lg"
+                  className="group"
                 >
-                  Join Now
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                  <Link href="/join">
+                    Join Now
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
 
-                <Link
-                  href="/projects"
-                  className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-bold rounded-lg hover:border-neon-purple hover:text-neon-purple transition-all duration-300"
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
                 >
-                  View Projects
-                </Link>
+                  <Link href="/projects">
+                    View Projects
+                  </Link>
+                </Button>
               </div>
             </motion.div>
 
@@ -120,7 +132,7 @@ export default function HomePage() {
               <div className="absolute inset-0 blur-3xl opacity-30 bg-gradient-radial from-neon-blue/50 to-transparent -z-10" />
             </motion.div>
           </div>
-        </div>
+        </Container>
 
         {/* Scroll indicator */}
         <motion.div
@@ -135,8 +147,8 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-panel-bg border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-4">
+      <Section spacing="small" className="bg-panel-bg border-y border-white/5">
+        <Container>
           <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <StaggerItem key={index}>
@@ -152,18 +164,16 @@ export default function HomePage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Featured Project Section */}
-      <section className="py-24 relative overflow-hidden">
+      <Section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/5 to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
+        <Container className="relative z-10">
           <ScrollReveal>
-            <div className="inline-block px-3 py-1 mb-4 border border-neon-purple text-neon-purple rounded-full text-xs font-bold tracking-wider">
-              PROJECT SPOTLIGHT
-            </div>
+            <Badge variant="secondary" className="mb-4">PROJECT SPOTLIGHT</Badge>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -205,6 +215,7 @@ export default function HomePage() {
                   alt={featuredProject.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
@@ -213,17 +224,17 @@ export default function HomePage() {
               </motion.div>
             </ScrollReveal>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Upcoming Event Section */}
-      <section className="py-24 bg-black">
-        <div className="max-w-7xl mx-auto px-4">
-          <ScrollReveal className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-orbitron text-white mb-4">
+      <Section className="bg-black">
+        <Container>
+          <ScrollReveal className="text-center mb-10">
+            <h2 className="text-3xl md:text-5xl font-bold font-orbitron text-white mb-4">
               UPCOMING <span className="text-neon-blue">EVENT</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-gray-400 max-w-2xl mx-auto text-base">
               Don't miss out on our next big event. Register now to secure your spot!
             </p>
           </ScrollReveal>
@@ -241,6 +252,7 @@ export default function HomePage() {
                     alt={upcomingEvent.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-panel-bg/80 md:block hidden" />
                 </div>
@@ -259,23 +271,22 @@ export default function HomePage() {
                     {upcomingEvent.description}
                   </p>
 
-                  <Link
-                    href="/events"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-neon-blue text-black font-bold rounded-lg hover:bg-white transition-colors w-fit"
-                  >
-                    View Event Details
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  <Button asChild>
+                    <Link href="/events">
+                      View Event Details
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </motion.div>
           </ScrollReveal>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* About Preview Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4">
+      <Section className="relative overflow-hidden">
+        <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal direction="left">
               <h2 className="text-4xl md:text-5xl font-bold font-orbitron text-white mb-6">
@@ -303,13 +314,12 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 text-neon-blue hover:text-white transition-colors group"
-              >
-                Learn more about us
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              <Button asChild variant="ghost" className="pl-0 gap-2 hover:bg-transparent hover:text-neon-blue">
+                <Link href="/about">
+                  Learn more about us
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={0.2}>
@@ -354,35 +364,40 @@ export default function HomePage() {
               </div>
             </ScrollReveal>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 relative overflow-hidden">
+      <Section className="bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black/50" />
 
-        <ScrollReveal className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl md:text-6xl font-bold font-orbitron text-white mb-6">
-            Ready to Build the Future?
-          </h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Join our community of innovators and start your journey in robotics and IoT today.
-          </p>
+        <Container className="max-w-4xl relative z-10 text-center">
+          <ScrollReveal>
+            <h2 className="text-4xl md:text-6xl font-bold font-orbitron text-white mb-6">
+              Ready to Build the Future?
+            </h2>
+            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+              Join our community of innovators and start your journey in robotics and IoT today.
+            </p>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link
-              href="/join"
-              className="inline-flex items-center gap-3 px-10 py-5 bg-white text-black font-bold text-lg rounded-xl hover:bg-neon-blue transition-colors"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Join the Club
-              <ArrowRight className="w-6 h-6" />
-            </Link>
-          </motion.div>
-        </ScrollReveal>
-      </section>
+              <Button
+                asChild
+                size="lg"
+                className="bg-white text-black hover:bg-neon-blue hover:text-black border-none"
+              >
+                <Link href="/join">
+                  Join the Club
+                  <ArrowRight className="ml-2 w-6 h-6" />
+                </Link>
+              </Button>
+            </motion.div>
+          </ScrollReveal>
+        </Container>
+      </Section>
     </div>
   );
 }

@@ -27,6 +27,7 @@ export default function EventCard({ event }: { event: EventProps }) {
                     alt={event.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 {!event.isPast && (
                     <div className="absolute top-0 right-0 bg-neon-purple text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10">
@@ -42,33 +43,36 @@ export default function EventCard({ event }: { event: EventProps }) {
                         <span className="block text-xs uppercase font-bold">{month}</span>
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors line-clamp-2">
+                        <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors line-clamp-2 leading-tight">
                             {event.title}
                         </h3>
                     </div>
                 </div>
 
-                <div className="space-y-2 mb-4 text-sm text-gray-400 flex-grow">
-                    <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-neon-blue" />
-                        <span>{event.time}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-neon-purple" />
-                        <span>{event.location}</span>
-                    </div>
-                    <p className="mt-3 line-clamp-3 text-gray-400">
+                <div className="space-y-3 mb-6 flex-grow">
+                    <p className="line-clamp-2 text-gray-400 text-sm">
                         {event.description}
                     </p>
+
+                    <div className="pt-2 space-y-2 border-t border-white/5">
+                        <div className="flex items-center gap-3 text-sm text-gray-300">
+                            <Clock className="h-4 w-4 text-neon-blue flex-shrink-0" />
+                            <span>{event.time}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-gray-300">
+                            <MapPin className="h-4 w-4 text-neon-purple flex-shrink-0" />
+                            <span>{event.location}</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="mt-auto">
                     {event.isPast ? (
-                        <button className="w-full py-2 rounded border border-white/10 text-gray-400 text-sm cursor-not-allowed">
-                            Event Canceled / Ended
+                        <button disabled className="w-full py-2.5 rounded border border-white/10 text-gray-500 text-sm cursor-not-allowed bg-white/5 font-medium">
+                            Event Ended
                         </button>
                     ) : (
-                        <button className="w-full py-2 rounded bg-white/5 border border-white/10 hover:bg-neon-blue hover:text-black hover:border-transparent transition-all text-sm font-semibold box-glow">
+                        <button className="w-full py-2.5 rounded bg-neon-blue/10 border border-neon-blue/50 text-neon-blue hover:bg-neon-blue hover:text-black hover:border-transparent transition-all text-sm font-bold tracking-wide uppercase box-glow">
                             Register Now
                         </button>
                     )}

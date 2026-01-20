@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Cpu } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import GooeyNav from "@/components/react-bits/GooeyNav";
 
-const navLinks = [
+// Consistent navigation items
+const navItems = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Members", href: "/members" },
@@ -20,64 +21,49 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <Link href="/" className="flex items-center space-x-2 group">
-                        <Cpu className="h-8 w-8 text-neon-blue group-hover:text-neon-purple transition-colors duration-300" />
-                        <span className="text-xl font-bold font-orbitron tracking-wider text-white group-hover:text-glow transition-all">
-                            IoT & ROBOTICS
-                        </span>
+        <header className="sticky top-0 z-50 w-full bg-black/40 backdrop-blur-2xl border-b border-white/10 supports-[backdrop-filter]:bg-black/20 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-20">
+                    {/* Brand Logo */}
+                    <Link href="/" className="text-lg md:text-2xl font-bold font-orbitron text-white z-50">
+                        IoT & Robotics <span className="text-neon-blue">Club</span>
                     </Link>
 
+                    {/* Desktop Navigation (GooeyNav) */}
                     <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-4">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-neon-blue hover:bg-white/5 transition-all duration-300"
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                        </div>
+                        <GooeyNav
+                            navItems={navItems}
+                            className="!bg-transparent !border-none"
+                        />
                     </div>
 
-                    <div className="md:hidden">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-300 hover:text-white focus:outline-none"
-                        >
-                            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                        </button>
-                    </div>
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        className="md:hidden text-white p-2 z-50 focus:outline-none"
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                    </button>
                 </div>
             </div>
 
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden glass-panel border-b border-white/10"
-                    >
-                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-neon-blue hover:bg-white/5"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </nav>
+            {/* Mobile Navigation Dropdown */}
+            {/* Uses absolute positioning to overlay content properly */}
+            {isOpen && (
+                <div className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-b border-white/10 shadow-2xl py-4 px-4 flex flex-col gap-2 animate-in slide-in-from-top-2 duration-200">
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className="block px-4 py-3 text-lg font-medium text-gray-300 hover:text-white hover:bg-neon-blue/10 hover:border-l-4 hover:border-neon-blue rounded-r-lg transition-all"
+                        >
+                            {item.name}
+                        </Link>
+                    ))}
+                </div>
+            )}
+        </header>
     );
 }

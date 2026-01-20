@@ -1,11 +1,17 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Instagram, Linkedin, Github, Globe } from 'lucide-react';
-import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
+import { Instagram, Linkedin, Github, Globe, ArrowRight } from 'lucide-react';
+import ScrollReveal from '@/components/ScrollReveal';
+import ChromaGrid from '@/components/react-bits/ChromaGrid';
 import membersData from '@/data/members.json';
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 
 interface Member {
     id: string;
@@ -20,7 +26,7 @@ interface Member {
     website?: string;
 }
 
-const teamOrder = ['Executive', 'Tech', 'Management', 'PR', 'Social Media', 'Multimedia'];
+const teamOrder = ['Executive', 'Tech', 'Management', 'PR', 'Social Media', 'Design', 'Multimedia'];
 
 const teamColors: Record<string, string> = {
     Executive: 'neon-purple',
@@ -28,6 +34,7 @@ const teamColors: Record<string, string> = {
     Management: 'green-400',
     PR: 'yellow-400',
     'Social Media': 'pink-400',
+    Design: 'indigo-400',
     Multimedia: 'orange-400',
 };
 
@@ -182,83 +189,84 @@ export default function MembersPage() {
     }, {} as Record<string, Member[]>);
 
     return (
-        <div className="min-h-screen pb-20">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="bg-gradient-to-b from-black to-panel-bg py-24 px-4 text-center border-b border-white/5">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6 text-glow">
-                        OUR <span className="text-neon-blue">TEAM</span>
-                    </h1>
-                    <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                        Meet the innovators, creators, and leaders driving the IoT & Robotics Club forward.
-                        Hover over a member to learn more.
-                    </p>
-                </motion.div>
-            </section>
+            <Section className="bg-gradient-to-b from-black to-panel-bg border-b border-white/5" spacing="small">
+                <Container>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="text-center"
+                    >
+                        <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6">
+                            OUR <span className="text-neon-blue">TEAM</span>
+                        </h1>
+                        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                            Meet the innovators, creators, and leaders driving the IoT & Robotics Club forward.
+                            Hover over a member to learn more.
+                        </p>
+                    </motion.div>
+                </Container>
+            </Section>
 
             {/* Members by Team */}
-            <div className="max-w-7xl mx-auto px-4 mt-16">
-                {teamOrder.map((team, teamIndex) => {
-                    const teamMembers = groupedMembers[team];
-                    if (!teamMembers || teamMembers.length === 0) return null;
+            <Section>
+                <Container>
+                    {teamOrder.map((team, teamIndex) => {
+                        const teamMembers = groupedMembers[team];
+                        if (!teamMembers || teamMembers.length === 0) return null;
 
-                    return (
-                        <section key={team} className="mb-20">
-                            <ScrollReveal delay={teamIndex * 0.1}>
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className={`h-12 w-2 bg-${teamColors[team] || 'neon-blue'} rounded-full`} />
-                                    <div>
-                                        <h2 className="text-3xl font-bold font-orbitron text-white">{team}</h2>
-                                        <p className="text-gray-500 text-sm">
-                                            {team === 'Executive' && 'Club leadership and management'}
-                                            {team === 'Tech' && 'Workshops, projects, and R&D'}
-                                            {team === 'Management' && 'Operations, finances, and logistics'}
-                                            {team === 'PR' && 'Sponsorships and campus presence'}
-                                            {team === 'Social Media' && 'Online presence and community'}
-                                            {team === 'Multimedia' && 'Visuals, videos, and branding'}
-                                        </p>
+                        return (
+                            <section key={team} className="mb-20 last:mb-0">
+                                <ScrollReveal delay={teamIndex * 0.1}>
+                                    <div className="flex items-center gap-4 mb-8">
+                                        <Badge variant="default" className={`bg-${teamColors[team] || 'neon-blue'}/20 text-${teamColors[team] || 'neon-blue'} border-${teamColors[team] || 'neon-blue'}/20`}>
+                                            {team}
+                                        </Badge>
+                                        <div>
+                                            {team === 'Executive' && <span className="text-gray-400 text-sm hidden sm:inline-block">Club leadership and management</span>}
+                                            {team === 'Tech' && <span className="text-gray-400 text-sm hidden sm:inline-block">Workshops, projects, and R&D</span>}
+                                        </div>
                                     </div>
-                                </div>
-                            </ScrollReveal>
+                                    <h2 className="text-3xl font-bold font-orbitron text-white mb-8 hidden">
+                                        {team}
+                                        {/* Hidden h2 for SEO but visible Badge above for UI */}
+                                    </h2>
+                                </ScrollReveal>
 
-                            <StaggerContainer
-                                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
-                                staggerDelay={0.05}
-                            >
-                                {teamMembers.map((member) => (
-                                    <StaggerItem key={member.id}>
-                                        <MemberCard member={member} />
-                                    </StaggerItem>
-                                ))}
-                            </StaggerContainer>
-                        </section>
-                    );
-                })}
-            </div>
+                                <ChromaGrid columns={4}>
+                                    {teamMembers.map((member) => (
+                                        <MemberCard key={member.id} member={member} />
+                                    ))}
+                                </ChromaGrid>
+                            </section>
+                        );
+                    })}
+                </Container>
+            </Section>
 
             {/* Join CTA */}
-            <ScrollReveal className="max-w-4xl mx-auto px-4 mt-16">
-                <div className="glass-panel p-8 md:p-12 rounded-2xl border border-neon-blue/30 text-center">
-                    <h2 className="text-2xl md:text-3xl font-bold font-orbitron text-white mb-4">
-                        Want to be part of the team?
-                    </h2>
-                    <p className="text-gray-400 mb-6">
-                        We're always looking for passionate students to join our community.
-                    </p>
-                    <motion.a
-                        href="/join"
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-neon-blue text-black font-bold rounded-lg hover:bg-white transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Apply Now
-                    </motion.a>
-                </div>
-            </ScrollReveal>
+            <Section className="pt-0">
+                <Container className="max-w-4xl">
+                    <ScrollReveal>
+                        <div className="glass-panel p-8 md:p-12 rounded-2xl border border-neon-blue/30 text-center">
+                            <h2 className="text-2xl md:text-3xl font-bold font-orbitron text-white mb-4">
+                                Want to be part of the team?
+                            </h2>
+                            <p className="text-gray-400 mb-6">
+                                We're always looking for passionate students to join our community.
+                            </p>
+                            <Button asChild size="lg">
+                                <Link href="/join">
+                                    Apply Now
+                                    <ArrowRight className="ml-2 w-5 h-5" />
+                                </Link>
+                            </Button>
+                        </div>
+                    </ScrollReveal>
+                </Container>
+            </Section>
         </div>
     );
 }

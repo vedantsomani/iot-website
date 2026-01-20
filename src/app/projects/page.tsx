@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
 import projectsData from '@/data/projects.json';
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Badge } from "@/components/ui/Badge";
 
 interface Project {
     slug: string;
@@ -44,8 +47,8 @@ function ProjectCard({ project }: { project: Project }) {
 
                 {/* Featured badge */}
                 {project.featured && (
-                    <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-neon-purple text-white relative z-20">
-                        Featured
+                    <div className="absolute top-4 left-4 z-20">
+                        <Badge variant="secondary">Featured</Badge>
                     </div>
                 )}
 
@@ -117,88 +120,93 @@ export default function ProjectsPage() {
     const otherProjects = projects.filter((p) => !p.featured);
 
     return (
-        <div className="min-h-screen pb-20">
+        <div className="min-h-screen">
             {/* Header */}
-            <section className="bg-gradient-to-b from-black to-panel-bg py-24 px-4 text-center border-b border-white/5">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6 text-glow">
-                        OUR <span className="text-neon-blue">PROJECTS</span>
-                    </h1>
-                    <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                        From autonomous drones to smart IoT systems — explore the innovations built by our team.
-                    </p>
-                </motion.div>
-            </section>
+            <Section className="bg-gradient-to-b from-black to-panel-bg border-b border-white/5" spacing="small">
+                <Container>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="text-center"
+                    >
+                        <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6">
+                            OUR <span className="text-neon-blue">PROJECTS</span>
+                        </h1>
+                        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                            From autonomous drones to smart IoT systems — explore the innovations built by our team.
+                        </p>
+                    </motion.div>
+                </Container>
+            </Section>
 
-            <div className="max-w-7xl mx-auto px-4">
-                {/* Featured Projects */}
-                {featuredProjects.length > 0 && (
-                    <section className="mt-16">
+            <Section>
+                <Container>
+                    {/* Featured Projects */}
+                    {featuredProjects.length > 0 && (
+                        <div className="mb-20">
+                            <ScrollReveal>
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="h-12 w-2 bg-neon-purple rounded-full" />
+                                    <h2 className="text-3xl font-bold font-orbitron text-white">Featured Projects</h2>
+                                </div>
+                            </ScrollReveal>
+
+                            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {featuredProjects.map((project) => (
+                                    <StaggerItem key={project.slug}>
+                                        <ProjectCard project={project} />
+                                    </StaggerItem>
+                                ))}
+                            </StaggerContainer>
+                        </div>
+                    )}
+
+                    {/* All Projects */}
+                    <div>
                         <ScrollReveal>
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="h-12 w-2 bg-neon-purple rounded-full" />
-                                <h2 className="text-3xl font-bold font-orbitron text-white">Featured Projects</h2>
+                                <div className="h-12 w-2 bg-neon-blue rounded-full" />
+                                <h2 className="text-3xl font-bold font-orbitron text-white">All Projects</h2>
                             </div>
                         </ScrollReveal>
 
-                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {otherProjects.map((project) => (
+                                <StaggerItem key={project.slug}>
+                                    <ProjectCard project={project} />
+                                </StaggerItem>
+                            ))}
                             {featuredProjects.map((project) => (
                                 <StaggerItem key={project.slug}>
                                     <ProjectCard project={project} />
                                 </StaggerItem>
                             ))}
                         </StaggerContainer>
-                    </section>
-                )}
+                    </div>
 
-                {/* All Projects */}
-                <section className="mt-16">
-                    <ScrollReveal>
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="h-12 w-2 bg-neon-blue rounded-full" />
-                            <h2 className="text-3xl font-bold font-orbitron text-white">All Projects</h2>
+                    {/* CTA */}
+                    <ScrollReveal className="mt-20">
+                        <div className="glass-panel p-8 md:p-12 rounded-2xl border border-neon-purple/30 text-center">
+                            <h2 className="text-2xl md:text-3xl font-bold font-orbitron text-white mb-4">
+                                Have a project idea?
+                            </h2>
+                            <p className="text-gray-400 mb-6">
+                                Join the club and turn your ideas into reality with our team and resources.
+                            </p>
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <Link
+                                    href="/join"
+                                    className="inline-flex items-center gap-2 px-8 py-4 bg-neon-purple text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors"
+                                >
+                                    Start Building
+                                    <ArrowRight className="w-5 h-5" />
+                                </Link>
+                            </motion.div>
                         </div>
                     </ScrollReveal>
-
-                    <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {otherProjects.map((project) => (
-                            <StaggerItem key={project.slug}>
-                                <ProjectCard project={project} />
-                            </StaggerItem>
-                        ))}
-                        {featuredProjects.map((project) => (
-                            <StaggerItem key={project.slug}>
-                                <ProjectCard project={project} />
-                            </StaggerItem>
-                        ))}
-                    </StaggerContainer>
-                </section>
-
-                {/* CTA */}
-                <ScrollReveal className="mt-16">
-                    <div className="glass-panel p-8 md:p-12 rounded-2xl border border-neon-purple/30 text-center">
-                        <h2 className="text-2xl md:text-3xl font-bold font-orbitron text-white mb-4">
-                            Have a project idea?
-                        </h2>
-                        <p className="text-gray-400 mb-6">
-                            Join the club and turn your ideas into reality with our team and resources.
-                        </p>
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Link
-                                href="/join"
-                                className="inline-flex items-center gap-2 px-8 py-4 bg-neon-purple text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors"
-                            >
-                                Start Building
-                                <ArrowRight className="w-5 h-5" />
-                            </Link>
-                        </motion.div>
-                    </div>
-                </ScrollReveal>
-            </div>
+                </Container>
+            </Section>
         </div>
     );
 }
