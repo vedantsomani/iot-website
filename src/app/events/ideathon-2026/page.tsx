@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, CheckCircle, User, Users, Shield, FileText, Lock, Unlock, AlertTriangle, Zap, Edit } from 'lucide-react';
+import { ChevronRight, CheckCircle, User, Users, Shield, FileText, Lock, Unlock, AlertTriangle, Zap, Edit, Download, Crosshair, ArrowRight } from 'lucide-react';
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import ParticleBackground from "@/components/ParticleBackground";
-import RobotMascot from "@/components/RobotMascot";
+import { CyberLock } from "@/components/CyberLock";
 import { Section } from "@/components/ui/Section";
+import { MissionTimer } from "@/components/MissionTimer";
 
 export default function IdeathonPage() {
     const [protocolsRead, setProtocolsRead] = useState(false);
@@ -53,8 +54,8 @@ export default function IdeathonPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
                     >
-                        <div className="h-48 mb-6 flex items-center justify-center">
-                            <RobotMascot />
+                        <div className="mb-6 flex items-center justify-center">
+                            <CyberLock />
                         </div>
                         <h1 className="text-6xl md:text-8xl font-bold font-orbitron text-white mb-6 tracking-tighter">
                             IDEATHON <span className="text-neon-blue">2026</span>
@@ -63,6 +64,9 @@ export default function IdeathonPage() {
                             OPERATION: ESCAPE ROOM. <br />
                             <span className="text-neon-purple font-mono text-base">&gt; 24 HOURS. 4 AGENTS. 1 MISSION.</span>
                         </p>
+
+                        <MissionTimer targetDate="2026-02-04T09:00:00" />
+                        <div className="mb-8" />
 
                         {!protocolsRead ? (
                             <Button
@@ -135,6 +139,20 @@ export default function IdeathonPage() {
                                 Sabotage of rival squads will result in immediate court-martial (disqualification). Respect the integrity of the facility. Innovation is the primary directive.
                             </p>
                         </motion.div>
+
+                        <motion.div
+                            whileHover={{ scale: 1.01 }}
+                            className="glass-panel p-6 rounded-xl border-l-4 border-red-500"
+                        >
+                            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                <AlertTriangle className="w-5 h-5 text-red-500" />
+                                4. MISSION TIMELINE (CRITICAL)
+                            </h3>
+                            <div className="text-gray-300 ml-7 space-y-2 text-sm">
+                                <p><strong className="text-white">Day 1 [IDEATHON]:</strong> Topic Reveal (On-Site) &rarr; 2 Hours Intel/Research &rarr; Presentation Briefing.</p>
+                                <p><strong className="text-neon-purple">Day 2 [ESCAPE ROOM]:</strong> Only the <span className="text-white font-bold">TOP 10 SQUADS</span> from Day 1 will advance to the Operation Escape Room phase.</p>
+                            </div>
+                        </motion.div>
                     </div>
 
                     <div className="mt-12 text-center">
@@ -150,6 +168,40 @@ export default function IdeathonPage() {
                                 "I ACKNOWLEDGE & ACCEPT"
                             )}
                         </Button>
+                    </div>
+                </Container>
+            </Section>
+
+            {/* TACTICAL RESOURCES */}
+            <Section className="border-t border-white/5 bg-black/50 backdrop-blur-sm" spacing="small">
+                <Container>
+                    <div className="flex items-center gap-3 mb-8">
+                        <Crosshair className="text-neon-purple w-6 h-6" />
+                        <h2 className="text-2xl font-bold text-white tracking-widest">TACTICAL RESOURCES</h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {[
+                            { title: "MISSION BRIEF", size: "2.4 MB", icon: FileText },
+                            { title: "CODE OF CONDUCT", size: "1.1 MB", icon: Shield },
+                            { title: "FIELD ASSET PACK", size: "45 MB", icon: Download },
+                        ].map((resource, i) => (
+                            <motion.div
+                                key={i}
+                                whileHover={{ scale: 1.02 }}
+                                className="glass-panel p-6 rounded-lg border border-white/10 hover:border-neon-purple/50 transition-colors group cursor-pointer"
+                            >
+                                <div className="flex justify-between items-start mb-4">
+                                    <resource.icon className="w-8 h-8 text-gray-500 group-hover:text-neon-purple transition-colors" />
+                                    <span className="text-xs text-gray-500 font-mono">{resource.size}</span>
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-2">{resource.title}</h3>
+                                <div className="flex items-center gap-2 text-xs text-neon-purple opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span>DOWNLOAD SECURE FILE</span>
+                                    <ArrowRight className="w-3 h-3" />
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </Container>
             </Section>
@@ -332,7 +384,28 @@ export default function IdeathonPage() {
                                         <div className="flex gap-3 mt-4">
                                             <Button variant="outline" onClick={() => setStep(1)} className="flex-1">Back</Button>
                                             <Button
-                                                onClick={nextStep}
+                                                onClick={async () => {
+                                                    // Validate Emails
+                                                    const emailRegex = /^[a-zA-Z0-9._%+-]+@(bennett\.edu\.in|gmail\.com)$/i;
+                                                    const invalidMember = formData.members.find(m => !emailRegex.test(m.email.trim()));
+
+                                                    if (invalidMember) {
+                                                        alert(`Agent ${invalidMember.name || 'Unknown'} has an invalid email credentials. Only @bennett.edu.in and @gmail.com domains are authorized.`);
+                                                        return;
+                                                    }
+
+                                                    try {
+                                                        const res = await fetch('/api/register', {
+                                                            method: 'POST',
+                                                            headers: { 'Content-Type': 'application/json' },
+                                                            body: JSON.stringify(formData),
+                                                        });
+                                                        if (res.ok) nextStep();
+                                                        else throw new Error('Failed');
+                                                    } catch (e) {
+                                                        alert('Registration failed. Please try again.');
+                                                    }
+                                                }}
                                                 className="flex-[2] bg-neon-purple text-white hover:bg-neon-purple/80 border-none"
                                                 disabled={!formData.teamName || !formData.track}
                                             >

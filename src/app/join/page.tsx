@@ -10,13 +10,31 @@ import { Button } from "@/components/ui/Button";
 export default function JoinPage() {
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
-        // Here you would typically send data to a backend
-        setTimeout(() => {
-            alert("Application submitted! We will contact you soon.");
-        }, 500);
+        try {
+            const formData = new FormData(e.target as HTMLFormElement);
+            const data = Object.fromEntries(formData.entries());
+
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@(bennett\.edu\.in|gmail\.com)$/i;
+            const email = (data.email as string).trim();
+
+            if (!emailRegex.test(email)) {
+                alert("Restricted Access: Only @bennett.edu.in and @gmail.com domains are authorized.");
+                return;
+            }
+
+            await fetch('/api/join', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            setSubmitted(true);
+        } catch (error) {
+            console.error('Error submitting application:', error);
+            alert('Application failed to send. Please try again.');
+        }
     };
 
     if (submitted) {
