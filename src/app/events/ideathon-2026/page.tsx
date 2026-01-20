@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, CheckCircle, User, Users, Shield, FileText, Lock, Unlock, AlertTriangle, Zap, Edit, Download, Crosshair, ArrowRight } from 'lucide-react';
 import { Container } from "@/components/ui/Container";

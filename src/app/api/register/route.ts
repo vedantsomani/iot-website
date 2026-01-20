@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     const emailPromises = Array.from(uniqueEmails).map(async (email) => {
       return transporter.sendMail({
         ...mailOptions,
-        to: email, // Send to this specific member
+        to: email as string,
         subject: `MISSION CONFIRMED: ${teamName}`,
         html: generateTeamConfirmation(teamName, track, members),
       });
