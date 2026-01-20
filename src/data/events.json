@@ -8,7 +8,7 @@
         "description": "An innovative Ideathon combined with a thrilling technical Escape Room challenge.",
         "image": "/images/event-placeholder.png",
         "type": "upcoming",
-        "registrationLink": "#",
+        "registrationLink": "/events/ideathon-2026",
         "tags": [
             "Hackathon",
             "Competition",

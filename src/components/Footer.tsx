@@ -46,7 +46,7 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-white/5 text-center text-sm text-gray-500">
-                    <p>&copy; {new Date().getFullYear()} IoT & Robotics Club, Bennett University. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} IoT & Robotics Club, Bennett University. All rights reserved. <br className="md:hidden" /> <span className="hidden md:inline">|</span> Made by <span className="text-neon-blue">Vedant Somani</span></p>
                 </div>
             </Container>
         </footer>

@@ -107,12 +107,22 @@
         "linkedin": "#"
     },
     {
-        "id": "santhan",
-        "name": "Santhan",
+        "id": "shivansh",
+        "name": "Shivansh",
         "role": "Multimedia Head",
         "team": "Multimedia",
-        "image": "/images/member-placeholder.png",
+        "image": "/images/Shivansh.jpeg",
         "bio": "Leading multimedia content creation.",
+        "instagram": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "santhan",
+        "name": "Santhan",
+        "role": "Multimedia Team Member",
+        "team": "Multimedia",
+        "image": "/images/member-placeholder.png",
+        "bio": "Creating multimedia content.",
         "instagram": "#",
         "linkedin": "#"
     },
@@ -126,13 +136,54 @@
         "instagram": "#"
     },
     {
-        "id": "arpan",
-        "name": "Arpan",
-        "role": "Design Sub-Head",
-        "team": "Design",
-        "image": "/images/arpan (sub head design).jpeg",
-        "bio": "Creating visual assets.",
-        "instagram": "#"
+        "id": "daksh",
+        "name": "Daksh Malav",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/Daksh Malav.jpg",
+        "bio": "Contributing to technical projects.",
+        "github": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "priyanshu",
+        "name": "Priyanshu Yadav",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/PRIYANSHU YADAV.jpg",
+        "bio": "Contributing to technical projects.",
+        "github": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "umang",
+        "name": "Umang Agrawal",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/umang agrawal(S25CSERY0430).jpg",
+        "bio": "Contributing to technical projects.",
+        "github": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "samar",
+        "name": "Samar Pratap",
+        "role": "Social Media Team Member",
+        "team": "Social Media",
+        "image": "/images/SAMAR_PRATAP_iOS.jpg",
+        "bio": "Managing social media content.",
+        "instagram": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "sujal",
+        "name": "Sujal Raj",
+        "role": "Social Media Team Member",
+        "team": "Social Media",
+        "image": "/images/SUJAL_RAJ_iOS.jpg",
+        "bio": "Managing social media content.",
+        "instagram": "#",
+        "linkedin": "#"
     },
     {
         "id": "astha-kranwal",

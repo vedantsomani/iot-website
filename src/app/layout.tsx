@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Orbitron } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -47,9 +46,7 @@ export default function RootLayout({
         className="antialiased min-h-screen flex flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
-        <Navbar />
-        <main className="flex-grow pt-16">{children}</main>
-        <Footer />
+        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
       </body>
     </html>
   );
