@@ -26,7 +26,7 @@ const RobotMascot = dynamic(() => import('@/components/RobotMascot'), {
 
 // Static data
 const stats = [
-  { icon: Users, value: '150+', label: 'Active Members' },
+  { icon: Users, value: '40+', label: 'Active Members' },
   { icon: Cpu, value: '25+', label: 'Projects Built' },
   { icon: Award, value: '10+', label: 'Awards Won' },
   { icon: Calendar, value: '50+', label: 'Events Hosted' },
@@ -270,7 +270,14 @@ export default function HomePage() {
                 <div className="p-8 flex flex-col justify-center">
                   <div className="inline-flex items-center gap-2 text-neon-blue mb-4">
                     <Calendar className="w-4 h-4" />
-                    <span className="text-sm font-bold">{upcomingEvent.date}</span>
+                    <span className="text-sm font-bold">
+                      {(() => {
+                        const date = new Date(upcomingEvent.date);
+                        return isNaN(date.getTime())
+                          ? upcomingEvent.date
+                          : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                      })()}
+                    </span>
                   </div>
 
                   <h3 className="text-2xl font-bold font-orbitron text-white mb-4">

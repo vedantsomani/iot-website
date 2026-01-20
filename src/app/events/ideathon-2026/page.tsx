@@ -19,6 +19,23 @@ export default function IdeathonPage() {
         window.scrollTo(0, 0);
     }, []);
 
+    // Check for existing registration
+    useEffect(() => {
+        const savedRegistration = localStorage.getItem('ideathon_registration');
+        if (savedRegistration) {
+            try {
+                const parsedData = JSON.parse(savedRegistration);
+                if (parsedData.teamName && parsedData.members) {
+                    setFormData(parsedData);
+                    setProtocolsRead(true);
+                    setStep(3); // Jump to success screen
+                }
+            } catch (e) {
+                console.error("Failed to parse saved registration", e);
+            }
+        }
+    }, []);
+
     const [activeMember, setActiveMember] = useState(0);
     const [formData, setFormData] = useState({
         teamName: '',
@@ -83,13 +100,21 @@ export default function IdeathonPage() {
                                 <FileText className="w-5 h-5 mr-2" /> Review Mission Protocols
                             </Button>
                         ) : (
-                            <Button
-                                onClick={() => document.getElementById('enlist')?.scrollIntoView({ behavior: 'smooth' })}
-                                size="lg"
-                                className="bg-neon-blue text-black hover:bg-white border-none animate-pulse"
-                            >
-                                <Shield className="w-5 h-5 mr-2" /> DEPLOY SQUAD
-                            </Button>
+                            step === 3 ? (
+                                <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg backdrop-blur-md animate-fade-in">
+                                    <p className="text-green-400 font-bold font-orbitron flex items-center justify-center gap-2">
+                                        <CheckCircle className="w-5 h-5" /> STATUS: REGISTERED
+                                    </p>
+                                </div>
+                            ) : (
+                                <Button
+                                    onClick={() => document.getElementById('enlist')?.scrollIntoView({ behavior: 'smooth' })}
+                                    size="lg"
+                                    className="bg-neon-blue text-black hover:bg-white border-none animate-pulse"
+                                >
+                                    <Shield className="w-5 h-5 mr-2" /> DEPLOY SQUAD
+                                </Button>
+                            )
                         )}
                     </motion.div>
                 </Container>
@@ -392,7 +417,7 @@ export default function IdeathonPage() {
                                             <Button
                                                 onClick={async () => {
                                                     // Validate Emails
-                                                    const emailRegex = /^[a-zA-Z0-9._%+-]+@(bennett\.edu\.in|gmail\.com)$/i;
+                                                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                                                     const invalidMember = formData.members.find(m => !emailRegex.test(m.email.trim()));
 
                                                     if (invalidMember) {
@@ -406,7 +431,11 @@ export default function IdeathonPage() {
                                                             headers: { 'Content-Type': 'application/json' },
                                                             body: JSON.stringify(formData),
                                                         });
-                                                        if (res.ok) nextStep();
+                                                        if (res.ok) {
+                                                            // Save to localStorage
+                                                            localStorage.setItem('ideathon_registration', JSON.stringify(formData));
+                                                            nextStep();
+                                                        }
                                                         else throw new Error('Failed');
                                                     } catch (e) {
                                                         alert('Registration failed. Please try again.');

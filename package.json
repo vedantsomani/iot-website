@@ -19,6 +19,8 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.26.2",
     "gl-matrix": "^3.4.4",
+    "google-auth-library": "^10.5.0",
+    "google-spreadsheet": "^5.0.2",
     "howler": "^2.2.4",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.562.0",

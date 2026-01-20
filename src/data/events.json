@@ -16,21 +16,247 @@
         ]
     },
     {
-        "id": "3d-fusion-workshop-2025",
+        "id": "3d-fusion-workshop-nov-2025",
         "title": "3D Printing & Fusion 360 Workshop",
-        "date": "2025-10-15",
+        "date": "2025-11-12",
         "time": "2 Days Workshop",
-        "location": "IoT Lab (B La 105)",
+        "location": "Bennett University",
         "description": "Hands-on workshop on 3D designing with Fusion 360 and 3D printing technology.",
         "image": "/images/event-placeholder.png",
         "type": "past",
-        "gallery": [
-            "/images/event-placeholder.png"
-        ],
+        "gallery": [],
         "tags": [
             "Workshop",
             "3D Printing",
             "CAD"
+        ]
+    },
+    {
+        "id": "3d-fusion-workshop-2025",
+        "title": "3D Printing & Fusion 360 Workshop",
+        "date": "2025-03-29",
+        "time": "2 Days Workshop",
+        "location": "Bennett University",
+        "description": "Hosted 3D Verse: A 3D printing and 3D designing 2-day workshop.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Workshop",
+            "3D Printing",
+            "CAD"
+        ]
+    },
+    {
+        "id": "halloween-night-2023",
+        "title": "Halloween Night",
+        "date": "2023-10-31",
+        "time": "Evening",
+        "location": "Bennett University",
+        "description": "Spooky Halloween night celebration.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Fun",
+            "Social"
+        ]
+    },
+    {
+        "id": "orientation-2023",
+        "title": "Club Orientation 2023",
+        "date": "2023-08-15",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Annual club orientation for new members.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Orientation",
+            "Intro"
+        ]
+    },
+    {
+        "id": "line-following-workshop-2022",
+        "title": "Line Following Workshop",
+        "date": "2022-05-02",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Workshop on building line follower robots.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Workshop",
+            "Robotics"
+        ]
+    },
+    {
+        "id": "community-robotics-workshop-2022",
+        "title": "Community Robotics Workshop",
+        "date": "2022-04-23",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Robotics workshop for students of a Delhi Government Girl School.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Workshop",
+            "Community",
+            "Robotics"
+        ]
+    },
+    {
+        "id": "discord-bot-workshop-2022",
+        "title": "Discord Chat Bot Workshop",
+        "date": "2022-02-27",
+        "time": "TBD",
+        "location": "Online/Bennett University",
+        "description": "Learn to create your own Discord chat bot.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Workshop",
+            "Coding"
+        ]
+    },
+    {
+        "id": "tinkercad-workshop-2022",
+        "title": "Tinkercad Workshop",
+        "date": "2022-02-06",
+        "time": "TBD",
+        "location": "Online/Bennett University",
+        "description": "Introductory workshop on 3D design using Tinkercad.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Workshop",
+            "3D Design"
+        ]
+    },
+    {
+        "id": "minecraft-build-tournament-2021",
+        "title": "Minecraft Build Tournament",
+        "date": "2021-12-27",
+        "time": "TBD",
+        "location": "Online",
+        "description": "Minecraft building tournament in collaboration with BU Gamers.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Competition",
+            "Gaming"
+        ]
+    },
+    {
+        "id": "diy-competition-2021",
+        "title": "DIY Competition",
+        "date": "2021-12-12",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Do-It-Yourself maker competition.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Competition",
+            "DIY"
+        ]
+    },
+    {
+        "id": "minecraft-event-2021",
+        "title": "Minecraft Event",
+        "date": "2021-02-06",
+        "time": "TBD",
+        "location": "Online",
+        "description": "Another exciting Minecraft event with BU Gamers.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Event",
+            "Gaming"
+        ]
+    },
+    {
+        "id": "technotix-roboyantriki-2020",
+        "title": "TECHNOTIX x SNU RoboYantriki",
+        "date": "2020-11-05",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Collaboration event with SNU RoboYantriki.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Collaboration",
+            "Robotics"
+        ]
+    },
+    {
+        "id": "line-follow-bot-uphoria-2020",
+        "title": "Line Follow Bot (Uphoria 4.0)",
+        "date": "2020-04-26",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Line follower bot competition during Uphoria 4.0.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Competition",
+            "Robotics"
+        ]
+    },
+    {
+        "id": "laser-obstacle-course-2020",
+        "title": "Laser Obstacle Course",
+        "date": "2020-02-16",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Technotix club in collaboration with Astronomy club brings you Laser Obstacle Course during Uphoria.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Event",
+            "Fun"
+        ]
+    },
+    {
+        "id": "bu-cube-open-2020",
+        "title": "BU Cube Open 2020",
+        "date": "2020-01-19",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Cubing competition open to all.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Competition",
+            "Cubing"
+        ]
+    },
+    {
+        "id": "ict-iot-android-workshops-2019",
+        "title": "ICT IoT and Android Workshops",
+        "date": "2019-09-21",
+        "time": "9:00 AM",
+        "location": "Bennett University",
+        "description": "IoT and Android workshops in collaboration with IIT Kanpur.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Workshop",
+            "IoT",
+            "Android"
         ]
     }
 ]
