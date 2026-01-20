@@ -13,6 +13,12 @@ import { MissionTimer } from "@/components/MissionTimer";
 export default function IdeathonPage() {
     const [protocolsRead, setProtocolsRead] = useState(false);
     const [step, setStep] = useState(1);
+
+    // Force scroll to top on mount
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const [activeMember, setActiveMember] = useState(0);
     const [formData, setFormData] = useState({
         teamName: '',
