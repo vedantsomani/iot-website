@@ -24,6 +24,27 @@ export async function POST(req: Request) {
 
         const sheet = doc.sheetsByIndex[0]; // Assuming first sheet
 
+        // Check if header row exists, if not, set it
+        // We load header row to check, catching error if it's empty
+        try {
+          await sheet.loadHeaderRow();
+        } catch (e) {
+          // Likely empty, so we set headers
+          await sheet.setHeaderRow([
+            'Timestamp',
+            'TeamName',
+            'Track',
+            'LeadName',
+            'LeadEmail',
+            'Member2Name',
+            'Member2Email',
+            'Member3Name',
+            'Member3Email',
+            'Member4Name',
+            'Member4Email'
+          ]);
+        }
+
         // Prepare row data
         const timestamp = new Date().toISOString();
         const row = {
