@@ -32,10 +32,20 @@ const stats = [
   { icon: Calendar, value: '50+', label: 'Events Hosted' },
 ];
 
-const upcomingEvent = {
-  title: 'RoboWeek 2026',
-  date: 'Feb 15, 2026',
-  description: 'A week-long celebration of robotics featuring workshops, competitions, and exhibitions.',
+import eventsData from '@/data/events.json';
+
+// Get the nearest upcoming event
+const getUpcomingEvent = () => {
+  const upcoming = eventsData.filter(e => e.type === 'upcoming');
+  // Sort by date ascending to get the nearest one
+  const sorted = upcoming.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  return sorted[0] || null;
+};
+
+const upcomingEvent = getUpcomingEvent() || {
+  title: 'Stay Tuned!',
+  date: 'Coming Soon',
+  description: 'We are planning something exciting. Check back later for updates!',
   image: '/images/event-placeholder.png',
 };
 
