@@ -60,14 +60,72 @@
         "github": "#"
     },
     {
-        "id": "vishrut",
-        "name": "Vishrut",
+        "id": "Tanmay sahai",
+        "name": "Tanmay Sahai",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/member-placeholder.png",
+        "image": "/images/Tanmay_sahai.jpg",
         "bio": "Contributing to technical projects.",
         "linkedin": "#",
         "github": "#"
+    },
+    {
+        "id": "Vishrut",
+        "name": "Vishrut",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/Vishrut.jpg",
+        "bio": "Contributing to technical projects.",
+        "linkedin": "#",
+        "github": "#"
+    },
+    {
+        "id": "Ishant",
+        "name": "Ishant",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/Ishant.jpg",
+        "bio": "Contributing to technical projects.",
+        "linkedin": "#"
+    },
+    {
+        "id": "Sujal Gupta",
+        "name": "Sujal Gupta",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/Sujal gupta.png",
+        "bio": "Contributing to technical projects.",
+        "linkedin": "#"
+    },
+    {
+        "id": "daksh",
+        "name": "Daksh Malav",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/Daksh Malav.jpg",
+        "bio": "Contributing to technical projects.",
+        "github": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "priyanshu",
+        "name": "Priyanshu Yadav",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/PRIYANSHU YADAV.jpg",
+        "bio": "Contributing to technical projects.",
+        "github": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "umang",
+        "name": "Umang Agrawal",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/umang agrawal(S25CSERY0430).jpg",
+        "bio": "Contributing to technical projects.",
+        "github": "#",
+        "linkedin": "#"
     },
     {
         "id": "lakshit",
@@ -97,12 +155,59 @@
         "linkedin": "#"
     },
     {
+        "id": "Kanishka",
+        "name": "Kanishka",
+        "role": "Management",
+        "team": "Management",
+        "image": "/images/Kanishka.png",
+        "bio": "Assisting in management operations.",
+        "linkedin": "#"
+    },
+    {
+        "id": "Aval",
+        "name": "Aval",
+        "role": "Management",
+        "team": "Management",
+        "image": "/images/Aval.jpg",
+        "bio": "Assisting in management operations.",
+        "linkedin": "#"
+    },
+    {
+        "id": "Nikhil",
+        "name": "Nikhil",
+        "role": "Management",
+        "team": "Management",
+        "image": "/images/Nikhil.jpg",
+        "bio": "Assisting in management operations.",
+        "linkedin": "#"
+    },
+    {
         "id": "yashi",
         "name": "Yashi",
         "role": "Social Media Head",
         "team": "Social Media",
         "image": "/images/Yashi Pandey (Social Media sub-head).jpg",
         "bio": "Managing social media presence.",
+        "instagram": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "samar",
+        "name": "Samar Pratap",
+        "role": "Social Media Team Member",
+        "team": "Social Media",
+        "image": "/images/SAMAR_PRATAP_iOS.jpg",
+        "bio": "Managing social media content.",
+        "instagram": "#",
+        "linkedin": "#"
+    },
+    {
+        "id": "sujal",
+        "name": "Sujal Raj",
+        "role": "Social Media Team Member",
+        "team": "Social Media",
+        "image": "/images/SUJAL_RAJ_iOS.jpg",
+        "bio": "Managing social media content.",
         "instagram": "#",
         "linkedin": "#"
     },
@@ -136,56 +241,6 @@
         "instagram": "#"
     },
     {
-        "id": "daksh",
-        "name": "Daksh Malav",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/Daksh Malav.jpg",
-        "bio": "Contributing to technical projects.",
-        "github": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "priyanshu",
-        "name": "Priyanshu Yadav",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/PRIYANSHU YADAV.jpg",
-        "bio": "Contributing to technical projects.",
-        "github": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "umang",
-        "name": "Umang Agrawal",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/umang agrawal(S25CSERY0430).jpg",
-        "bio": "Contributing to technical projects.",
-        "github": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "samar",
-        "name": "Samar Pratap",
-        "role": "Social Media Team Member",
-        "team": "Social Media",
-        "image": "/images/SAMAR_PRATAP_iOS.jpg",
-        "bio": "Managing social media content.",
-        "instagram": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "sujal",
-        "name": "Sujal Raj",
-        "role": "Social Media Team Member",
-        "team": "Social Media",
-        "image": "/images/SUJAL_RAJ_iOS.jpg",
-        "bio": "Managing social media content.",
-        "instagram": "#",
-        "linkedin": "#"
-    },
-    {
         "id": "astha-kranwal",
         "name": "Astha Kranwal",
         "role": "PR Head",
@@ -200,6 +255,15 @@
         "role": "PR Team Member",
         "team": "PR",
         "image": "/images/Shubham singh PR.jpg",
+        "bio": "Assisting with PR activities.",
+        "linkedin": "#"
+    },
+    {
+        "id": "Ansh",
+        "name": "Ansh",
+        "role": "PR Team Member",
+        "team": "PR",
+        "image": "/images/Ansh.png",
         "bio": "Assisting with PR activities.",
         "linkedin": "#"
     }
