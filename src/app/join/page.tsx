@@ -1,185 +1,184 @@
 "use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Send, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { ArrowRight, Code, Palette, Users, Zap, Terminal, Cpu, Globe, Rocket, Star, ChevronRight, Megaphone, Video, Share2, Briefcase } from 'lucide-react';
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
+import ParticleBackground from "@/components/ParticleBackground";
+
+const domains = [
+    {
+        icon: Cpu,
+        title: "Tech Team",
+        desc: "IoT, Robotics, Software, and AI. The builders of the future.",
+        color: "text-neon-blue",
+        border: "group-hover:border-neon-blue/50"
+    },
+    {
+        icon: Palette,
+        title: "Design Team",
+        desc: "UI/UX, Graphic Design, and Brand Identity creation.",
+        color: "text-pink-400",
+        border: "group-hover:border-pink-400/50"
+    },
+    {
+        icon: Video,
+        title: "Multimedia",
+        desc: "Video editing, photography, and visual storytelling.",
+        color: "text-purple-400",
+        border: "group-hover:border-purple-400/50"
+    },
+    {
+        icon: Share2,
+        title: "Social Media",
+        desc: "Content creation, digital marketing, and brand presence.",
+        color: "text-orange-400",
+        border: "group-hover:border-orange-400/50"
+    },
+    {
+        icon: Briefcase,
+        title: "Management",
+        desc: "Event planning, logistics, and club operations.",
+        color: "text-green-400",
+        border: "group-hover:border-green-400/50"
+    },
+    {
+        icon: Megaphone,
+        title: "Public Relations",
+        desc: "Sponsorships, outreach, and external communications.",
+        color: "text-yellow-400",
+        border: "group-hover:border-yellow-400/50"
+    }
+];
+
+const benefits = [
+    { title: "Real Projects", desc: "Work on deployed production apps and research papers.", icon: Rocket },
+    { title: "Mentorship", desc: "Learn significantly faster from seniors and alumni.", icon: Users },
+    { title: "Hackathons", desc: "Exclusive access to internal hackathons and funding.", icon: Terminal },
+    { title: "Network", desc: "Connect with the brightest tech minds on campus.", icon: Globe },
+];
 
 export default function JoinPage() {
-    const [submitted, setSubmitted] = useState(false);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            const formData = new FormData(e.target as HTMLFormElement);
-            const data = Object.fromEntries(formData.entries());
-
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@(bennett\.edu\.in|gmail\.com)$/i;
-            const email = (data.email as string).trim();
-
-            if (!emailRegex.test(email)) {
-                alert("Restricted Access: Only @bennett.edu.in and @gmail.com domains are authorized.");
-                return;
-            }
-
-            await fetch('/api/join', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-
-            setSubmitted(true);
-        } catch (error) {
-            console.error('Error submitting application:', error);
-            alert('Application failed to send. Please try again.');
-        }
-    };
-
-    if (submitted) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-black">
-                <Container className="text-center">
-                    <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="glass-panel p-12 rounded-2xl border border-neon-blue/30 inline-block"
-                    >
-                        <CheckCircle className="w-20 h-20 text-neon-blue mx-auto mb-6" />
-                        <h2 className="text-3xl font-bold font-orbitron text-white mb-4">Application Received!</h2>
-                        <p className="text-gray-400 mb-8 max-w-md">
-                            Thanks for your interest in joining the IoT & Robotics Club.
-                            Our team will review your application and get back to you shortly.
-                        </p>
-                        <Button onClick={() => setSubmitted(false)} variant="outline">
-                            Submit Another Response
-                        </Button>
-                    </motion.div>
-                </Container>
-            </div>
-        );
-    }
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({ target: containerRef });
+    const py = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
     return (
-        <div className="min-h-screen">
-            {/* Header */}
-            <Section className="bg-gradient-to-b from-black to-panel-bg border-b border-white/5 relative overflow-hidden" spacing="small">
-                <div className="absolute inset-0 bg-gradient-to-r from-neon-blue/10 to-neon-purple/10" />
+        <div className="min-h-screen bg-black relative" ref={containerRef}>
+            <ParticleBackground />
 
-                <Container className="relative z-10 text-center">
+            {/* Hero Section */}
+            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black z-10" />
+
+                <Container className="relative z-20 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-white mb-6">
-                            JOIN <span className="text-neon-blue">THE CREW</span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md">
+                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-xs font-mono text-white/70 tracking-widest uppercase">Recruitment Open 2026</span>
+                        </div>
+
+                        <h1 className="text-6xl md:text-9xl font-bold font-orbitron text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 mb-8 tracking-tighter">
+                            BUILD <br />
+                            <span className="text-stroke-white text-transparent">THE FUTURE</span>
                         </h1>
-                        <p className="text-gray-300 max-w-2xl mx-auto text-lg mb-8">
-                            Fill out the form below to apply for membership. We recruit passionate individuals ready to build the future.
+
+                        <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
+                            We are looking for the outliers. The builders. The designers.<br />
+                            Join Bennett University's elite technical society.
                         </p>
+
+                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                            <Button asChild size="xl" className="h-14 px-8 text-lg bg-white text-black hover:bg-white/90 rounded-full font-bold tracking-wide shadow-[0_0_40px_rgba(255,255,255,0.3)]">
+                                <Link href="/join/apply">
+                                    APPLY NOW <ArrowRight className="ml-2 w-5 h-5" />
+                                </Link>
+                            </Button>
+                            <Button asChild variant="ghost" size="lg" className="text-white hover:text-white/80">
+                                <Link href="#domains">
+                                    Explore Roles
+                                </Link>
+                            </Button>
+                        </div>
                     </motion.div>
+                </Container>
+            </section>
+
+            {/* Why Join? */}
+            <Section className="relative z-20 bg-black/50 backdrop-blur-sm border-t border-white/5">
+                <Container>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {benefits.map((b, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                                viewport={{ once: true }}
+                                className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group"
+                            >
+                                <b.icon className="w-8 h-8 text-neon-blue mb-4 group-hover:scale-110 transition-transform" />
+                                <h3 className="text-xl font-bold text-white mb-2">{b.title}</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed">{b.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </Container>
             </Section>
 
-            {/* Application Form */}
-            <Section>
-                <Container className="max-w-3xl">
-                    <motion.form
-                        onSubmit={handleSubmit}
-                        className="glass-panel p-8 md:p-10 rounded-2xl border border-white/10 space-y-8"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        {/* Personal Details */}
-                        <div className="space-y-6">
-                            <h3 className="text-xl font-bold font-orbitron text-white border-b border-white/10 pb-2">
-                                01. Personal Details
-                            </h3>
+            {/* Domains */}
+            <Section id="domains" spacing="large">
+                <Container>
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-bold font-orbitron text-white mb-6">DOMAINS</h2>
+                        <p className="text-gray-400 max-w-2xl mx-auto">Find your place in the ecosystem. We recruit across multiple disciplines.</p>
+                    </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-gray-400 text-sm mb-2">Full Name *</label>
-                                    <input required type="text" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="John Doe" />
-                                </div>
-                                <div>
-                                    <label className="block text-gray-400 text-sm mb-2">Phone Number *</label>
-                                    <input required type="tel" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="+91 98765 43210" />
-                                </div>
-                            </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {domains.map((d, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: i * 0.1 }}
+                                viewport={{ once: true }}
+                                className={`glass-panel p-8 rounded-2xl border border-white/10 hover:border-opacity-50 transition-all duration-300 group ${d.border}`}
+                            >
+                                <d.icon className={`w-12 h-12 ${d.color} mb-6`} />
+                                <h3 className="text-2xl font-bold text-white mb-3">{d.title}</h3>
+                                <p className="text-gray-400 mb-6">{d.desc}</p>
+                                <div className="h-px w-full bg-white/5 group-hover:bg-white/20 transition-colors mb-6" />
+                                <Link href="/join/apply" className="inline-flex items-center text-sm font-mono text-white/50 group-hover:text-white transition-colors">
+                                    APPLY FOR THIS ROLE <ChevronRight className="w-4 h-4 ml-1" />
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </div>
+                </Container>
+            </Section>
 
-                            <div>
-                                <label className="block text-gray-400 text-sm mb-2">Email Address *</label>
-                                <input required type="email" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="john.doe@bennett.edu.in" />
-                            </div>
-                        </div>
-
-                        {/* Academic Details */}
-                        <div className="space-y-6">
-                            <h3 className="text-xl font-bold font-orbitron text-white border-b border-white/10 pb-2">
-                                02. Academic Info
-                            </h3>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-gray-400 text-sm mb-2">Current Year *</label>
-                                    <select required className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors">
-                                        <option value="">Select Year</option>
-                                        <option value="1">1st Year</option>
-                                        <option value="2">2nd Year</option>
-                                        <option value="3">3rd Year</option>
-                                        <option value="4">4th Year</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block text-gray-400 text-sm mb-2">Branch / Course *</label>
-                                    <input required type="text" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="e.g. B.Tech CSE" />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Club Preferences */}
-                        <div className="space-y-6">
-                            <h3 className="text-xl font-bold font-orbitron text-white border-b border-white/10 pb-2">
-                                03. Club Preferences
-                            </h3>
-
-                            <div>
-                                <label className="block text-gray-400 text-sm mb-2">Which team are you most interested in? *</label>
-                                <select required className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors">
-                                    <option value="">Select Team</option>
-                                    <option value="tech">Tech Team (IoT, Robotics, Coding)</option>
-                                    <option value="design">Design Team (UI/UX, Graphics)</option>
-                                    <option value="multimedia">Multimedia Team (Video, Photo)</option>
-                                    <option value="social-media">Social Media Team</option>
-                                    <option value="management">Management Team</option>
-                                    <option value="pr">Public Relations (PR)</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label className="block text-gray-400 text-sm mb-2">Technical Skills / Tools Known</label>
-                                <textarea className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors h-24" placeholder="e.g. Arduino, Python, Photoshop, Premiere Pro, etc."></textarea>
-                            </div>
-
-                            <div>
-                                <label className="block text-gray-400 text-sm mb-2">Why do you want to join the club? *</label>
-                                <textarea required className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors h-32" placeholder="Tell us about your interests and what you hope to learn..."></textarea>
-                            </div>
-
-                            <div>
-                                <label className="block text-gray-400 text-sm mb-2">Portfolio / GitHub / LinkedIn Link (Optional)</label>
-                                <input type="url" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="https://..." />
-                            </div>
-                        </div>
-
-                        <Button className="w-full gap-2 text-lg py-6 mt-4">
-                            Submit Application <Send className="w-5 h-5" />
-                        </Button>
-
-                    </motion.form>
+            {/* Bottom CTA */}
+            <Section className="relative overflow-hidden py-32">
+                <div className="absolute inset-0 bg-gradient-to-t from-neon-blue/10 via-transparent to-transparent opacity-50" />
+                <Container className="relative z-10 text-center">
+                    <h2 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-8">
+                        READY TO <span className="text-neon-blue">SHIP?</span>
+                    </h2>
+                    <p className="text-xl text-gray-400 mb-12 max-w-xl mx-auto">
+                        Applications close soon. Don't miss your chance to be part of the legacy.
+                    </p>
+                    <Button asChild size="xl" className="h-16 px-10 text-xl bg-neon-blue text-black hover:bg-white hover:scale-105 transition-all rounded-full font-bold shadow-[0_0_50px_rgba(0,212,255,0.4)]">
+                        <Link href="/join/apply">
+                            START APPLICATION
+                        </Link>
+                    </Button>
                 </Container>
             </Section>
         </div>

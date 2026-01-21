@@ -26,7 +26,7 @@ export default function IdeathonPage() {
             try {
                 const parsedData = JSON.parse(savedRegistration);
                 if (parsedData.teamName && parsedData.members) {
-                    setFormData(parsedData);
+                    setFormData({ ...parsedData, teamLeadMobile: parsedData.teamLeadMobile || '' });
                     setProtocolsRead(true);
                     setStep(3); // Jump to success screen
                 }
@@ -39,6 +39,7 @@ export default function IdeathonPage() {
     const [activeMember, setActiveMember] = useState(0);
     const [formData, setFormData] = useState({
         teamName: '',
+        teamLeadMobile: '',
         members: [
             { name: '', email: '' },
             { name: '', email: '' },
@@ -81,7 +82,7 @@ export default function IdeathonPage() {
                             <CyberLock />
                         </div>
                         <h1 className="text-6xl md:text-8xl font-bold font-orbitron text-white mb-6 tracking-tighter">
-                            IDEATHON <span className="text-neon-blue">2026</span>
+                            REWIRE <span className="text-neon-blue">2026</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-8 font-light">
                             OPERATION: ESCAPE ROOM. <br />
@@ -396,6 +397,17 @@ export default function IdeathonPage() {
                                             />
                                         </div>
                                         <div>
+                                            <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Team Lead Mobile No</label>
+                                            <input
+                                                name="teamLeadMobile"
+                                                value={formData.teamLeadMobile}
+                                                onChange={(e) => setFormData({ ...formData, teamLeadMobile: e.target.value })}
+                                                type="tel"
+                                                className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:border-neon-purple focus:shadow-[0_0_15px_rgba(189,0,255,0.3)] transition-all outline-none"
+                                                placeholder="+91 98765 43210"
+                                            />
+                                        </div>
+                                        <div>
                                             <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Mission Track</label>
                                             <div className="grid grid-cols-2 gap-3">
                                                 {['Robotics', 'IoT', 'Software', 'Open Invoice'].map((track) => (
@@ -442,7 +454,7 @@ export default function IdeathonPage() {
                                                     }
                                                 }}
                                                 className="flex-[2] bg-neon-purple text-white hover:bg-neon-purple/80 border-none"
-                                                disabled={!formData.teamName || !formData.track}
+                                                disabled={!formData.teamName || !formData.track || !formData.teamLeadMobile}
                                             >
                                                 Confirm Loadout
                                             </Button>
@@ -478,6 +490,12 @@ export default function IdeathonPage() {
                                         &gt; LOCATION: SECTOR B, LA 105<br />
                                         &gt; STATUS: STANDBY
                                     </div>
+
+                                    <Button asChild size="lg" className="w-full mb-3 bg-[#25D366] text-white hover:bg-[#128C7E] border-none font-bold">
+                                        <a href="https://chat.whatsapp.com/CO8iYjd3NuiKjekVUNZWiU" target="_blank" rel="noopener noreferrer">
+                                            Join Mission Updates (WhatsApp)
+                                        </a>
+                                    </Button>
                                     <Button
                                         onClick={() => setStep(1)}
                                         variant="outline"
@@ -494,6 +512,6 @@ export default function IdeathonPage() {
                     </div>
                 </Container>
             </Section>
-        </div>
+        </div >
     );
 }

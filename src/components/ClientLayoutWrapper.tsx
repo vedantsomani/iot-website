@@ -11,7 +11,7 @@ export default function ClientLayoutWrapper({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
-    const isMicrosite = pathname?.startsWith("/events/ideathon-2026");
+    const isMicrosite = pathname?.startsWith("/events/rewire");
 
     return (
         <>

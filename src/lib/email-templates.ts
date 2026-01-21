@@ -48,7 +48,7 @@ export const generateTeamConfirmation = (teamName: string, track: string, member
           </div>
           <div style="padding: 30px; background: #080808;">
             <p style="color: #ccc; line-height: 1.6;">
-              Greetings Team Lead. Your squad <strong>${teamName}</strong> has been officially enlisted for the Ideathon 2026 operation.
+              Greetings Team Lead. Your squad <strong>${teamName}</strong> has been officially enlisted for the Rewire 2026 operation.
             </p>
             
             <div style="margin: 24px 0;">

@@ -1,14 +1,14 @@
 [
     {
-        "id": "ideathon-escaperoom-2026",
-        "title": "Ideathon & Escape Room",
+        "id": "rewire-2026",
+        "title": "Rewire",
         "date": "2026-02-04",
         "time": "10:00 AM Onwards",
         "location": "Bennett University",
         "description": "An innovative Ideathon combined with a thrilling technical Escape Room challenge.",
         "image": "/images/event-placeholder.png",
         "type": "upcoming",
-        "registrationLink": "/events/ideathon-2026",
+        "registrationLink": "/events/rewire",
         "tags": [
             "Hackathon",
             "Competition",

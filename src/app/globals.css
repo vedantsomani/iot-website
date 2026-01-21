@@ -1,24 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
+  /* Phase 0: Black-first foundation */
+  --background: #000000;
   --foreground: #ededed;
-  
-  /* IoT/Robotics Theme Colors */
+
+  /* Phase 1: Design System Tokens */
+  --surface: rgba(0, 0, 0, 0.45);
+  --surface-elevated: rgba(0, 0, 0, 0.60);
+  --border: rgba(255, 255, 255, 0.10);
+  --text-primary: rgba(255, 255, 255, 0.90);
+  --text-muted: rgba(255, 255, 255, 0.70);
+
+  /* Accent Colors */
   --neon-blue: #00f3ff;
   --neon-purple: #bc13fe;
-  --glass-bg: rgba(18, 18, 18, 0.8);
-  --panel-bg: #121212;
+
+  /* Legacy mappings (for existing components) */
+  --glass-bg: var(--surface);
+  --panel-bg: var(--surface-elevated);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Design System */
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+
+  /* Accents */
   --color-neon-blue: var(--neon-blue);
   --color-neon-purple: var(--neon-purple);
-  --color-glass: var(--glass-bg);
-  --color-panel: var(--panel-bg);
-  
+
+  /* Legacy aliases */
+  --color-glass: var(--surface);
+  --color-panel: var(--surface-elevated);
+
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-orbitron: var(--font-orbitron);
@@ -36,12 +58,14 @@ body {
   .text-glow {
     text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
   }
+
   .box-glow {
     box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
   }
+
   .glass-panel {
-    background: var(--glass-bg);
+    background: var(--surface);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
   }
 }

@@ -5,11 +5,12 @@ import { generateAdminNotification, generateTeamConfirmation } from '@/lib/email
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const { teamName, track, members } = data;
+    const { teamName, track, members, teamLeadMobile } = data;
 
-    // 0. Save to Google Sheets (Non-blocking or blocking depending on requirement, let's make it blocking for data integrity)
+    // 0. Save to Google Sheets
     try {
       if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_SHEET_ID) {
+        // ... (imports)
         const { GoogleSpreadsheet } = await import('google-spreadsheet');
         const { JWT } = await import('google-auth-library');
 
@@ -22,20 +23,23 @@ export async function POST(req: Request) {
         const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, serviceAccountAuth);
         await doc.loadInfo();
 
-        const sheet = doc.sheetsByIndex[0]; // Assuming first sheet
+        const sheet = doc.sheetsByIndex[0];
 
-        // Check if header row exists, if not, set it
-        // We load header row to check, catching error if it's empty
         try {
           await sheet.loadHeaderRow();
+          // Check if LeadMobile is in headers, if not append it
+          const headers = sheet.headerValues;
+          if (!headers.includes('LeadMobile')) {
+            await sheet.setHeaderRow([...headers, 'LeadMobile']);
+          }
         } catch (e) {
-          // Likely empty, so we set headers
           await sheet.setHeaderRow([
             'Timestamp',
             'TeamName',
             'Track',
             'LeadName',
             'LeadEmail',
+            'LeadMobile',
             'Member2Name',
             'Member2Email',
             'Member3Name',
@@ -45,7 +49,6 @@ export async function POST(req: Request) {
           ]);
         }
 
-        // Prepare row data
         const timestamp = new Date().toISOString();
         const row = {
           Timestamp: timestamp,
@@ -53,6 +56,7 @@ export async function POST(req: Request) {
           Track: track,
           LeadName: members[0].name,
           LeadEmail: members[0].email,
+          LeadMobile: teamLeadMobile || '',
           Member2Name: members[1].name,
           Member2Email: members[1].email,
           Member3Name: members[2].name,
@@ -74,12 +78,13 @@ export async function POST(req: Request) {
     await transporter.sendMail({
       ...mailOptions,
       to: process.env.EMAIL_USER,
-      subject: `NEW OPERATIVES ENLISTED: ${teamName}`,
+      subject: `REWIRE SQUAD DEPLOYED: ${teamName}`,
       html: generateAdminNotification(`NEW SQUAD DEPLOYED: ${teamName}`, {
         TeamName: teamName,
         MissionTrack: track,
         TeamLead: members[0].name,
         LeadEmail: members[0].email,
+        LeadMobile: teamLeadMobile || 'N/A',
         Agent02: members[1].name,
         Agent03: members[2].name,
         Agent04: members[3].name,
@@ -94,7 +99,7 @@ export async function POST(req: Request) {
       return transporter.sendMail({
         ...mailOptions,
         to: email as string,
-        subject: `MISSION CONFIRMED: ${teamName}`,
+        subject: `REWIRE MISSION CONFIRMED: ${teamName}`,
         html: generateTeamConfirmation(teamName, track, members),
       });
     });
