@@ -29,7 +29,7 @@ export const generateAdminNotification = (title: string, data: Record<string, st
   `;
 };
 
-export const generateTeamConfirmation = (teamName: string, track: string, members: any[]) => {
+export const generateTeamConfirmation = (teamName: string, track: string, members: any[], ticketUrl?: string) => {
   const memberList = members.map((m, i) => `
     <div style="background: #111; padding: 10px; margin-bottom: 8px; border-left: 3px solid ${i === 0 ? '#bd00ff' : '#333'};">
       <div style="color: #888; font-size: 10px; font-family: monospace;">AGENT 0${i + 1}</div>
@@ -37,6 +37,22 @@ export const generateTeamConfirmation = (teamName: string, track: string, member
       <div style="color: #666; font-size: 12px;">${m.email}</div>
     </div>
   `).join('');
+
+  // Generate QR code image URL using Google Charts API
+  const qrImageUrl = ticketUrl
+    ? `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(ticketUrl)}&choe=UTF-8`
+    : '';
+
+  const ticketSection = ticketUrl ? `
+    <div style="margin-top: 30px; padding: 20px; background: #bd00ff15; border: 1px solid #bd00ff55; border-radius: 6px; text-align: center;">
+      <div style="color: #bd00ff; font-size: 14px; margin-bottom: 8px; font-family: monospace;">YOUR EVENT TICKET</div>
+      <div style="color: #fff; font-size: 14px; margin-bottom: 16px;">Show this QR code at check-in</div>
+      <div style="background: #fff; display: inline-block; padding: 10px; border-radius: 8px;">
+        <img src="${qrImageUrl}" alt="Ticket QR Code" width="200" height="200" style="display: block;" />
+      </div>
+      <div style="color: #888; font-size: 12px; margin-top: 12px;">Scan with the staff scanner at the venue</div>
+    </div>
+  ` : '';
 
   return `
     <!DOCTYPE html>
@@ -58,6 +74,8 @@ export const generateTeamConfirmation = (teamName: string, track: string, member
 
             <h3 style="color: #fff; border-bottom: 1px solid #333; padding-bottom: 8px; margin-top: 24px;">SQUAD ROSTER</h3>
             ${memberList}
+
+            ${ticketSection}
 
             <div style="margin-top: 30px; padding: 20px; background: #00ff8808; border: 1px solid #00ff8833; border-radius: 6px; text-align: center;">
               <div style="color: #00ff88; font-size: 14px; margin-bottom: 8px; font-family: monospace;">MISSION COMMENCEMENT</div>
