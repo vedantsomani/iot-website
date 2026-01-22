@@ -38,9 +38,9 @@ export const generateTeamConfirmation = (teamName: string, track: string, member
     </div>
   `).join('');
 
-  // Generate QR code image URL using Google Charts API
+  // Generate QR code image URL using QR Server API (free, no authentication)
   const qrImageUrl = ticketUrl
-    ? `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(ticketUrl)}&choe=UTF-8`
+    ? `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(ticketUrl)}`
     : '';
 
   const ticketSection = ticketUrl ? `
