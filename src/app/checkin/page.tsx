@@ -22,30 +22,194 @@ interface CheckInResult {
     blockReason?: string;
 }
 
+// Matrix rain effect component
+function MatrixRain() {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops: number[] = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function draw() {
+            if (!ctx || !canvas) return;
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillStyle = `rgba(0, ${150 + Math.random() * 105}, 0, ${0.5 + Math.random() * 0.5})`;
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        const interval = setInterval(draw, 50);
+
+        const handleResize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            clearInterval(interval);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    return (
+        <canvas
+            ref={canvasRef}
+            className="fixed inset-0 pointer-events-none opacity-30 z-0"
+        />
+    );
+}
+
+// Typewriter text component
+function TypewriterText({ text, speed = 30, className = '' }: { text: string; speed?: number; className?: string }) {
+    const [displayText, setDisplayText] = useState('');
+    const [showCursor, setShowCursor] = useState(true);
+
+    useEffect(() => {
+        setDisplayText('');
+        let index = 0;
+        const interval = setInterval(() => {
+            if (index < text.length) {
+                setDisplayText(text.slice(0, index + 1));
+                index++;
+            } else {
+                clearInterval(interval);
+            }
+        }, speed);
+
+        return () => clearInterval(interval);
+    }, [text, speed]);
+
+    useEffect(() => {
+        const cursorInterval = setInterval(() => {
+            setShowCursor(prev => !prev);
+        }, 500);
+        return () => clearInterval(cursorInterval);
+    }, []);
+
+    return (
+        <span className={className}>
+            {displayText}
+            <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>▌</span>
+        </span>
+    );
+}
+
+// Glitch text component
+function GlitchText({ text, className = '' }: { text: string; className?: string }) {
+    return (
+        <span className={`relative inline-block ${className}`}>
+            <span className="relative z-10">{text}</span>
+            <span className="absolute top-0 left-0.5 text-red-500 opacity-70 z-0 animate-pulse">{text}</span>
+            <span className="absolute top-0 -left-0.5 text-cyan-500 opacity-70 z-0 animate-pulse" style={{ animationDelay: '0.1s' }}>{text}</span>
+        </span>
+    );
+}
+
 export default function CheckInPage() {
     const videoRef = useRef<HTMLVideoElement>(null);
     const readerRef = useRef<BrowserMultiFormatReader | null>(null);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
     const [scanning, setScanning] = useState(false);
     const [result, setResult] = useState<CheckInResult | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [cooldown, setCooldown] = useState(false);
     const [lastScannedToken, setLastScannedToken] = useState<string | null>(null);
+    const [terminalLines, setTerminalLines] = useState<string[]>([]);
+    const [showMatrix, setShowMatrix] = useState(true);
 
-    const COOLDOWN_MS = 2000; // 2 second cooldown between scans
+    const COOLDOWN_MS = 2000;
+
+    // Add terminal log line
+    const addTerminalLine = useCallback((line: string) => {
+        setTerminalLines(prev => [...prev.slice(-10), `[${new Date().toLocaleTimeString()}] ${line}`]);
+    }, []);
+
+    // Play success sound
+    const playSuccessSound = useCallback(() => {
+        if (typeof window !== 'undefined' && 'AudioContext' in window) {
+            const audioContext = new AudioContext();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+            oscillator.frequency.exponentialRampToValueAtTime(1600, audioContext.currentTime + 0.2);
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+    }, []);
+
+    // Play error sound
+    const playErrorSound = useCallback(() => {
+        if (typeof window !== 'undefined' && 'AudioContext' in window) {
+            const audioContext = new AudioContext();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.2);
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+    }, []);
 
     const processCheckIn = useCallback(async (scannedText: string) => {
         if (cooldown) return;
 
-        // Prevent duplicate scans of the same token
         if (scannedText === lastScannedToken) return;
         setLastScannedToken(scannedText);
 
-        // Start cooldown
         setCooldown(true);
         setTimeout(() => setCooldown(false), COOLDOWN_MS);
 
         setResult(null);
         setError(null);
+
+        addTerminalLine('> SCANNING QR CODE...');
+        addTerminalLine('> EXTRACTING TOKEN DATA...');
 
         try {
             const res = await fetch('/api/checkin', {
@@ -56,7 +220,11 @@ export default function CheckInPage() {
 
             const data = await res.json();
 
+            addTerminalLine(`> QUERYING DATABASE...`);
+
             if (!res.ok) {
+                addTerminalLine(`> ERROR: ${data.error}`);
+                playErrorSound();
                 setResult({
                     success: false,
                     error: data.error,
@@ -67,35 +235,49 @@ export default function CheckInPage() {
                     checkedInAt: data.checkedInAt,
                 });
             } else {
+                addTerminalLine(`> ACCESS GRANTED: ${data.teamName}`);
+                addTerminalLine(`> CHECK-IN SUCCESSFUL`);
+                playSuccessSound();
                 setResult({
                     success: true,
                     teamName: data.teamName,
                     track: data.track,
                     leadName: data.leadName,
+                    leadEmail: data.leadEmail,
+                    leadMobile: data.leadMobile,
+                    member2Name: data.member2Name,
+                    member2Email: data.member2Email,
+                    member3Name: data.member3Name,
+                    member3Email: data.member3Email,
+                    member4Name: data.member4Name,
+                    member4Email: data.member4Email,
                     checkedInAt: data.checkedInAt,
                 });
-                // Play success sound or vibrate
                 if (navigator.vibrate) {
-                    navigator.vibrate(200);
+                    navigator.vibrate([200, 100, 200]);
                 }
             }
         } catch (err) {
             console.error('Check-in error:', err);
+            addTerminalLine('> CONNECTION ERROR');
+            playErrorSound();
             setError('Connection error');
         }
 
-        // Clear the last scanned token after cooldown to allow re-scanning
         setTimeout(() => setLastScannedToken(null), COOLDOWN_MS * 2);
-    }, [cooldown, lastScannedToken]);
+    }, [cooldown, lastScannedToken, addTerminalLine, playSuccessSound, playErrorSound]);
 
     useEffect(() => {
         const reader = new BrowserMultiFormatReader();
         readerRef.current = reader;
 
+        addTerminalLine('> SYSTEM INITIALIZED');
+        addTerminalLine('> AWAITING SCAN INPUT...');
+
         return () => {
             reader.reset();
         };
-    }, []);
+    }, [addTerminalLine]);
 
     async function startScanning() {
         if (!videoRef.current || !readerRef.current) return;
@@ -103,10 +285,12 @@ export default function CheckInPage() {
         setScanning(true);
         setError(null);
         setResult(null);
+        addTerminalLine('> CAMERA ACTIVATED');
+        addTerminalLine('> SCANNING FOR QR CODES...');
 
         try {
             await readerRef.current.decodeFromVideoDevice(
-                null, // Use default camera
+                null,
                 videoRef.current,
                 (decodedResult, err) => {
                     if (decodedResult) {
@@ -114,13 +298,13 @@ export default function CheckInPage() {
                         processCheckIn(text);
                     }
                     if (err && !(err instanceof NotFoundException)) {
-                        // NotFoundException is expected when no QR is in view
                         console.error('Scan error:', err);
                     }
                 }
             );
         } catch (err) {
             console.error('Camera error:', err);
+            addTerminalLine('> CAMERA ACCESS DENIED');
             setError('Could not access camera. Please ensure camera permissions are granted.');
             setScanning(false);
         }
@@ -131,201 +315,216 @@ export default function CheckInPage() {
             readerRef.current.reset();
         }
         setScanning(false);
+        addTerminalLine('> CAMERA DEACTIVATED');
     }
 
     function clearResult() {
         setResult(null);
         setError(null);
+        addTerminalLine('> READY FOR NEXT SCAN');
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 p-4">
-            <div className="max-w-md mx-auto">
-                {/* Header */}
-                <div className="text-center mb-6">
-                    <h1 className="text-2xl font-bold text-white">Check-In Scanner</h1>
-                    <p className="text-gray-400">Scan participant QR codes</p>
-                </div>
+        <div className="min-h-screen bg-black text-green-400 font-mono relative overflow-hidden">
+            {/* Matrix Rain Background */}
+            {showMatrix && <MatrixRain />}
 
-                {/* Camera View */}
-                <div className="relative bg-gray-800 rounded-2xl overflow-hidden border border-purple-500/30 mb-6">
-                    <video
-                        ref={videoRef}
-                        className={`w-full aspect-square object-cover ${!scanning ? 'hidden' : ''}`}
-                    />
+            {/* Scanlines overlay */}
+            <div className="fixed inset-0 pointer-events-none z-10 opacity-10"
+                style={{
+                    background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.1) 2px, rgba(0,255,0,0.1) 4px)'
+                }}
+            />
 
-                    {!scanning && (
-                        <div className="w-full aspect-square flex items-center justify-center bg-gray-900">
-                            <div className="text-center">
-                                <svg
-                                    className="w-16 h-16 text-gray-600 mx-auto mb-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={1.5}
-                                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                                    />
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={1.5}
-                                        d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                                    />
-                                </svg>
-                                <p className="text-gray-500">Camera inactive</p>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Scanning overlay */}
-                    {scanning && (
-                        <div className="absolute inset-0 pointer-events-none">
-                            <div className="absolute inset-8 border-2 border-purple-400 rounded-lg"></div>
-                            {cooldown && (
-                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                    <div className="text-white text-lg">Processing...</div>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
-
-                {/* Controls */}
-                <div className="flex gap-4 mb-6">
-                    {!scanning ? (
-                        <button
-                            onClick={startScanning}
-                            className="flex-1 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all"
-                        >
-                            Start Scanning
-                        </button>
-                    ) : (
-                        <button
-                            onClick={stopScanning}
-                            className="flex-1 py-3 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-all"
-                        >
-                            Stop Scanning
-                        </button>
-                    )}
-                </div>
-
-                {/* Error Display */}
-                {error && (
-                    <div className="bg-red-900/30 border border-red-500/30 rounded-xl p-4 mb-6">
-                        <p className="text-red-400 text-center">{error}</p>
+            <div className="relative z-20 p-4 max-w-md mx-auto">
+                {/* Terminal Header */}
+                <div className="bg-gray-900/90 border border-green-500/50 rounded-t-lg p-3 flex items-center gap-2">
+                    <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
                     </div>
-                )}
+                    <span className="text-green-400 text-sm ml-2">REWIRE_CHECKIN_TERMINAL_v2.0</span>
+                </div>
 
-                {/* Result Display */}
-                {result && (
-                    <div
-                        className={`rounded-xl p-6 mb-6 ${result.success
-                            ? 'bg-green-900/30 border border-green-500/30'
-                            : 'bg-red-900/30 border border-red-500/30'
-                            }`}
-                    >
-                        <div className="flex justify-between items-start mb-4">
-                            <div
-                                className={`text-2xl font-bold ${result.success ? 'text-green-400' : 'text-red-400'
-                                    }`}
-                            >
-                                {result.success ? '✓ Check-In Success' : '✗ Check-In Failed'}
+                {/* Terminal Body */}
+                <div className="bg-black/90 border-x border-b border-green-500/50 rounded-b-lg p-4">
+                    {/* ASCII Art Header */}
+                    <pre className="text-green-400 text-xs mb-4 leading-tight">
+                        {`╔═══════════════════════════════════╗
+║  ██████╗ ███████╗██╗    ██╗██╗██████╗ ███████╗  ║
+║  ██╔══██╗██╔════╝██║    ██║██║██╔══██╗██╔════╝  ║
+║  ██████╔╝█████╗  ██║ █╗ ██║██║██████╔╝█████╗    ║
+║  ██╔══██╗██╔══╝  ██║███╗██║██║██╔══██╗██╔══╝    ║
+║  ██║  ██║███████╗╚███╔███╔╝██║██║  ██║███████╗  ║
+║  ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚═╝╚═╝  ╚═╝╚══════╝  ║
+║        [ CHECK-IN TERMINAL ]        ║
+╚═══════════════════════════════════╝`}
+                    </pre>
+
+                    {/* Camera View */}
+                    <div className="relative bg-gray-900 rounded border border-green-500/30 mb-4 overflow-hidden">
+                        <video
+                            ref={videoRef}
+                            className={`w-full aspect-square object-cover ${!scanning ? 'hidden' : ''}`}
+                            style={{ filter: 'hue-rotate(80deg) saturate(1.5)' }}
+                        />
+
+                        {!scanning && (
+                            <div className="w-full aspect-square flex items-center justify-center bg-black">
+                                <div className="text-center">
+                                    <div className="text-green-500 text-6xl mb-4 animate-pulse">◎</div>
+                                    <TypewriterText text="CAMERA OFFLINE" className="text-green-400" />
+                                </div>
                             </div>
-                            <button
-                                onClick={clearResult}
-                                className="text-gray-400 hover:text-white"
-                            >
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
+                        )}
 
-                        {result.teamName && (
-                            <div className="space-y-3">
-                                <div className="border-b border-gray-600 pb-3">
-                                    <p className="text-white text-xl font-bold">{result.teamName}</p>
-                                    {result.track && <p className="text-purple-300 text-lg">{result.track}</p>}
-                                </div>
-
-                                {/* Squad Roster */}
-                                <div className="text-left space-y-2">
-                                    <p className="text-gray-500 text-xs font-semibold uppercase">Squad Roster</p>
-
-                                    {/* Lead */}
-                                    {result.leadName && (
-                                        <div className="bg-purple-900/30 rounded-lg p-2">
-                                            <p className="text-purple-400 text-xs">TEAM LEAD</p>
-                                            <p className="text-white font-semibold">{result.leadName}</p>
-                                            {result.leadEmail && <p className="text-gray-400 text-sm">{result.leadEmail}</p>}
-                                            {result.leadMobile && <p className="text-gray-500 text-sm">📱 {result.leadMobile}</p>}
-                                        </div>
-                                    )}
-
-                                    {/* Member 2 */}
-                                    {result.member2Name && (
-                                        <div className="bg-gray-800/50 rounded-lg p-2">
-                                            <p className="text-gray-500 text-xs">MEMBER 2</p>
-                                            <p className="text-white">{result.member2Name}</p>
-                                            {result.member2Email && <p className="text-gray-400 text-sm">{result.member2Email}</p>}
-                                        </div>
-                                    )}
-
-                                    {/* Member 3 */}
-                                    {result.member3Name && (
-                                        <div className="bg-gray-800/50 rounded-lg p-2">
-                                            <p className="text-gray-500 text-xs">MEMBER 3</p>
-                                            <p className="text-white">{result.member3Name}</p>
-                                            {result.member3Email && <p className="text-gray-400 text-sm">{result.member3Email}</p>}
-                                        </div>
-                                    )}
-
-                                    {/* Member 4 */}
-                                    {result.member4Name && (
-                                        <div className="bg-gray-800/50 rounded-lg p-2">
-                                            <p className="text-gray-500 text-xs">MEMBER 4</p>
-                                            <p className="text-white">{result.member4Name}</p>
-                                            {result.member4Email && <p className="text-gray-400 text-sm">{result.member4Email}</p>}
-                                        </div>
-                                    )}
-                                </div>
-
-                                {result.success && result.checkedInAt && (
-                                    <div className="text-center pt-2 border-t border-gray-600">
-                                        <p className="text-green-400 text-sm">✓ Checked in at {new Date(result.checkedInAt).toLocaleTimeString()}</p>
+                        {scanning && (
+                            <div className="absolute inset-0 pointer-events-none">
+                                <div className="absolute inset-4 border-2 border-green-400 rounded animate-pulse"></div>
+                                <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-green-400 animate-ping"></div>
+                                {cooldown && (
+                                    <div className="absolute inset-0 bg-green-500/20 flex items-center justify-center">
+                                        <div className="text-green-400 text-lg animate-pulse">PROCESSING...</div>
                                     </div>
                                 )}
                             </div>
                         )}
+                    </div>
 
-                        {result.error && (
-                            <p className="text-gray-300 mt-2">{result.error}</p>
-                        )}
+                    {/* Terminal Log */}
+                    <div className="bg-gray-900/50 border border-green-500/30 rounded p-2 mb-4 h-32 overflow-y-auto text-xs">
+                        {terminalLines.map((line, i) => (
+                            <div key={i} className="text-green-400 opacity-80">{line}</div>
+                        ))}
+                        <div className="text-green-400 animate-pulse">{'>'} _</div>
+                    </div>
 
-                        {result.status === 'BLOCKED' && result.blockReason && (
-                            <p className="text-red-300 mt-2 text-sm">Reason: {result.blockReason}</p>
-                        )}
-
-                        {result.checkedInAt && !result.success && (
-                            <p className="text-gray-400 mt-2 text-sm">
-                                Already checked in: {new Date(result.checkedInAt).toLocaleString()}
-                            </p>
+                    {/* Controls */}
+                    <div className="flex gap-4 mb-4">
+                        {!scanning ? (
+                            <button
+                                onClick={startScanning}
+                                className="flex-1 py-3 bg-green-900/50 border border-green-500 text-green-400 font-bold rounded hover:bg-green-800/50 transition-all uppercase tracking-wider"
+                            >
+                                [  INITIATE SCAN  ]
+                            </button>
+                        ) : (
+                            <button
+                                onClick={stopScanning}
+                                className="flex-1 py-3 bg-red-900/50 border border-red-500 text-red-400 font-bold rounded hover:bg-red-800/50 transition-all uppercase tracking-wider"
+                            >
+                                [  TERMINATE  ]
+                            </button>
                         )}
                     </div>
-                )}
 
-                {/* Back to Login */}
-                <div className="text-center">
-                    <a
-                        href="/staff"
-                        className="text-purple-400 hover:text-purple-300 text-sm"
-                    >
-                        ← Back to Staff Login
-                    </a>
+                    {/* Error Display */}
+                    {error && (
+                        <div className="bg-red-900/30 border border-red-500 rounded p-4 mb-4">
+                            <GlitchText text="⚠ ERROR" className="text-red-400 font-bold" />
+                            <p className="text-red-300 mt-2">{error}</p>
+                        </div>
+                    )}
+
+                    {/* Result Display */}
+                    {result && (
+                        <div className={`rounded p-4 mb-4 border ${result.success
+                            ? 'bg-green-900/30 border-green-500'
+                            : 'bg-red-900/30 border-red-500'
+                            }`}>
+                            <div className="flex justify-between items-start mb-4">
+                                {result.success ? (
+                                    <GlitchText text="✓ ACCESS GRANTED" className="text-green-400 text-xl font-bold" />
+                                ) : (
+                                    <GlitchText text="✗ ACCESS DENIED" className="text-red-400 text-xl font-bold" />
+                                )}
+                                <button onClick={clearResult} className="text-gray-400 hover:text-white text-xl">×</button>
+                            </div>
+
+                            {result.teamName && (
+                                <div className="space-y-3">
+                                    <div className="border-b border-green-500/30 pb-3">
+                                        <div className="text-gray-500 text-xs">SQUAD_IDENTIFIER</div>
+                                        <TypewriterText text={result.teamName} className="text-green-400 text-xl font-bold" speed={50} />
+                                        {result.track && (
+                                            <div className="text-cyan-400 mt-1">[{result.track}]</div>
+                                        )}
+                                    </div>
+
+                                    <div className="text-left space-y-2">
+                                        <div className="text-gray-500 text-xs">SQUAD_ROSTER</div>
+
+                                        {result.leadName && (
+                                            <div className="bg-green-900/30 rounded p-2 border-l-2 border-green-400">
+                                                <div className="text-green-500 text-xs">LEAD_AGENT</div>
+                                                <div className="text-white font-semibold">{result.leadName}</div>
+                                                {result.leadEmail && <div className="text-gray-400 text-sm">{result.leadEmail}</div>}
+                                                {result.leadMobile && <div className="text-gray-500 text-sm">📱 {result.leadMobile}</div>}
+                                            </div>
+                                        )}
+
+                                        {result.member2Name && (
+                                            <div className="bg-gray-800/50 rounded p-2 border-l-2 border-gray-600">
+                                                <div className="text-gray-500 text-xs">AGENT_02</div>
+                                                <div className="text-white">{result.member2Name}</div>
+                                                {result.member2Email && <div className="text-gray-400 text-sm">{result.member2Email}</div>}
+                                            </div>
+                                        )}
+
+                                        {result.member3Name && (
+                                            <div className="bg-gray-800/50 rounded p-2 border-l-2 border-gray-600">
+                                                <div className="text-gray-500 text-xs">AGENT_03</div>
+                                                <div className="text-white">{result.member3Name}</div>
+                                                {result.member3Email && <div className="text-gray-400 text-sm">{result.member3Email}</div>}
+                                            </div>
+                                        )}
+
+                                        {result.member4Name && (
+                                            <div className="bg-gray-800/50 rounded p-2 border-l-2 border-gray-600">
+                                                <div className="text-gray-500 text-xs">AGENT_04</div>
+                                                <div className="text-white">{result.member4Name}</div>
+                                                {result.member4Email && <div className="text-gray-400 text-sm">{result.member4Email}</div>}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {result.success && result.checkedInAt && (
+                                        <div className="text-center pt-2 border-t border-green-500/30">
+                                            <div className="text-green-400 text-sm">
+                                                ✓ TIMESTAMP: {new Date(result.checkedInAt).toLocaleString()}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {result.error && (
+                                <div className="text-red-300 mt-2 font-mono">&gt; {result.error}</div>
+                            )}
+
+                            {result.status === 'BLOCKED' && result.blockReason && (
+                                <div className="text-red-300 mt-2 text-sm">BLOCK_REASON: {result.blockReason}</div>
+                            )}
+
+                            {result.checkedInAt && !result.success && (
+                                <div className="text-yellow-400 mt-2 text-sm">
+                                    PREVIOUS_CHECKIN: {new Date(result.checkedInAt).toLocaleString()}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Toggle Matrix */}
+                    <div className="flex items-center justify-between text-xs text-gray-500">
+                        <a href="/staff" className="hover:text-green-400">← LOGOUT</a>
+                        <button
+                            onClick={() => setShowMatrix(!showMatrix)}
+                            className="hover:text-green-400"
+                        >
+                            [{showMatrix ? 'DISABLE' : 'ENABLE'} MATRIX]
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
