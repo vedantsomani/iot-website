@@ -8,6 +8,14 @@ interface CheckInResult {
     teamName?: string;
     track?: string;
     leadName?: string;
+    leadEmail?: string;
+    leadMobile?: string;
+    member2Name?: string;
+    member2Email?: string;
+    member3Name?: string;
+    member3Email?: string;
+    member4Name?: string;
+    member4Email?: string;
     checkedInAt?: string;
     error?: string;
     status?: string;
@@ -238,11 +246,58 @@ export default function CheckInPage() {
                         </div>
 
                         {result.teamName && (
-                            <div className="space-y-2">
-                                <p className="text-white text-lg font-semibold">{result.teamName}</p>
-                                {result.track && <p className="text-gray-300">{result.track}</p>}
-                                {result.leadName && (
-                                    <p className="text-gray-400 text-sm">Lead: {result.leadName}</p>
+                            <div className="space-y-3">
+                                <div className="border-b border-gray-600 pb-3">
+                                    <p className="text-white text-xl font-bold">{result.teamName}</p>
+                                    {result.track && <p className="text-purple-300 text-lg">{result.track}</p>}
+                                </div>
+
+                                {/* Squad Roster */}
+                                <div className="text-left space-y-2">
+                                    <p className="text-gray-500 text-xs font-semibold uppercase">Squad Roster</p>
+
+                                    {/* Lead */}
+                                    {result.leadName && (
+                                        <div className="bg-purple-900/30 rounded-lg p-2">
+                                            <p className="text-purple-400 text-xs">TEAM LEAD</p>
+                                            <p className="text-white font-semibold">{result.leadName}</p>
+                                            {result.leadEmail && <p className="text-gray-400 text-sm">{result.leadEmail}</p>}
+                                            {result.leadMobile && <p className="text-gray-500 text-sm">📱 {result.leadMobile}</p>}
+                                        </div>
+                                    )}
+
+                                    {/* Member 2 */}
+                                    {result.member2Name && (
+                                        <div className="bg-gray-800/50 rounded-lg p-2">
+                                            <p className="text-gray-500 text-xs">MEMBER 2</p>
+                                            <p className="text-white">{result.member2Name}</p>
+                                            {result.member2Email && <p className="text-gray-400 text-sm">{result.member2Email}</p>}
+                                        </div>
+                                    )}
+
+                                    {/* Member 3 */}
+                                    {result.member3Name && (
+                                        <div className="bg-gray-800/50 rounded-lg p-2">
+                                            <p className="text-gray-500 text-xs">MEMBER 3</p>
+                                            <p className="text-white">{result.member3Name}</p>
+                                            {result.member3Email && <p className="text-gray-400 text-sm">{result.member3Email}</p>}
+                                        </div>
+                                    )}
+
+                                    {/* Member 4 */}
+                                    {result.member4Name && (
+                                        <div className="bg-gray-800/50 rounded-lg p-2">
+                                            <p className="text-gray-500 text-xs">MEMBER 4</p>
+                                            <p className="text-white">{result.member4Name}</p>
+                                            {result.member4Email && <p className="text-gray-400 text-sm">{result.member4Email}</p>}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {result.success && result.checkedInAt && (
+                                    <div className="text-center pt-2 border-t border-gray-600">
+                                        <p className="text-green-400 text-sm">✓ Checked in at {new Date(result.checkedInAt).toLocaleTimeString()}</p>
+                                    </div>
                                 )}
                             </div>
                         )}

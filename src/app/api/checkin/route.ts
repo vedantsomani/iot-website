@@ -111,6 +111,14 @@ export async function POST(req: NextRequest) {
             teamName,
             track,
             leadName: row.get('LeadName'),
+            leadEmail: row.get('LeadEmail'),
+            leadMobile: row.get('LeadMobile'),
+            member2Name: row.get('Member2Name'),
+            member2Email: row.get('Member2Email'),
+            member3Name: row.get('Member3Name'),
+            member3Email: row.get('Member3Email'),
+            member4Name: row.get('Member4Name'),
+            member4Email: row.get('Member4Email'),
             checkedInAt: checkInTime,
         });
     } catch (error) {
