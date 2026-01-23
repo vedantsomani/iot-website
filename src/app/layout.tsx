@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Orbitron } from "next/font/google";
+import SecurityProvider from "@/components/SecurityProvider";
+
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
 import "./globals.css";
 
@@ -19,18 +21,6 @@ const orbitron = Orbitron({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "IoT & Robotics Club | Bennett University",
-  description:
-    "The official website of the IoT & Robotics Club at Bennett University. Innovation, Automation, and Technology.",
-  keywords: ["IoT", "Robotics", "Bennett University", "Club", "Engineering", "Technology"],
-  openGraph: {
-    title: "IoT & Robotics Club | Bennett University",
-    description: "Innovation, Automation, and Technology.",
-    type: "website",
-  },
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -46,7 +36,9 @@ export default function RootLayout({
         className="antialiased min-h-screen flex flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
-        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        <SecurityProvider>
+          <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        </SecurityProvider>
       </body>
     </html>
   );
