@@ -14,6 +14,15 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 
+const InteractiveRobot = dynamic(() => import('@/components/InteractiveRobot'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="animate-pulse text-neon-blue text-sm">Loading System...</div>
+    </div>
+  ),
+});
+
 // Dynamic import for 3D mascot (client-only)
 const RobotMascot = dynamic(() => import('@/components/RobotMascot'), {
   ssr: false,
@@ -129,14 +138,12 @@ export default function HomePage() {
 
             {/* Right: 3D Robot Mascot */}
             <motion.div
-              className="h-[400px] lg:h-[500px] relative"
+              className="h-[400px] lg:h-[600px] relative w-full flex items-center justify-center"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
             >
-              <Suspense fallback={<div className="animate-pulse" />}>
-                <RobotMascot />
-              </Suspense>
+              <InteractiveRobot />
 
               {/* Glow effect behind mascot */}
               <div className="absolute inset-0 blur-3xl opacity-30 bg-gradient-radial from-neon-blue/50 to-transparent -z-10" />

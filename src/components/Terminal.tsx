@@ -151,22 +151,25 @@ export default function Terminal() {
                     <div className="space-y-1">
                         <p>Available Commands:</p>
                         <p className="pl-4">- <span className="text-yellow-400">help</span>: Show this message</p>
+                        <p className="pl-4">- <span className="text-yellow-400">about</span>: Club information</p>
                         <p className="pl-4">- <span className="text-yellow-400">login &lt;email&gt; &lt;pass&gt;</span>: Authenticate</p>
                         <p className="pl-4">- <span className="text-yellow-400">signup &lt;email&gt; &lt;pass&gt; [name]</span>: Create account</p>
+                        <p className="pl-4">- <span className="text-yellow-400">logout</span>: End session</p>
                         <p className="pl-4">- <span className="text-yellow-400">chat &lt;msg&gt;</span>: Broadcast to secure channel</p>
+                        <p className="pl-4">- <span className="text-yellow-400">msg &lt;user&gt;</span>: Send encrypted transmission</p>
                         <p className="pl-4">- <span className="text-yellow-400">nick &lt;name&gt;</span>: Change terminal codename</p>
+                        <p className="pl-4">- <span className="text-yellow-400">theme &lt;color&gt;</span>: Change UI theme (green, red, pink, etc)</p>
                         <p className="pl-4">- <span className="text-yellow-400">whoami</span>: Current user status</p>
+                        <p className="pl-4">- <span className="text-yellow-400">whois &lt;name&gt;</span>: Query member database</p>
                         <p className="pl-4">- <span className="text-yellow-400">ls</span>: List current directory</p>
                         <p className="pl-4">- <span className="text-yellow-400">clear</span>: Clear terminal</p>
                         <p className="pl-4">- <span className="text-yellow-400">sudo</span>: Execute admin privileges</p>
-                        <p className="pl-4">- <span className="text-yellow-400">sudo</span>: Execute admin privileges</p>
                         <p className="pl-4">- <span className="text-yellow-400">hack</span>: Initialize matrix protocol</p>
-                        <p className="pl-4">- <span className="text-yellow-400">whois &lt;name&gt;</span>: Query member database</p>
-                        <p className="pl-4">- <span className="text-yellow-400">msg &lt;user&gt;</span>: Send encrypted transmission</p>
                         <p className="pl-4">- <span className="text-yellow-400">game</span>: Launch firewall defense protocol</p>
                         <p className="pl-4">- <span className="text-yellow-400">submit &lt;code&gt;</span>: Verify security clearance key</p>
                         <p className="pl-4">- <span className="text-yellow-400">level</span>: Check current clearance status</p>
                         <p className="pl-4">- <span className="text-yellow-400">cat secret.txt</span>: Read classified file</p>
+                        <p className="pl-4">- <span className="text-red-500">selfdestruct</span>: <span className="animate-pulse">DO NOT EXECUTE</span></p>
                     </div>
 
                 );

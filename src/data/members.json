@@ -4,7 +4,7 @@
         "name": "Rudrakshi Rai",
         "role": "President",
         "team": "Executive",
-        "image": "/images/Rudrakshi Rai.JPG",
+        "image": "/images/executive/Rudrakshi Rai.JPG",
         "bio": "Leading the club's vision and strategy.",
         "linkedin": "#",
         "instagram": "#"
@@ -14,7 +14,7 @@
         "name": "Annya",
         "role": "Vice President",
         "team": "Executive",
-        "image": "/images/annya.jpeg",
+        "image": "/images/executive/annya.jpeg",
         "bio": "Coordinating club activities and partnerships.",
         "linkedin": "#",
         "github": "#"
@@ -24,17 +24,17 @@
         "name": "Pushp",
         "role": "General Secretary",
         "team": "Executive",
-        "image": "/images/Pushp.jpg",
+        "image": "/images/executive/Pushp.jpg",
         "bio": "Managing communications and documentation.",
         "linkedin": "#",
         "instagram": "#"
     },
     {
-        "id": "Rishab",
-        "name": "Rishab",
-        "role": "Tech Lead",
+        "id": "rishabh-raj",
+        "name": "Rishabh Raj",
+        "role": "Tech Head",
         "team": "Tech",
-        "image": "/images/member-placeholder.png",
+        "image": "/images/tech/Rishabh_Raj_(Tech Head).jpeg",
         "bio": "Driving technical innovation and project development.",
         "linkedin": "#",
         "github": "#"
@@ -54,17 +54,7 @@
         "name": "Vedant Somani",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/Vedant Somani.jpg",
-        "bio": "Contributing to technical projects.",
-        "linkedin": "#",
-        "github": "#"
-    },
-    {
-        "id": "Tanmay sahai",
-        "name": "Tanmay Sahai",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/Tanmay_sahai.jpg",
+        "image": "/images/tech/Vedant Somani.jpg",
         "bio": "Contributing to technical projects.",
         "linkedin": "#",
         "github": "#"
@@ -74,7 +64,7 @@
         "name": "Vishrut",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/Vishrut.jpg",
+        "image": "/images/tech/Vishrut.jpg",
         "bio": "Contributing to technical projects.",
         "linkedin": "#",
         "github": "#"
@@ -84,7 +74,7 @@
         "name": "Ishant",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/Ishant.jpg",
+        "image": "/images/tech/Ishant.jpg",
         "bio": "Contributing to technical projects.",
         "linkedin": "#"
     },
@@ -93,7 +83,7 @@
         "name": "Sujal Gupta",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/Sujal gupta.png",
+        "image": "/images/tech/Sujal gupta.png",
         "bio": "Contributing to technical projects.",
         "linkedin": "#"
     },
@@ -102,7 +92,7 @@
         "name": "Daksh Malav",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/Daksh Malav.jpg",
+        "image": "/images/tech/Daksh Malav.jpg",
         "bio": "Contributing to technical projects.",
         "github": "#",
         "linkedin": "#"
@@ -112,7 +102,7 @@
         "name": "Priyanshu Yadav",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/PRIYANSHU YADAV.jpg",
+        "image": "/images/tech/PRIYANSHU YADAV.jpg",
         "bio": "Contributing to technical projects.",
         "github": "#",
         "linkedin": "#"
@@ -122,7 +112,7 @@
         "name": "Umang Agrawal",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/umang agrawal(S25CSERY0430).jpg",
+        "image": "/images/tech/umang agrawal(S25CSERY0430).jpg",
         "bio": "Contributing to technical projects.",
         "github": "#",
         "linkedin": "#"
@@ -132,7 +122,7 @@
         "name": "Lakshit",
         "role": "Management Head",
         "team": "Management",
-        "image": "/images/Lakshit Gupta.jpg",
+        "image": "/images/management/Lakshit Gupta.jpg",
         "bio": "Managing club operations and logistics.",
         "linkedin": "#"
     },
@@ -141,7 +131,7 @@
         "name": "Pranjal",
         "role": "Management Team Member",
         "team": "Management",
-        "image": "/images/PranjalMishra_SubHead_Management.jpg",
+        "image": "/images/management/PranjalMishra_SubHead_Management.jpg",
         "bio": "Managing club operations and logistics.",
         "linkedin": "#"
     },
@@ -150,7 +140,7 @@
         "name": "Tanya",
         "role": "Management Sub-Head",
         "team": "Management",
-        "image": "/images/Tanya (management sub-head).jpg",
+        "image": "/images/management/Tanya (management sub-head).jpg",
         "bio": "Assisting in management operations.",
         "linkedin": "#"
     },
@@ -159,7 +149,7 @@
         "name": "Kanishka",
         "role": "Management",
         "team": "Management",
-        "image": "/images/Kanishka.png",
+        "image": "/images/management/Kanishka.png",
         "bio": "Assisting in management operations.",
         "linkedin": "#"
     },
@@ -168,7 +158,7 @@
         "name": "Aval",
         "role": "Management",
         "team": "Management",
-        "image": "/images/Aval.jpg",
+        "image": "/images/management/Aval.jpg",
         "bio": "Assisting in management operations.",
         "linkedin": "#"
     },
@@ -177,16 +167,26 @@
         "name": "Nikhil",
         "role": "Management",
         "team": "Management",
-        "image": "/images/Nikhil.jpg",
+        "image": "/images/management/Nikhil.jpg",
         "bio": "Assisting in management operations.",
         "linkedin": "#"
+    },
+    {
+        "id": "Tanmay sahai",
+        "name": "Tanmay Sahai",
+        "role": "Management Team Member",
+        "team": "Management",
+        "image": "/images/tech/Tanmay_sahai.jpg",
+        "bio": "Coordinating club logistics and operations.",
+        "linkedin": "#",
+        "github": "#"
     },
     {
         "id": "yashi",
         "name": "Yashi",
         "role": "Social Media Head",
         "team": "Social Media",
-        "image": "/images/Yashi Pandey (Social Media sub-head).jpg",
+        "image": "/images/social_media/Yashi Pandey (Social Media sub-head).jpg",
         "bio": "Managing social media presence.",
         "instagram": "#",
         "linkedin": "#"
@@ -196,7 +196,7 @@
         "name": "Samar Pratap",
         "role": "Social Media Team Member",
         "team": "Social Media",
-        "image": "/images/SAMAR_PRATAP_iOS.jpg",
+        "image": "/images/social_media/SAMAR_PRATAP_iOS.jpg",
         "bio": "Managing social media content.",
         "instagram": "#",
         "linkedin": "#"
@@ -206,7 +206,7 @@
         "name": "Sujal Raj",
         "role": "Social Media Team Member",
         "team": "Social Media",
-        "image": "/images/SUJAL_RAJ_iOS.jpg",
+        "image": "/images/social_media/SUJAL_RAJ_iOS.jpg",
         "bio": "Managing social media content.",
         "instagram": "#",
         "linkedin": "#"
@@ -216,17 +216,17 @@
         "name": "Shivansh",
         "role": "Multimedia Head",
         "team": "Multimedia",
-        "image": "/images/Shivansh.jpeg",
+        "image": "/images/multimedia/Shivansh.jpeg",
         "bio": "Leading multimedia content creation.",
         "instagram": "#",
         "linkedin": "#"
     },
     {
-        "id": "santhan",
-        "name": "Santhan",
+        "id": "shanthan",
+        "name": "Shanthan",
         "role": "Multimedia Team Member",
         "team": "Multimedia",
-        "image": "/images/member-placeholder.png",
+        "image": "/images/multimedia/Shanthan.jpeg",
         "bio": "Creating multimedia content.",
         "instagram": "#",
         "linkedin": "#"
@@ -236,7 +236,7 @@
         "name": "Roshan Gupta",
         "role": "Design Head",
         "team": "Design",
-        "image": "/images/Roshan Gupta ( Design Head ).jpg",
+        "image": "/images/design/Roshan Gupta ( Design Head ).jpg",
         "bio": "Leading design initiatives.",
         "instagram": "#"
     },
@@ -245,7 +245,7 @@
         "name": "Astha Kranwal",
         "role": "PR Head",
         "team": "PR",
-        "image": "/images/Astha Kranwal PR Head.jpg",
+        "image": "/images/pr/Astha Kranwal PR Head.jpg",
         "bio": "Managing public relations.",
         "linkedin": "#"
     },
@@ -254,7 +254,7 @@
         "name": "Shubham Singh",
         "role": "PR Team Member",
         "team": "PR",
-        "image": "/images/Shubham singh PR.jpg",
+        "image": "/images/pr/Shubham singh PR.jpg",
         "bio": "Assisting with PR activities.",
         "linkedin": "#"
     },
@@ -263,8 +263,44 @@
         "name": "Ansh",
         "role": "PR Team Member",
         "team": "PR",
-        "image": "/images/Ansh.png",
+        "image": "/images/pr/Ansh.png",
         "bio": "Assisting with PR activities.",
+        "linkedin": "#"
+    },
+    {
+        "id": "arpan",
+        "name": "Arpan",
+        "role": "Design Sub-Head",
+        "team": "Design",
+        "image": "/images/design/arpan (sub head design).jpeg",
+        "bio": "Leading design initiatives.",
+        "instagram": "#"
+    },
+    {
+        "id": "gargi-gupta",
+        "name": "Gargi Gupta",
+        "role": "Design Team Member",
+        "team": "Design",
+        "image": "/images/design/Gargi Gupta design .JPG",
+        "bio": "Contributing to design visual identity.",
+        "instagram": "#"
+    },
+    {
+        "id": "saniya",
+        "name": "Saniya",
+        "role": "Design Team Member",
+        "team": "Design",
+        "image": "/images/design/saniya.jpg",
+        "bio": "Creating visual assets for the club.",
+        "instagram": "#"
+    },
+    {
+        "id": "rakshika",
+        "name": "Rakshika",
+        "role": "PR Sub-Head",
+        "team": "PR",
+        "image": "/images/pr/Rakshika PR subhead (1).jpeg",
+        "bio": "Coordinating public relations and outreach.",
         "linkedin": "#"
     }
 ]

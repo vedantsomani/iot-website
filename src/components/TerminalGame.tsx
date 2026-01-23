@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 type GameState = 'START' | 'PLAYING' | 'GAME_OVER' | 'WIN';
 
@@ -8,23 +8,19 @@ interface TerminalGameProps {
     onExit: () => void;
 }
 
+const WORD_BANK = [
+    'SYSTEM', 'HACK', 'BREACH', 'FIREWALL', 'ACCESS', 'DENIED',
+    'SERVER', 'PROXY', 'ENCRYPT', 'DECRYPT', 'MAINFRAME', 'ROOT',
+    'KERNEL', 'BUFFER', 'STACK', 'HEAP', 'LINUX', 'PYTHON', 'REACT',
+    'NODES', 'ROBOT', 'DRONE', 'IOT', 'SENSORS', 'CIRCUIT', 'ARDUINO'
+];
+
 export default function TerminalGame({ onExit }: TerminalGameProps) {
     const [gameState, setGameState] = useState<GameState>('START');
     const [score, setScore] = useState(0);
     const [input, setInput] = useState('');
     const [words, setWords] = useState<{ text: string, x: number, y: number }[]>([]);
     const [health, setHealth] = useState(100);
-
-    const canvasRef = useRef<HTMLDivElement>(null);
-    const frameRef = useRef<number>(0);
-
-    // Word bank
-    const WORD_BANK = [
-        'SYSTEM', 'HACK', 'BREACH', 'FIREWALL', 'ACCESS', 'DENIED',
-        'SERVER', 'PROXY', 'ENCRYPT', 'DECRYPT', 'MAINFRAME', 'ROOT',
-        'KERNEL', 'BUFFER', 'STACK', 'HEAP', 'LINUX', 'PYTHON', 'REACT',
-        'NODES', 'ROBOT', 'DRONE', 'IOT', 'SENSORS', 'CIRCUIT', 'ARDUINO'
-    ];
 
     const spawnWord = () => {
         const text = WORD_BANK[Math.floor(Math.random() * WORD_BANK.length)];
@@ -71,14 +67,6 @@ export default function TerminalGame({ onExit }: TerminalGameProps) {
         return () => clearInterval(interval);
     }, [gameState]);
 
-    // Win/Loss checks moved inline to avoid setState in effect
-    const checkGameOver = (newHealth: number) => {
-        if (newHealth <= 0) setGameState('GAME_OVER');
-    };
-    const checkWin = (newScore: number) => {
-        if (newScore >= 500) setGameState('WIN');
-    };
-
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value.toUpperCase();
         setInput(val);
@@ -117,7 +105,7 @@ export default function TerminalGame({ onExit }: TerminalGameProps) {
             </div>
 
             {/* Game Area */}
-            <div className="flex-1 relative" ref={canvasRef}>
+            <div className="flex-1 relative">
                 {gameState === 'START' && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                         <h2 className="text-2xl text-green-500 font-bold mb-4">DEFEND MAINFRAME</h2>

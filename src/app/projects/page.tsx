@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
 import projectsData from '@/data/projects.json';
+import ProjectBlueprint from '@/components/ProjectBlueprint';
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
@@ -142,20 +143,32 @@ export default function ProjectsPage() {
 
             <Section>
                 <Container>
-                    {/* Featured Projects */}
+                    {/* Featured Projects - Digital Twin Gallery */}
                     {featuredProjects.length > 0 && (
                         <div className="mb-20">
                             <ScrollReveal>
                                 <div className="flex items-center gap-4 mb-8">
                                     <div className="h-12 w-2 bg-neon-purple rounded-full" />
-                                    <h2 className="text-3xl font-bold font-orbitron text-white">Featured Projects</h2>
+                                    <div>
+                                        <h2 className="text-3xl font-bold font-orbitron text-white">Digital Twin Gallery</h2>
+                                        <p className="text-blue-400 font-mono text-sm mt-1">
+                                            // SYSTEM.ACCESS_LEVEL: TOP_SECRET //
+                                        </p>
+                                    </div>
                                 </div>
                             </ScrollReveal>
 
-                            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 {featuredProjects.map((project) => (
                                     <StaggerItem key={project.slug}>
-                                        <ProjectCard project={project} />
+                                        <Link href={`/projects/${project.slug}`}>
+                                            <ProjectBlueprint
+                                                title={project.title}
+                                                description={project.shortDesc}
+                                                image={project.image}
+                                                tech={project.techStack}
+                                            />
+                                        </Link>
                                     </StaggerItem>
                                 ))}
                             </StaggerContainer>

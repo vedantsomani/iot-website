@@ -59,7 +59,7 @@ function MemberCard({ member }: { member: Member }) {
                 src={member.image}
                 alt={member.name}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
             />
 
             {/* Gradient overlay */}
@@ -87,7 +87,7 @@ function MemberCard({ member }: { member: Member }) {
                             animate={{ scale: 1 }}
                             transition={{ type: 'spring', stiffness: 400 }}
                         >
-                            <Image src={member.image} alt={member.name} fill className="object-cover" />
+                            <Image src={member.image} alt={member.name} fill className="object-cover object-top" />
                         </motion.div>
 
                         <motion.h3

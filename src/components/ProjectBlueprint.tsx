@@ -33,7 +33,7 @@ export default function ProjectBlueprint({ title, description, image, tech }: Pr
                     {tech.map((t, i) => (
                         <div key={i}>[{t.toUpperCase()}]</div>
                     ))}
-                    <div className="mt-2">STATUS: PROTOOTYPE</div>
+                    <div className="mt-2 text-blue-400">STATUS: PROTOTYPE</div>
                 </div>
 
                 {/* Title & Desc */}
