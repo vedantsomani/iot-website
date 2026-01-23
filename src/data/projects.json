@@ -1,90 +1,92 @@
 [
     {
-        "slug": "fire-drone",
-        "title": "Autonomous Firefighting Drone",
-        "shortDesc": "A quadcopter that autonomously detects and extinguishes fires.",
-        "description": "Our flagship project: a quadcopter equipped with thermal cameras and a ball-drop extinguishing mechanism. It can autonomously navigate to fire sources and deploy fire suppression agents.",
-        "image": "/images/project-drone.png",
-        "gallery": [
-            "/images/project-drone.png"
-        ],
+        "slug": "mars-rover-6-legged",
+        "title": "6 Legged Mars Rover",
+        "shortDesc": "Bluetooth-controlled hexapod robot powered by Arduino.",
+        "description": "A 6-legged Mars rover prototype controlled remotely via Bluetooth and powered by Arduino. A complex mechanical build demonstrating advanced locomotion control.",
+        "image": "/images/projects/mars-rover-6-legged/Screenshot 2026-01-24 025854.png",
+        "gallery": [],
         "techStack": [
-            "ESP32",
-            "ROS2",
-            "Python",
-            "OpenCV",
-            "PX4"
+            "Arduino",
+            "Bluetooth",
+            "Robotics",
+            "Hexapod"
         ],
         "team": [
-            "Rohan Verma",
-            "Vikram Singh",
-            "Karan Malhotra"
+            "mudit__kapoor"
         ],
-        "demoLink": "#",
         "githubLink": "#",
         "featured": true
     },
     {
-        "slug": "smart-greenhouse",
-        "title": "Smart Greenhouse System",
-        "shortDesc": "IoT-based automated greenhouse monitoring and control.",
-        "description": "An automated greenhouse system that monitors temperature, humidity, soil moisture, and light levels. It automatically controls irrigation, ventilation, and lighting for optimal plant growth.",
-        "image": "/images/project-drone.png",
-        "gallery": [
-            "/images/project-drone.png"
-        ],
+        "slug": "alexa-rpi",
+        "title": "Alexa on Raspberry Pi",
+        "shortDesc": "Custom Alexa voice assistant integration on RPi.",
+        "description": "Bringing Amazon Alexa to the Raspberry Pi for a custom smart home voice assistant experience.",
+        "image": "/images/projects/alexa-rpi/Screenshot 2026-01-24 030959.png",
+        "gallery": [],
         "techStack": [
-            "Arduino",
-            "MQTT",
-            "Node-RED",
-            "Sensors"
+            "Raspberry Pi",
+            "Alexa AVS",
+            "Python"
         ],
         "team": [
-            "Ananya Roy",
-            "Priya Patel"
-        ],
-        "demoLink": "#",
-        "githubLink": "#",
-        "featured": true
-    },
-    {
-        "slug": "line-follower",
-        "title": "Line Following Robot",
-        "shortDesc": "A beginner-friendly autonomous line-following robot.",
-        "description": "A classic robotics project that teaches fundamental concepts of sensors, motors, and control algorithms. Built as part of our beginner workshop series.",
-        "image": "/images/project-drone.png",
-        "gallery": [
-            "/images/project-drone.png"
-        ],
-        "techStack": [
-            "Arduino",
-            "IR Sensors",
-            "L298N Motor Driver"
-        ],
-        "team": [
-            "Tech Team"
+            "ambuje_"
         ],
         "githubLink": "#",
         "featured": false
     },
     {
-        "slug": "voice-assistant",
-        "title": "Offline Voice Assistant",
-        "shortDesc": "A privacy-focused voice assistant that runs entirely offline.",
-        "description": "An IoT device that processes voice commands locally without sending data to the cloud. Perfect for smart home automation with privacy in mind.",
-        "image": "/images/project-drone.png",
-        "gallery": [
-            "/images/project-drone.png"
-        ],
+        "slug": "gesture-drone",
+        "title": "Gesture Control Drone",
+        "shortDesc": "Drone controlled by hand gestures.",
+        "description": "A flying robot (UAV) remotely controlled by hand gestures. Working in conjunction with onboard sensors and GPS for stability and navigation.",
+        "image": "/images/projects/gesture-drone/Screenshot 2026-01-24 025934.png",
+        "gallery": [],
         "techStack": [
-            "Raspberry Pi",
-            "Vosk",
-            "Python",
-            "Home Assistant"
+            "Drone",
+            "Gesture Control",
+            "Sensors",
+            "GPS"
         ],
         "team": [
-            "Sneha Gupta",
-            "Ananya Roy"
+            "regatte100"
+        ],
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "mud-skipper",
+        "title": "Mud Skipper Bio-Robot",
+        "shortDesc": "Biological robot mimicking a mud skipper.",
+        "description": "A bio-inspired robot that mimics the first land-walking animal. This robot demonstrates the importance of fins and tails for the movement of these amphibious creatures.",
+        "image": "/images/projects/mud-skipper/Screenshot 2026-01-24 025956.png",
+        "gallery": [],
+        "techStack": [
+            "Biomimicry",
+            "Robotics",
+            "Servo Motors"
+        ],
+        "team": [
+            "sparsh_27_"
+        ],
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "ir-thermometer",
+        "title": "IoT IR Thermometer",
+        "shortDesc": "Contactless temperature sensor with high accuracy.",
+        "description": "An infrared thermometer with a range of 0-99°C, functioning effectively at a 1-meter distance with only 0.02°C error.",
+        "image": "/images/projects/ir-thermometer/Screenshot 2026-01-24 031016.png",
+        "gallery": [],
+        "techStack": [
+            "IR Sensor",
+            "Arduino",
+            "IoT"
+        ],
+        "team": [
+            "rushilgoomera"
         ],
         "githubLink": "#",
         "featured": false

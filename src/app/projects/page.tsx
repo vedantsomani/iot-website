@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
 import projectsData from '@/data/projects.json';
-import ProjectBlueprint from '@/components/ProjectBlueprint';
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
@@ -28,8 +27,8 @@ interface Project {
 function ProjectCard({ project }: { project: Project }) {
     return (
         <motion.div
-            className="glass-panel border border-white/10 rounded-xl overflow-hidden group relative"
-            whileHover={{ y: -10 }}
+            className="glass-panel border border-white/10 rounded-xl overflow-hidden group relative h-[400px] flex flex-col"
+            whileHover={{ y: -5 }}
             transition={{ type: 'spring', stiffness: 300 }}
         >
             {/* Main Card Link Overlay */}
@@ -37,78 +36,56 @@ function ProjectCard({ project }: { project: Project }) {
                 <span className="sr-only">View {project.title}</span>
             </Link>
 
-            <div className="relative h-56">
+            <div className="relative h-48 overflow-hidden">
                 <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-panel-bg via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-panel-bg via-transparent to-transparent opacity-60" />
 
                 {/* Featured badge */}
                 {project.featured && (
                     <div className="absolute top-4 left-4 z-20">
-                        <Badge variant="secondary">Featured</Badge>
+                        <Badge variant="secondary" className="bg-neon-blue/20 text-neon-blue border-neon-blue/20 backdrop-blur-md">Featured</Badge>
                     </div>
                 )}
-
-                {/* Quick links */}
-                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                    {project.githubLink && (
-                        <a
-                            href={project.githubLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-black/50 text-white hover:bg-white hover:text-black transition-colors"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <Github className="w-4 h-4" />
-                        </a>
-                    )}
-                    {project.demoLink && (
-                        <a
-                            href={project.demoLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-black/50 text-white hover:bg-neon-blue hover:text-black transition-colors"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <ExternalLink className="w-4 h-4" />
-                        </a>
-                    )}
-                </div>
             </div>
 
-            <div className="p-5 relative z-0">
+            <div className="p-6 flex flex-col flex-1 relative z-0 bg-gradient-to-b from-black/50 to-transparent">
                 <h3 className="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-neon-blue transition-colors">
                     {project.title}
                 </h3>
 
-                <p className="text-gray-400 text-sm mb-4 line-clamp-2">{project.shortDesc}</p>
+                <p className="text-gray-400 text-sm mb-4 line-clamp-3 group-hover:text-gray-300 transition-colors">
+                    {project.shortDesc}
+                </p>
 
-                {/* Tech stack tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techStack.slice(0, 3).map((tech) => (
-                        <span
-                            key={tech}
-                            className="px-2 py-1 rounded text-xs bg-neon-blue/10 text-neon-blue border border-neon-blue/20"
-                        >
-                            {tech}
-                        </span>
-                    ))}
-                    {project.techStack.length > 3 && (
-                        <span className="px-2 py-1 rounded text-xs bg-white/5 text-gray-500">
-                            +{project.techStack.length - 3}
-                        </span>
-                    )}
-                </div>
+                <div className="mt-auto">
+                    {/* Tech stack tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {project.techStack.slice(0, 3).map((tech) => (
+                            <span
+                                key={tech}
+                                className="px-2 py-1 rounded text-[10px] uppercase font-mono bg-white/5 text-gray-400 border border-white/10 group-hover:border-neon-blue/30 group-hover:text-neon-blue transition-colors"
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                        {project.techStack.length > 3 && (
+                            <span className="px-2 py-1 rounded text-[10px] font-mono bg-white/5 text-gray-500">
+                                +{project.techStack.length - 3}
+                            </span>
+                        )}
+                    </div>
 
-                <div className="flex items-center justify-between">
-                    <span className="text-gray-500 text-sm">
-                        {project.team.length} contributor{project.team.length > 1 ? 's' : ''}
-                    </span>
-                    <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-neon-blue group-hover:translate-x-1 transition-all" />
+                    <div className="flex items-center justify-between pt-4 border-t border-white/5 group-hover:border-neon-blue/20 transition-colors">
+                        <span className="text-gray-500 text-xs font-mono">
+                            // {project.team.length} MEMBER{project.team.length !== 1 ? 'S' : ''}
+                        </span>
+                        <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-neon-blue group-hover:translate-x-1 transition-all" />
+                    </div>
                 </div>
             </div>
         </motion.div>
@@ -143,54 +120,21 @@ export default function ProjectsPage() {
 
             <Section>
                 <Container>
-                    {/* Featured Projects - Digital Twin Gallery */}
-                    {featuredProjects.length > 0 && (
-                        <div className="mb-20">
-                            <ScrollReveal>
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="h-12 w-2 bg-neon-purple rounded-full" />
-                                    <div>
-                                        <h2 className="text-3xl font-bold font-orbitron text-white">Digital Twin Gallery</h2>
-                                        <p className="text-blue-400 font-mono text-sm mt-1">
-                                            // SYSTEM.ACCESS_LEVEL: TOP_SECRET //
-                                        </p>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-
-                            <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                {featuredProjects.map((project) => (
-                                    <StaggerItem key={project.slug}>
-                                        <Link href={`/projects/${project.slug}`}>
-                                            <ProjectBlueprint
-                                                title={project.title}
-                                                description={project.shortDesc}
-                                                image={project.image}
-                                                tech={project.techStack}
-                                            />
-                                        </Link>
-                                    </StaggerItem>
-                                ))}
-                            </StaggerContainer>
-                        </div>
-                    )}
-
-                    {/* All Projects */}
+                    {/* All Projects Grid */}
                     <div>
-                        <ScrollReveal>
-                            <div className="flex items-center gap-4 mb-8">
-                                <div className="h-12 w-2 bg-neon-blue rounded-full" />
-                                <h2 className="text-3xl font-bold font-orbitron text-white">All Projects</h2>
-                            </div>
-                        </ScrollReveal>
-
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {otherProjects.map((project) => (
+                            {/* Render all projects together without separation, prioritized by featured if desired, or just mixed */}
+                            {/* User asked to "merge it in normal", so we can just render them all. 
+                                Typically featured first is good, but let's keep the existing order logic 
+                                (Standard then Featured? Or Featured then Standard? Usually Featured First).
+                                Let's put Featured First for better UX. 
+                            */}
+                            {featuredProjects.map((project) => (
                                 <StaggerItem key={project.slug}>
                                     <ProjectCard project={project} />
                                 </StaggerItem>
                             ))}
-                            {featuredProjects.map((project) => (
+                            {otherProjects.map((project) => (
                                 <StaggerItem key={project.slug}>
                                     <ProjectCard project={project} />
                                 </StaggerItem>
@@ -200,14 +144,15 @@ export default function ProjectsPage() {
 
                     {/* CTA */}
                     <ScrollReveal className="mt-20">
-                        <div className="glass-panel p-8 md:p-12 rounded-2xl border border-neon-purple/30 text-center">
-                            <h2 className="text-2xl md:text-3xl font-bold font-orbitron text-white mb-4">
+                        <div className="glass-panel p-8 md:p-12 rounded-2xl border border-neon-purple/30 text-center relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-neon-purple/5 group-hover:bg-neon-purple/10 transition-colors duration-500" />
+                            <h2 className="text-2xl md:text-3xl font-bold font-orbitron text-white mb-4 relative z-10">
                                 Have a project idea?
                             </h2>
-                            <p className="text-gray-400 mb-6">
+                            <p className="text-gray-400 mb-6 relative z-10">
                                 Join the club and turn your ideas into reality with our team and resources.
                             </p>
-                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative z-10">
                                 <Link
                                     href="/join"
                                     className="inline-flex items-center gap-2 px-8 py-4 bg-neon-purple text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors"

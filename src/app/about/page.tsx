@@ -8,6 +8,7 @@ import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/Scroll
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 
 const teams = [
     {
@@ -43,12 +44,11 @@ const teams = [
 ];
 
 const milestones = [
-    { year: '2020', event: 'Club Founded' },
-    { year: '2021', event: 'First National Competition Win' },
-    { year: '2022', event: 'Launched Drone Research Program' },
-    { year: '2023', event: '50+ Active Members' },
-    { year: '2024', event: 'IoT Innovation Lab Partnership' },
-    { year: '2025', event: 'International Competition Representation' },
+    { year: '2019', event: 'Founded as "Robotics Club" under Student Council' },
+    { year: '2021', event: 'Rebranded to "Technoitx BU"' },
+    { year: '2022', event: 'Launched First Flagship Drone Project' },
+    { year: '2023', event: 'Expanded to 50+ Active Members' },
+    { year: '2024', event: 'Renamed "IoT & Robotics BU" under Student Cabinet' },
 ];
 
 export default function AboutPage() {
@@ -212,24 +212,24 @@ export default function AboutPage() {
 
                     <div className="relative">
                         {/* Timeline line */}
-                        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-neon-blue via-neon-purple to-transparent" />
+                        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-neon-blue via-neon-purple to-transparent border-r border-dashed border-white/20" />
 
-                        <div className="space-y-8">
+                        <div className="space-y-12">
                             {milestones.map((milestone, i) => (
                                 <ScrollReveal key={i} delay={i * 0.1}>
                                     <motion.div
-                                        className={`relative flex items-center gap-6 ${i % 2 === 0 ? 'md:flex-row-reverse md:text-right' : ''
+                                        className={`relative flex items-center gap-8 ${i % 2 === 0 ? 'md:flex-row-reverse md:text-right' : ''
                                             }`}
-                                        whileHover={{ x: i % 2 === 0 ? -10 : 10 }}
+                                        whileHover={{ x: i % 2 === 0 ? -5 : 5 }}
                                     >
                                         {/* Dot */}
-                                        <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-neon-blue -translate-x-1/2 z-10" />
+                                        <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-black border-2 border-neon-blue -translate-x-1/2 z-10 shadow-[0_0_10px_rgba(0,255,255,0.5)]" />
 
                                         {/* Content */}
                                         <div className={`ml-12 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-                                            <div className="glass-panel p-4 rounded-xl border border-white/10">
-                                                <span className="text-neon-blue font-bold">{milestone.year}</span>
-                                                <p className="text-white">{milestone.event}</p>
+                                            <div className="glass-panel p-6 rounded-xl border border-white/10 hover:border-neon-blue/40 transition-colors group">
+                                                <span className="text-neon-blue font-bold text-lg">{milestone.year}</span>
+                                                <p className="text-gray-300 group-hover:text-white transition-colors">{milestone.event}</p>
                                             </div>
                                         </div>
                                     </motion.div>

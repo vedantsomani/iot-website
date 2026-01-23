@@ -1,5 +1,22 @@
 [
     {
+        "id": "nfc-rfid-workshop",
+        "title": "NFC and RFID Workshop",
+        "date": "2023-01-01",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "A hands-on workshop exploring Near Field Communication (NFC) and Radio Frequency Identification (RFID) technologies.",
+        "image": "/images/event-placeholder.png",
+        "type": "past",
+        "gallery": [],
+        "tags": [
+            "Workshop",
+            "NFC",
+            "RFID",
+            "IoT"
+        ]
+    },
+    {
         "id": "movie-night-2026",
         "title": "Movie Night",
         "date": "2026-02-02",
@@ -38,9 +55,11 @@
         "time": "2 Days Workshop",
         "location": "Bennett University",
         "description": "Hands-on workshop on 3D designing with Fusion 360 and 3D printing technology.",
-        "image": "/images/event-placeholder.png",
+        "image": "/images/events/3d-fusion-workshop-nov-2025/Screenshot 2026-01-24 020612.png",
         "type": "past",
-        "gallery": [],
+        "gallery": [
+            "/images/events/3d-fusion-workshop-nov-2025/Screenshot 2026-01-24 020612.png"
+        ],
         "tags": [
             "Workshop",
             "3D Printing",
@@ -54,9 +73,13 @@
         "time": "2 Days Workshop",
         "location": "Bennett University",
         "description": "Hosted 3D Verse: A 3D printing and 3D designing 2-day workshop.",
-        "image": "/images/event-placeholder.png",
+        "image": "/images/events/3d-fusion-workshop-2025/Screenshot 2026-01-24 020356.png",
         "type": "past",
-        "gallery": [],
+        "gallery": [
+            "/images/events/3d-fusion-workshop-2025/Screenshot 2026-01-24 020356.png",
+            "/images/events/3d-fusion-workshop-2025/Screenshot 2026-01-24 020406.png",
+            "/images/events/3d-fusion-workshop-2025/Screenshot 2026-01-24 020412.png"
+        ],
         "tags": [
             "Workshop",
             "3D Printing",
@@ -191,9 +214,12 @@
         "time": "TBD",
         "location": "Online",
         "description": "Another exciting Minecraft event with BU Gamers.",
-        "image": "/images/event-placeholder.png",
+        "image": "/images/events/minecraft-event-2021/Screenshot 2026-01-24 020125.png",
         "type": "past",
-        "gallery": [],
+        "gallery": [
+            "/images/events/minecraft-event-2021/Screenshot 2026-01-24 020125.png",
+            "/images/events/minecraft-event-2021/Screenshot 2026-01-24 020134.png"
+        ],
         "tags": [
             "Event",
             "Gaming"
@@ -221,9 +247,12 @@
         "time": "TBD",
         "location": "Bennett University",
         "description": "Line follower bot competition during Uphoria 4.0.",
-        "image": "/images/event-placeholder.png",
+        "image": "/images/events/line-follow-bot-uphoria-2020/Screenshot 2026-01-24 015135.png",
         "type": "past",
-        "gallery": [],
+        "gallery": [
+            "/images/events/line-follow-bot-uphoria-2020/Screenshot 2026-01-24 015135.png",
+            "/images/events/line-follow-bot-uphoria-2020/Screenshot 2026-01-24 020018.png"
+        ],
         "tags": [
             "Competition",
             "Robotics"
@@ -236,9 +265,11 @@
         "time": "TBD",
         "location": "Bennett University",
         "description": "Technotix club in collaboration with Astronomy club brings you Laser Obstacle Course during Uphoria.",
-        "image": "/images/event-placeholder.png",
+        "image": "/images/events/laser-obstacle-course-2020/Screenshot 2026-01-24 020918.png",
         "type": "past",
-        "gallery": [],
+        "gallery": [
+            "/images/events/laser-obstacle-course-2020/Screenshot 2026-01-24 020918.png"
+        ],
         "tags": [
             "Event",
             "Fun"
@@ -251,9 +282,14 @@
         "time": "TBD",
         "location": "Bennett University",
         "description": "Cubing competition open to all.",
-        "image": "/images/event-placeholder.png",
+        "image": "/images/events/bu-cube-open-2020/Screenshot 2026-01-24 015149.png",
         "type": "past",
-        "gallery": [],
+        "gallery": [
+            "/images/events/bu-cube-open-2020/Screenshot 2026-01-24 015149.png",
+            "/images/events/bu-cube-open-2020/Screenshot 2026-01-24 015202.png",
+            "/images/events/bu-cube-open-2020/Screenshot 2026-01-24 015822.png",
+            "/images/events/bu-cube-open-2020/Screenshot 2026-01-24 015927.png"
+        ],
         "tags": [
             "Competition",
             "Cubing"
@@ -273,6 +309,23 @@
             "Workshop",
             "IoT",
             "Android"
+        ]
+    },
+    {
+        "id": "plane-making-workshop-2019",
+        "title": "Plane Making Workshop",
+        "date": "2019-10-26",
+        "time": "TBD",
+        "location": "Bennett University",
+        "description": "Hands-on workshop on aerodynamics and plane making.",
+        "image": "/images/events/plane-making-workshop-2019/Screenshot 2026-01-24 015310.png",
+        "type": "past",
+        "gallery": [
+            "/images/events/plane-making-workshop-2019/Screenshot 2026-01-24 015310.png"
+        ],
+        "tags": [
+            "Workshop",
+            "Aeromodelling"
         ]
     }
 ]

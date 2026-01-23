@@ -1,0 +1,113 @@
+[
+    {
+        "id": "project-expo-2019-2nd",
+        "title": "2nd Prize at Engineering Project Showcase 2019",
+        "date": "2019-11-11",
+        "category": "Competition",
+        "description": "Himank Sharma, Ayush Gawhane, Thiruvesh, and Saushtav Roy won 2nd prize in the Engineering and Biotechnology category at the Second Annual Engineering Project Showcase.",
+        "result": "2nd Prize",
+        "team": [
+            "Himank Sharma",
+            "Ayush Gawhane",
+            "Thiruvesh",
+            "Saushtav Roy"
+        ],
+        "image": "/images/achievements/project-expo-2019-2nd.png",
+        "gallery": []
+    },
+    {
+        "id": "icrtsem-2019-paper",
+        "title": "Research Presentation at ICRTSEM 2019",
+        "date": "2019-09-22",
+        "category": "Research",
+        "description": "Himank Sharma presented his research on 'Measurement of spine parameters and possible scoliosis cases with surface Topography Techniques: A case study with Indian young population' at the 3rd International Conference on Research on Recent Trends in Science, Engineering and Mathematics 2019 in Goa.",
+        "result": "Presented",
+        "team": [
+            "Himank Sharma"
+        ],
+        "image": "/images/achievements/icrtsem-2019.png",
+        "gallery": []
+    },
+    {
+        "id": "portable-ecg-device",
+        "title": "1st Prize - Portable ECG Device",
+        "date": "2019-11-11",
+        "category": "Competition",
+        "description": "Akhil, Ashish, Mansa, and Ramana R. won 1st prize in the Robotics and Sensors category for their 'Portable ECG Device'.",
+        "result": "1st Prize",
+        "team": [
+            "Akhil",
+            "Ashish",
+            "Mansa",
+            "Ramana R."
+        ],
+        "image": "/images/achievements/portable-ecg.png",
+        "gallery": []
+    },
+    {
+        "id": "project-expo-2019-robotics-2nd",
+        "title": "2nd Prize - Robotics and Sensors",
+        "date": "2019-11-11",
+        "category": "Competition",
+        "description": "Priyanshu, Raghav, Raghav, Nishtha, and Raghav won 2nd prize in the Robotics and Sensors category.",
+        "result": "2nd Prize",
+        "team": [
+            "Priyanshu",
+            "Raghav",
+            "Raghav",
+            "Nishtha",
+            "Raghav"
+        ],
+        "image": "/images/achievements/robotics-2nd.png",
+        "gallery": []
+    },
+    {
+        "id": "technovation-hackathon-2020",
+        "title": "2nd Runner Up - Technovation Hackathon 2",
+        "date": "2020-01-26",
+        "category": "Competition",
+        "description": "Team won 2nd Runner Up at Technovation Hackathon Smart City 2.",
+        "result": "2nd Runner Up",
+        "team": [],
+        "image": "/images/achievements/technovation-2020.png",
+        "gallery": []
+    },
+    {
+        "id": "sih-2020-selection",
+        "title": "Selected for SIH 2020 Finale",
+        "date": "2020-03-11",
+        "category": "Competition",
+        "description": "Team HEXA-TECHIES and Team FORTIFY selected for the Smart India Hackathon (SIH 2020) finale.",
+        "result": "Selected",
+        "team": [
+            "Mohit Bhat",
+            "Avinash Kumar",
+            "Aditya Singh",
+            "Chahat Bindra",
+            "M Vineeth",
+            "Kunchanapalli Manohar",
+            "Akshita Mehta",
+            "Anshuman Agarwal",
+            "Shreyas Papinwar",
+            "Zubin Choudhary",
+            "Naman Bansal",
+            "Swapnil Panwala"
+        ],
+        "image": "/images/achievements/sih-2020.png",
+        "gallery": []
+    },
+    {
+        "id": "snu-line-follower-win",
+        "title": "Line Follower Competition Winner - SNU",
+        "date": "2019-02-10",
+        "category": "Competition",
+        "description": "Congratulations to the team on winning the Line Follower Competition conducted at Shiv Nadar University (RoboYantriki).",
+        "result": "Winner",
+        "team": [
+            "thephilosophicalsoul",
+            "manu.starkzz"
+        ],
+        "image": "/images/achievements/snu-line-follower.jpg",
+        "gallery": []
+    }
+]

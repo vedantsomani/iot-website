@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
@@ -19,13 +19,6 @@ function RobotHead({ mouse }: { mouse: React.MutableRefObject<[number, number]> 
 
         headRef.current.rotation.y = THREE.MathUtils.lerp(headRef.current.rotation.y, targetX, 0.1);
         headRef.current.rotation.x = THREE.MathUtils.lerp(headRef.current.rotation.x, -targetY, 0.1);
-
-        // Blink effect
-        /*
-        if (Math.random() > 0.995) {
-           // Simple scale blink logic could go here if using spring values
-        }
-        */
     });
 
     return (

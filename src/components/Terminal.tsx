@@ -165,7 +165,9 @@ export default function Terminal() {
                         <p className="pl-4">- <span className="text-yellow-400">clear</span>: Clear terminal</p>
                         <p className="pl-4">- <span className="text-yellow-400">sudo</span>: Execute admin privileges</p>
                         <p className="pl-4">- <span className="text-yellow-400">hack</span>: Initialize matrix protocol</p>
+                        <p className="pl-4">- <span className="text-yellow-400">twin</span>: Access 3D Model Viewer</p>
                         <p className="pl-4">- <span className="text-yellow-400">game</span>: Launch firewall defense protocol</p>
+                        <p className="pl-4">- <span className="text-yellow-400">leaderboard</span>: View global hacker rankings</p>
                         <p className="pl-4">- <span className="text-yellow-400">submit &lt;code&gt;</span>: Verify security clearance key</p>
                         <p className="pl-4">- <span className="text-yellow-400">level</span>: Check current clearance status</p>
                         <p className="pl-4">- <span className="text-yellow-400">cat secret.txt</span>: Read classified file</p>
@@ -238,6 +240,10 @@ export default function Terminal() {
             case 'rudrakshi rai':
                 setShowSurprise(true);
                 response = <span className="text-yellow-400 font-bold uppercase tracking-widest animate-pulse">CRITICAL OVERRIDE: Birthday Surprise Protocol Initiated!</span>;
+                break;
+            case 'twin':
+                addHistory(<span className="text-cyan-400">Accessing Digital Twin interface... CONNECTING...</span>);
+                setTimeout(() => router.push('/twin'), 1000);
                 break;
             case 'game':
                 setIsPlayingGame(true);
