@@ -3,8 +3,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { X, Trophy, Star, Heart, Cpu, CircuitBoard } from 'lucide-react';
-
-
 import { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
 
@@ -63,7 +61,7 @@ export default function BirthdaySurprise({ isOpen, onClose }: BirthdaySurprisePr
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 md:p-8"
+                    className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-8"
                 >
                     {/* Background Glows */}
                     <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600/20 blur-[120px] rounded-full animate-pulse" />
@@ -73,7 +71,7 @@ export default function BirthdaySurprise({ isOpen, onClose }: BirthdaySurprisePr
                         initial={{ scale: 0.8, y: 20 }}
                         animate={{ scale: 1, y: 0 }}
                         exit={{ scale: 0.8, y: 20 }}
-                        className="relative w-full max-w-4xl bg-gradient-to-b from-white/10 to-transparent border border-white/20 rounded-3xl overflow-hidden shadow-2xl"
+                        className="relative w-full max-w-5xl bg-gradient-to-b from-white/10 to-transparent border border-white/20 rounded-3xl overflow-hidden shadow-2xl"
                     >
                         {/* Close Button */}
                         <button
@@ -89,12 +87,12 @@ export default function BirthdaySurprise({ isOpen, onClose }: BirthdaySurprisePr
                                 initial={{ x: -50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ delay: 0.2 }}
-                                className="relative group"
+                                className="relative group shrink-0"
                             >
                                 <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border-2 border-white/20">
+                                <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-2xl overflow-hidden border-2 border-white/20">
                                     <Image
-                                        src="/images/Rudrakshi Rai.JPG"
+                                        src="/birthday.jpeg"
                                         alt="President Rudrakshi Rai"
                                         fill
                                         className="object-cover"
@@ -125,7 +123,6 @@ export default function BirthdaySurprise({ isOpen, onClose }: BirthdaySurprisePr
                                     <CircuitBoard className="w-10 h-10" />
                                 </motion.div>
                             </motion.div>
-
 
                             {/* Content */}
                             <div className="flex-1 text-center md:text-left space-y-6">

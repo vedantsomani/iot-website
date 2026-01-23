@@ -179,7 +179,11 @@ export default function Terminal() {
                     </div>
                 </motion.div>
             )}
-            <BirthdaySurprise isOpen={showSurprise} onClose={() => setShowSurprise(false)} />
+            <BirthdaySurprise
+                key={showSurprise ? 'open' : 'closed'}
+                isOpen={showSurprise}
+                onClose={() => setShowSurprise(false)}
+            />
         </AnimatePresence>
     );
 }
