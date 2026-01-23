@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal as TerminalIcon, X, Send } from 'lucide-react';
+import { Terminal as TerminalIcon, X } from 'lucide-react';
+import BirthdaySurprise from './BirthdaySurprise';
+
 
 type Command = {
     cmd: string;
@@ -16,6 +18,8 @@ export default function Terminal() {
         { cmd: 'init', output: 'IoT_Club_OS v1.0.4 [Authorized Personnel Only]' },
         { cmd: 'status', output: 'System Online. Type "help" for commands.' }
     ]);
+    const [showSurprise, setShowSurprise] = useState(false);
+
 
     const inputRef = useRef<HTMLInputElement>(null);
     const endRef = useRef<HTMLDivElement>(null);
@@ -107,6 +111,15 @@ export default function Terminal() {
                 setIsOpen(false);
                 setInput('');
                 return;
+            case 'best':
+            case 'president':
+            case 'birthday':
+            case 'Rudrakshi Rai':
+            case 'rudrakshi rai':
+                setShowSurprise(true);
+                response = <span className="text-yellow-400 font-bold uppercase tracking-widest animate-pulse">CRITICAL OVERRIDE: Birthday Surprise Protocol Initiated!</span>;
+                break;
+
             default:
                 response = <span className="text-red-400">Command not found: {cmd}</span>;
         }
@@ -166,6 +179,8 @@ export default function Terminal() {
                     </div>
                 </motion.div>
             )}
+            <BirthdaySurprise isOpen={showSurprise} onClose={() => setShowSurprise(false)} />
         </AnimatePresence>
     );
 }
+

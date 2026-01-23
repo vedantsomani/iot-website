@@ -89,7 +89,7 @@ export default function IdeathonPage() {
                             <span className="text-neon-purple font-mono text-base">&gt; 24 HOURS. 4 AGENTS. 1 MISSION.</span>
                         </p>
 
-                        <MissionTimer targetDate="2026-02-04T09:00:00" />
+                        <MissionTimer targetDate="2026-02-03T18:30:00" />
                         <div className="mb-8" />
 
                         {!protocolsRead ? (
@@ -180,9 +180,26 @@ export default function IdeathonPage() {
                                 <AlertTriangle className="w-5 h-5 text-red-500" />
                                 4. MISSION TIMELINE (CRITICAL)
                             </h3>
-                            <div className="text-gray-300 ml-7 space-y-2 text-sm">
-                                <p><strong className="text-white">Day 1 [IDEATHON]:</strong> Topic Reveal (On-Site) &rarr; 2 Hours Intel/Research &rarr; Presentation Briefing.</p>
-                                <p><strong className="text-neon-purple">Day 2 [ESCAPE ROOM]:</strong> Only the <span className="text-white font-bold">TOP 10 SQUADS</span> from Day 1 will advance to the Operation Escape Room phase.</p>
+                            <div className="space-y-4">
+                                <div>
+                                    <strong className="text-white block mb-1">Day 1 [IDEATHON - OPEN INNOVATION]:</strong>
+                                    <ul className="list-disc ml-5 space-y-1 text-xs text-gray-400">
+                                        <li>Event Starts 06:30 PM.</li>
+                                        <li>We provide the Problem Statements (P.S). Teams of 4.</li>
+                                        <li>Event Flow: Judge Intro &gt; Presentation Requirements.</li>
+                                        <li>Teams prepare presentation (2-3 hours).</li>
+                                        <li>Judging Round: Top 6 Teams Shortlisted for Day 2.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong className="text-neon-purple block mb-1">Day 2 [ESCAPE ROOM]:</strong>
+                                    <ul className="list-disc ml-5 space-y-1 text-xs text-gray-400">
+                                        <li>Top 10 Teams from Day 1 advance.</li>
+                                        <li>2 Escape Rooms. 5 Teams per room (Turn by Turn).</li>
+                                        <li>Use your Magnets to solve puzzles!</li>
+                                        <li>Prize Pool for Top 3 Teams.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </motion.div>
                     </div>
@@ -410,7 +427,7 @@ export default function IdeathonPage() {
                                         <div>
                                             <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Mission Track</label>
                                             <div className="grid grid-cols-2 gap-3">
-                                                {['Robotics', 'IoT', 'Software', 'Open Invoice'].map((track) => (
+                                                {['Robotics', 'IoT', 'Software', 'Open Innovation'].map((track) => (
                                                     <button
                                                         key={track}
                                                         onClick={() => setFormData({ ...formData, track })}
@@ -486,7 +503,7 @@ export default function IdeathonPage() {
                                         ))}
                                     </div>
                                     <div className="p-4 bg-white/5 rounded-lg border border-white/10 mb-8 font-mono text-sm text-neon-blue">
-                                        &gt; DEPLOYMENT DATE: FEB 04, 2026<br />
+                                        &gt; DEPLOYMENT DATE: FEB 03, 2026<br />
                                         &gt; LOCATION: SECTOR B, LA 105<br />
                                         &gt; STATUS: STANDBY
                                     </div>

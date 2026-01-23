@@ -1,18 +1,34 @@
 [
     {
+        "id": "movie-night-2026",
+        "title": "Movie Night",
+        "date": "2026-02-02",
+        "time": "Evening",
+        "location": "Bennett University",
+        "description": "Join us for a spectacular Movie Night featuring 4 blockbuster movies back-to-back!",
+        "image": "/images/event-placeholder.png",
+        "type": "upcoming",
+        "gallery": [],
+        "tags": [
+            "Movie",
+            "Fun",
+            "Social"
+        ]
+    },
+    {
         "id": "rewire-2026",
         "title": "Rewire",
-        "date": "2026-02-04",
-        "time": "10:00 AM Onwards",
+        "date": "2026-02-03",
+        "time": "6:30 PM Onwards",
         "location": "Bennett University",
-        "description": "An innovative Ideathon combined with a thrilling technical Escape Room challenge.",
+        "description": "An innovative Ideathon (Open Innovation) on Day 1, followed by a thrilling technical Escape Room challenge for top teams on Day 2.",
         "image": "/images/event-placeholder.png",
         "type": "upcoming",
         "registrationLink": "/events/rewire",
         "tags": [
             "Hackathon",
-            "Competition",
-            "Fun"
+            "Escape Room",
+            "Competition"
         ]
     },
     {

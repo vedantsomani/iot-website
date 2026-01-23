@@ -46,7 +46,7 @@ const milestones = [
     { year: '2020', event: 'Club Founded' },
     { year: '2021', event: 'First National Competition Win' },
     { year: '2022', event: 'Launched Drone Research Program' },
-    { year: '2023', event: '100+ Active Members' },
+    { year: '2023', event: '50+ Active Members' },
     { year: '2024', event: 'IoT Innovation Lab Partnership' },
     { year: '2025', event: 'International Competition Representation' },
 ];
