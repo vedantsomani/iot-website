@@ -10,6 +10,8 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
 
+import FlagshipProjects from '@/components/FlagshipProjects';
+
 interface Project {
     slug: string;
     title: string;
@@ -22,6 +24,7 @@ interface Project {
     demoLink?: string;
     githubLink?: string;
     featured: boolean;
+    flagship?: boolean;
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -30,8 +33,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     return (
         <motion.div
             className={`glass-panel border rounded-xl overflow-hidden group relative h-[400px] flex flex-col ${isPremium
-                    ? 'border-neon-blue/40 shadow-[0_0_15px_rgba(0,243,255,0.1)]'
-                    : 'border-white/10'
+                ? 'border-neon-blue/40 shadow-[0_0_15px_rgba(0,243,255,0.1)]'
+                : 'border-white/10'
                 }`}
             whileHover={{
                 y: -5,
@@ -83,8 +86,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                             <span
                                 key={tech}
                                 className={`px-2 py-1 rounded text-[10px] uppercase font-mono bg-white/5 border transition-colors ${isPremium
-                                        ? 'text-neon-blue border-neon-blue/20 group-hover:bg-neon-blue/10'
-                                        : 'text-gray-400 border-white/10 group-hover:border-neon-blue/30 group-hover:text-neon-blue'
+                                    ? 'text-neon-blue border-neon-blue/20 group-hover:bg-neon-blue/10'
+                                    : 'text-gray-400 border-white/10 group-hover:border-neon-blue/30 group-hover:text-neon-blue'
                                     }`}
                             >
                                 {tech}
@@ -111,8 +114,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export default function ProjectsPage() {
     const projects = projectsData as Project[];
-    const featuredProjects = projects.filter((p) => p.featured);
-    const otherProjects = projects.filter((p) => !p.featured);
+    const flagshipProjects = projects.filter((p) => p.flagship);
+    // Exclude flagship projects from featured and other lists to avoid duplication
+    const featuredProjects = projects.filter((p) => p.featured && !p.flagship);
+    const otherProjects = projects.filter((p) => !p.featured && !p.flagship);
 
     return (
         <div className="min-h-screen">
@@ -135,17 +140,14 @@ export default function ProjectsPage() {
                 </Container>
             </Section>
 
+            {/* Flagship Projects Section */}
+            <FlagshipProjects projects={flagshipProjects} />
+
             <Section>
                 <Container>
                     {/* All Projects Grid */}
                     <div>
                         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {/* Render all projects together without separation, prioritized by featured if desired, or just mixed */}
-                            {/* User asked to "merge it in normal", so we can just render them all. 
-                                Typically featured first is good, but let's keep the existing order logic 
-                                (Standard then Featured? Or Featured then Standard? Usually Featured First).
-                                Let's put Featured First for better UX. 
-                            */}
                             {featuredProjects.map((project, i) => (
                                 <StaggerItem key={project.slug}>
                                     <ProjectCard project={project} index={i} />

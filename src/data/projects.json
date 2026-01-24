@@ -13,7 +13,7 @@
             "Autonomous Navigation"
         ],
         "team": [
-            "vishal"
+            "Pushp"
         ],
         "githubLink": "#",
         "featured": true
@@ -31,7 +31,8 @@
             "Fabrication"
         ],
         "team": [
-            "vishal"
+            "Niket",
+            "Himanshu"
         ],
         "githubLink": "#",
         "featured": true
@@ -49,7 +50,7 @@
             "Flight Controller"
         ],
         "team": [
-            "vishal"
+            "Vedant"
         ],
         "githubLink": "#",
         "featured": true
@@ -67,7 +68,8 @@
             "Microcontroller"
         ],
         "team": [
-            "vishal"
+            "Pushp ",
+            "Vedant"
         ],
         "githubLink": "#",
         "featured": true
@@ -85,7 +87,7 @@
             "Arduino"
         ],
         "team": [
-            "vishal"
+            "Himanshu"
         ],
         "githubLink": "#",
         "featured": true
@@ -106,7 +108,28 @@
             "vishal"
         ],
         "githubLink": "#",
-        "featured": true
+        "featured": true,
+        "flagship": true
+    },
+    {
+        "slug": "ai-voice-assistant",
+        "title": "AI Voice Assistant",
+        "shortDesc": "Next-gen AI assistant with voice, image, and 3D capabilities.",
+        "description": "A cutting-edge AI assistant capable of generating PPTs, images, and 3D models. It handles natural language chatting, web searching, and automation tasks like playing songs, redefining personal assistance.",
+        "image": "/images/projects/ai-assistant/primary.png",
+        "gallery": [],
+        "techStack": [
+            "Generative AI",
+            "NLP",
+            "3D Generation",
+            "Automation"
+        ],
+        "team": [
+            "Pushp"
+        ],
+        "githubLink": "#",
+        "featured": true,
+        "flagship": true
     },
     {
         "slug": "mars-rover-6-legged",
