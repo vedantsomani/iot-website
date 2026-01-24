@@ -93,6 +93,7 @@ export const RECRUITMENT_HEADERS = [
     'Role',
     'Skills',
     'Motivation',
+    'LinkedIn',
     'Portfolio',
     'ResumeURL',
     'Status'

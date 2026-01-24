@@ -57,13 +57,9 @@ export default function ApplyPage() {
                 return;
             }
 
-            // Security: Enforce Resume for Closed Teams
-            const OPEN_TEAMS = ['research', 'design-content', 'pr'];
-            const team = formData.get('team') as string;
-            const isClosedTeam = team && !OPEN_TEAMS.includes(team);
-
-            if (isClosedTeam && !uploadedFile) {
-                alert("For this team, a Resume/Portfolio is mandatory.");
+            // Validation: Enforce Resume/Portfolio Upload
+            if (!uploadedFile) {
+                alert("Please upload your Resume or Portfolio to proceed.");
                 setIsSubmitting(false);
                 return;
             }
@@ -334,12 +330,25 @@ export default function ApplyPage() {
                             </div>
 
                             <div>
-                                <label className="block text-white/70 text-sm mb-2">Portfolio / GitHub / LinkedIn Link</label>
+                                <label className="block text-white/70 text-sm mb-2">LinkedIn Profile URL *</label>
+                                <input
+                                    name="linkedin"
+                                    required
+                                    type="url"
+                                    className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all"
+                                    placeholder="https://linkedin.com/in/..."
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-white/70 text-sm mb-2">
+                                    GitHub Profile (Optional)
+                                </label>
                                 <input
                                     name="portfolio"
                                     type="url"
                                     className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all"
-                                    placeholder="https://..."
+                                    placeholder="https://github.com/..."
                                 />
                             </div>
                         </div>
@@ -351,18 +360,10 @@ export default function ApplyPage() {
                             </h3>
 
                             <div>
-                                {(() => {
-                                    const OPEN_TEAMS = ['research', 'design-content', 'pr'];
-                                    const isClosedTeam = selectedTeam && !OPEN_TEAMS.includes(selectedTeam);
-                                    return (
-                                        <>
-                                            <label className="block text-white/70 text-sm mb-2">
-                                                Resume / Portfolio {isClosedTeam ? '(Required for Resume Drop)' : '(Optional)'}
-                                            </label>
-                                            <p className="text-white/50 text-xs mb-3">Upload your resume or portfolio. Max 5MB. PDF, JPEG, PNG, or WebP only.</p>
-                                        </>
-                                    );
-                                })()}
+                                <label className="block text-white/70 text-sm mb-2">
+                                    Resume / Portfolio (Required)
+                                </label>
+                                <p className="text-white/50 text-xs mb-3">Upload your resume or portfolio. Max 5MB. PDF, JPEG, PNG, or WebP only.</p>
 
                                 {!uploadedFile ? (
                                     <div
