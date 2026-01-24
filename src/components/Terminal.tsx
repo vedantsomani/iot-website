@@ -327,16 +327,36 @@ export default function Terminal() {
                 if (cmdLower.startsWith('login ')) {
                     const parts = cmd.split(' ');
                     if (parts.length < 3) {
-                        response = <span className="text-red-400">Usage: login &lt;email&gt; &lt;password&gt;</span>;
+                        response = <span className="text-red-400">Usage: login &lt;username&gt; &lt;password&gt;</span>;
                     } else {
-                        addHistory("Authenticating...");
-                        const { error } = await supabase.auth.signInWithPassword({
-                            email: parts[1],
-                            password: parts[2]
-                        });
-                        response = error ? <span className="text-red-500">Error: {error.message}</span> : <span className="text-green-500">Access Granted. Welcome back, Agent.</span>;
+                        addHistory("Authenticating with Staff Mainframe...");
+                        try {
+                            const res = await fetch('/api/staff/login', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ username: parts[1], password: parts[2] }),
+                            });
+
+                            const data = await res.json();
+
+                            if (res.ok) {
+                                response = <span className="text-green-500">Access Granted. Welcome, {data.user.username}. Redirecting...</span>;
+                                setTimeout(() => router.push('/staff/dashboard'), 1000);
+                            } else {
+                                response = <span className="text-red-500">Error: {data.error}</span>;
+                            }
+                        } catch (err) {
+                            response = <span className="text-red-500">Connection Failed.</span>;
+                        }
                     }
                     addHistory(response);
+                    setInput('');
+                    return;
+                }
+
+                if (cmdLower === 'dashboard') {
+                    addHistory("Opening Command Center...");
+                    setTimeout(() => router.push('/staff/dashboard'), 500);
                     setInput('');
                     return;
                 }

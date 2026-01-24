@@ -9,15 +9,21 @@ const COOKIE_NAME = 'staff_session';
 const EXPIRY = '8h'; // Session lasts 8 hours
 
 export interface SessionPayload {
-    staffId: string;
+    staffId: string; // username
+    role: 'president' | 'head';
+    department?: string;
+    displayName: string;
     iat: number;
 }
 
 /**
  * Create a signed JWT session token
  */
-export async function createSession(staffId: string): Promise<string> {
-    return new SignJWT({ staffId })
+/**
+ * Create a signed JWT session token
+ */
+export async function createSession(payload: Omit<SessionPayload, 'iat'>): Promise<string> {
+    return new SignJWT({ ...payload })
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
         .setExpirationTime(EXPIRY)
@@ -39,8 +45,13 @@ export async function verifySession(token: string): Promise<SessionPayload | nul
 /**
  * Set session cookie
  */
-export async function setSessionCookie(staffId: string): Promise<void> {
-    const token = await createSession(staffId);
+export async function setSessionCookie(user: { username: string; role: 'president' | 'head'; department?: string; displayName: string }): Promise<void> {
+    const token = await createSession({
+        staffId: user.username,
+        role: user.role,
+        department: user.department,
+        displayName: user.displayName
+    });
     const cookieStore = await cookies();
 
     cookieStore.set(COOKIE_NAME, token, {

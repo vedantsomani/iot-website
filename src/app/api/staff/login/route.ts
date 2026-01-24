@@ -1,39 +1,53 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { setSessionCookie } from '@/lib/session';
+import { STAFF_USERS } from '@/config/staff';
 
 export async function POST(req: NextRequest) {
     try {
-        const { pin } = await req.json();
+        const { username, password } = await req.json();
 
-        if (!pin) {
+        if (!username || !password) {
             return NextResponse.json(
-                { error: 'PIN is required' },
+                { error: 'Username and password are required' },
                 { status: 400 }
             );
         }
 
-        const staffPin = process.env.STAFF_PIN;
+        // Find user
+        const user = STAFF_USERS.find(u => u.username === username);
 
-        if (!staffPin) {
-            console.error('STAFF_PIN environment variable is not set');
+        if (!user) {
+            // Use time-constant comparison simulation or just return error (low risk here)
             return NextResponse.json(
-                { error: 'Server configuration error' },
-                { status: 500 }
-            );
-        }
-
-        // Constant-time comparison to prevent timing attacks
-        if (pin.length !== staffPin.length || pin !== staffPin) {
-            return NextResponse.json(
-                { error: 'Invalid PIN' },
+                { error: 'Invalid credentials' },
                 { status: 401 }
             );
         }
 
-        // Set session cookie
-        await setSessionCookie('staff');
+        // Check password
+        if (user.password !== password) {
+            return NextResponse.json(
+                { error: 'Invalid credentials' },
+                { status: 401 }
+            );
+        }
 
-        return NextResponse.json({ success: true });
+        // Set session
+        await setSessionCookie({
+            username: user.username,
+            role: user.role,
+            department: user.department,
+            displayName: user.displayName
+        });
+
+        return NextResponse.json({
+            success: true,
+            user: {
+                username: user.username,
+                role: user.role,
+                department: user.department
+            }
+        });
     } catch (error) {
         console.error('Staff login error:', error);
         return NextResponse.json(

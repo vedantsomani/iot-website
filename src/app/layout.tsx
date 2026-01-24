@@ -37,7 +37,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <SecurityProvider>
-          <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+          <ClientLayoutWrapper>
+            {children}
+          </ClientLayoutWrapper>
         </SecurityProvider>
       </body>
     </html>

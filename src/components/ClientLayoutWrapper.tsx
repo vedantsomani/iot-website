@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Terminal from "@/components/Terminal";
-import KonamiCode from "@/components/KonamiCode";
 import SystemCrash from "@/components/SystemCrash";
 import { useEffect, useState } from "react";
 
@@ -34,7 +33,6 @@ export default function ClientLayoutWrapper({
     return (
         <>
             <Terminal />
-            <KonamiCode />
             {!isMicrosite && <Navbar />}
             <main className={`flex-grow ${!isMicrosite ? "pt-16" : ""}`}>{children}</main>
             {!isMicrosite && <Footer />}

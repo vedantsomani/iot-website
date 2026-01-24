@@ -12,6 +12,7 @@ export default function ApplyPage() {
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+    const [selectedTeam, setSelectedTeam] = useState("");
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +53,17 @@ export default function ApplyPage() {
 
             if (!emailRegex.test(email.trim())) {
                 alert("Restricted Access: Only @bennett.edu.in and @gmail.com domains are authorized.");
+                setIsSubmitting(false);
+                return;
+            }
+
+            // Security: Enforce Resume for Closed Teams
+            const OPEN_TEAMS = ['research', 'design-content', 'pr'];
+            const team = formData.get('team') as string;
+            const isClosedTeam = team && !OPEN_TEAMS.includes(team);
+
+            if (isClosedTeam && !uploadedFile) {
+                alert("For this team, a Resume/Portfolio is mandatory.");
                 setIsSubmitting(false);
                 return;
             }
@@ -234,22 +246,73 @@ export default function ApplyPage() {
                                 03. Club Preferences
                             </h3>
 
-                            <div>
-                                <label className="block text-white/70 text-sm mb-2">Which team are you most interested in? *</label>
-                                <select
-                                    name="team"
-                                    required
-                                    className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-all"
-                                >
-                                    <option value="">Select Team</option>
-                                    <option value="tech">Tech Team (IoT, Robotics, Coding)</option>
-                                    <option value="design">Design Team (UI/UX, Graphics)</option>
-                                    <option value="multimedia">Multimedia Team (Video, Photo)</option>
-                                    <option value="social-media">Social Media Team</option>
-                                    <option value="management">Management Team</option>
-                                    <option value="pr">Public Relations (PR)</option>
-                                </select>
-                            </div>
+                            {/* Team Selection Logic */}
+                            {(() => {
+                                const OPEN_TEAMS = ['research', 'design-content', 'pr'];
+                                const isTeamOpen = OPEN_TEAMS.includes(selectedTeam);
+                                const isTeamSelected = selectedTeam !== "";
+
+                                return (
+                                    <>
+                                        <div>
+                                            <label className="block text-white/70 text-sm mb-2">Which team are you most interested in? *</label>
+                                            <select
+                                                name="team"
+                                                required
+                                                className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-all"
+                                                onChange={(e) => setSelectedTeam(e.target.value)}
+                                            >
+                                                <option value="">Select Team</option>
+                                                <option value="research">Research Team (Deep Tech, Papers) [OPEN]</option>
+                                                <option value="design-content">Design & Content Team [OPEN]</option>
+                                                <option value="pr">Public Relations (PR) [OPEN]</option>
+                                                <option disabled>──────────</option>
+                                                <option value="tech">Tech Team (IoT, Robotics, Coding)</option>
+                                                <option value="multimedia">Multimedia Team (Video, Photo)</option>
+                                                <option value="social-media">Social Media Team</option>
+                                                <option value="management">Management Team</option>
+                                            </select>
+                                        </div>
+
+                                        {/* Status Message */}
+                                        {isTeamSelected && !isTeamOpen && (
+                                            <div className="p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-yellow-200 text-sm">
+                                                <strong>Note:</strong> This team is currently at capacity. However, you can still submit your application for our <strong>Resume Drop</strong>. We will review it and contact you if a position opens up!
+                                            </div>
+                                        )}
+
+                                        {/* Dynamic Role Selection */}
+                                        {isTeamSelected && (
+                                            <div className="animate-in fade-in slide-in-from-top-2 duration-300">
+                                                {isTeamOpen ? (
+                                                    <>
+                                                        <label className="block text-white/70 text-sm mb-2">Role Applying For *</label>
+                                                        <select
+                                                            name="role"
+                                                            required
+                                                            className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-all"
+                                                        >
+                                                            <option value="">Select Role</option>
+                                                            {selectedTeam === 'research' && (
+                                                                <>
+                                                                    <option value="Head">Head</option>
+                                                                    <option value="Co-Head">Co-Head</option>
+                                                                    <option value="Junior Core">Junior Core</option>
+                                                                </>
+                                                            )}
+                                                            {['pr', 'design-content'].includes(selectedTeam) && (
+                                                                <option value="Junior Core">Junior Core</option>
+                                                            )}
+                                                        </select>
+                                                    </>
+                                                ) : (
+                                                    <input type="hidden" name="role" value="Resume Drop" />
+                                                )}
+                                            </div>
+                                        )}
+                                    </>
+                                );
+                            })()}
 
                             <div>
                                 <label className="block text-white/70 text-sm mb-2">Technical Skills / Tools Known</label>
@@ -288,8 +351,18 @@ export default function ApplyPage() {
                             </h3>
 
                             <div>
-                                <label className="block text-white/70 text-sm mb-2">Resume / Portfolio (Optional)</label>
-                                <p className="text-white/50 text-xs mb-3">Upload your resume or portfolio. Max 5MB. PDF, JPEG, PNG, or WebP only.</p>
+                                {(() => {
+                                    const OPEN_TEAMS = ['research', 'design-content', 'pr'];
+                                    const isClosedTeam = selectedTeam && !OPEN_TEAMS.includes(selectedTeam);
+                                    return (
+                                        <>
+                                            <label className="block text-white/70 text-sm mb-2">
+                                                Resume / Portfolio {isClosedTeam ? '(Required for Resume Drop)' : '(Optional)'}
+                                            </label>
+                                            <p className="text-white/50 text-xs mb-3">Upload your resume or portfolio. Max 5MB. PDF, JPEG, PNG, or WebP only.</p>
+                                        </>
+                                    );
+                                })()}
 
                                 {!uploadedFile ? (
                                     <div

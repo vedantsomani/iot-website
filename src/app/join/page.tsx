@@ -18,9 +18,16 @@ const domains = [
         border: "group-hover:border-neon-blue/50"
     },
     {
+        icon: Star,
+        title: "Research Team",
+        desc: "Deep tech research, paper publication, and innovation.",
+        color: "text-red-400",
+        border: "group-hover:border-red-400/50"
+    },
+    {
         icon: Palette,
-        title: "Design Team",
-        desc: "UI/UX, Graphic Design, and Brand Identity creation.",
+        title: "Design and Content",
+        desc: "Graphic Design, Brand Identity, and Creative Writing.",
         color: "text-pink-400",
         border: "group-hover:border-pink-400/50"
     },

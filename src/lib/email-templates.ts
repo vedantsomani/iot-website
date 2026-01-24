@@ -92,3 +92,60 @@ export const generateTeamConfirmation = (teamName: string, track: string, member
     </html>
   `;
 };
+export const generateRecruitmentConfirmation = (name: string, team: string, role: string) => {
+  return `
+    <!DOCTYPE html>
+    <html>
+      <body style="background-color: #f4f4f4; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px 0;">
+        <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+          
+          <!-- Header -->
+          <div style="background: #000; padding: 30px 40px; text-align: left; border-bottom: 4px solid #00d4ff;">
+             <div style="color: #fff; font-size: 24px; font-weight: bold; font-family: 'Orbitron', sans-serif, monospace;">IoT & <span style="color: #00d4ff;">ROBOTICS</span> CLUB</div>
+             <div style="color: #888; font-size: 14px; margin-top: 5px;">BENNETT UNIVERSITY</div>
+          </div>
+
+          <!-- Body -->
+          <div style="padding: 40px;">
+            <h2 style="color: #111; margin-top: 0; font-size: 20px;">Application Received</h2>
+            <p style="color: #555; line-height: 1.6; font-size: 16px;">
+              Dear <strong>${name}</strong>,
+            </p>
+            <p style="color: #555; line-height: 1.6; font-size: 16px;">
+              Thank you for expressing your interest in joining the <strong>IoT & Robotics Club</strong>. We are pleased to confirm that your application has been successfully submitted and is currently under review by our recruitment committee.
+            </p>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-left: 4px solid #00d4ff; margin: 25px 0; border-radius: 4px;">
+              <div style="color: #888; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">Application Summary</div>
+              <div style="margin-bottom: 8px;">
+                <span style="color: #555; font-weight: 500; width: 60px; display: inline-block;">Team:</span> 
+                <strong style="color: #000;">${team.charAt(0).toUpperCase() + team.slice(1)} Team</strong>
+              </div>
+              <div>
+                <span style="color: #555; font-weight: 500; width: 60px; display: inline-block;">Role:</span> 
+                <strong style="color: #000;">${role}</strong>
+              </div>
+            </div>
+
+            <p style="color: #555; line-height: 1.6; font-size: 16px;">
+              <strong>What Happens Next?</strong><br/>
+              Our leads will evaluate your profile and portfolio. If your skills and motivation align with our vision, you will be invited for an interview round. Please check your email regularly for updates.
+            </p>
+            
+            <p style="color: #555; line-height: 1.6; font-size: 16px; margin-top: 30px;">
+              Best Regards,<br/>
+              <strong>Recruitment Team</strong><br/>
+              IoT & Robotics Club
+            </p>
+          </div>
+
+          <!-- Footer -->
+          <div style="background: #111; padding: 20px; text-align: center; color: #666; font-size: 12px; border-top: 1px solid #222;">
+            &copy; ${new Date().getFullYear()} IoT & Robotics Club, Bennett University.<br/>
+            All Rights Reserved.
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+};
