@@ -1,5 +1,114 @@
 [
     {
+        "slug": "ai-integrated-car",
+        "title": "AI Integrated Car",
+        "shortDesc": "Intelligent Navigation & Interactive System.",
+        "description": "An autonomous vehicle featuring intelligent navigation and a fully interactive system capable of effective obstacle avoidance in complex environments.",
+        "image": "/images/projects/ai-car/primary.jpg",
+        "gallery": [],
+        "techStack": [
+            "AI/ML",
+            "Computer Vision",
+            "Robotics",
+            "Autonomous Navigation"
+        ],
+        "team": [
+            "vishal"
+        ],
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "fixed-wing-plane",
+        "title": "Fixed Wing Plane",
+        "shortDesc": "Custom built fixed-wing aircraft.",
+        "description": "A custom-designed fixed-wing aircraft optimized for aerodynamic efficiency and stable flight dynamics.",
+        "image": "/images/projects/fixed-wing/primary.jpg",
+        "gallery": [],
+        "techStack": [
+            "Aerodynamics",
+            "RC Control",
+            "Fabrication"
+        ],
+        "team": [
+            "vishal"
+        ],
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "hexacopter",
+        "title": "Hexacopter",
+        "shortDesc": "Six-rotor heavy lift drone platform.",
+        "description": "A robust hexacopter platform designed for high stability and heavy payload capacity, featuring a six-rotor configuration.",
+        "image": "/images/projects/hexacopter/primary.jpg",
+        "gallery": [],
+        "techStack": [
+            "Drone",
+            "Multi-rotor",
+            "Flight Controller"
+        ],
+        "team": [
+            "vishal"
+        ],
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "humanoid-robot",
+        "title": "Humanoid Robot",
+        "shortDesc": "Advanced humanoid robot with servo control.",
+        "description": "A complex humanoid robot build capable of bipedal locomotion and arm gestures, powered by high-torque servos.",
+        "image": "/images/projects/humanoid/primary.png",
+        "gallery": [],
+        "techStack": [
+            "Robotics",
+            "Servos",
+            "Microcontroller"
+        ],
+        "team": [
+            "vishal"
+        ],
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "gyro-mouse",
+        "title": "Gyro Mouse",
+        "shortDesc": "Mouse input device controlled by gyroscope.",
+        "description": "An innovative input device that uses a gyroscope to control the mouse cursor, allowing for intuitive hand-movement based interaction.",
+        "image": "/images/projects/gyro-mouse/primary.png",
+        "gallery": [],
+        "techStack": [
+            "Gyroscope",
+            "HID",
+            "Arduino"
+        ],
+        "team": [
+            "vishal"
+        ],
+        "githubLink": "#",
+        "featured": true
+    },
+    {
+        "slug": "aerial-drone-development",
+        "title": "Aerial Drone Development",
+        "shortDesc": "Custom Build & Flight Control Systems.",
+        "description": "Flagship Project: Developing a powerful proprietary flight controller capable of controlling any drone with fully autonomous AI-driven navigation.",
+        "image": "/images/projects/aerial-drone/primary.png",
+        "gallery": [],
+        "techStack": [
+            "Drone",
+            "Flight Controller",
+            "Aerodynamics"
+        ],
+        "team": [
+            "vishal"
+        ],
+        "githubLink": "#",
+        "featured": true
+    },
+    {
         "slug": "mars-rover-6-legged",
         "title": "6 Legged Mars Rover",
         "shortDesc": "Bluetooth-controlled hexapod robot powered by Arduino.",

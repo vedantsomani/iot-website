@@ -38,7 +38,7 @@ const teamColors: Record<string, string> = {
     Multimedia: 'orange-400',
 };
 
-function MemberCard({ member }: { member: Member }) {
+function MemberCard({ member, priority = false }: { member: Member; priority?: boolean }) {
     const [isHovered, setIsHovered] = useState(false);
     const [isTapped, setIsTapped] = useState(false);
 
@@ -59,6 +59,7 @@ function MemberCard({ member }: { member: Member }) {
                 src={member.image}
                 alt={member.name}
                 fill
+                priority={priority}
                 className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
             />
 
@@ -237,7 +238,7 @@ export default function MembersPage() {
 
                                 <ChromaGrid columns={4}>
                                     {teamMembers.map((member) => (
-                                        <MemberCard key={member.id} member={member} />
+                                        <MemberCard key={member.id} member={member} priority={team === 'Executive'} />
                                     ))}
                                 </ChromaGrid>
                             </section>

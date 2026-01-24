@@ -24,11 +24,19 @@ interface Project {
     featured: boolean;
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+    const isPremium = ['aerial-drone-development', 'humanoid-robot'].includes(project.slug);
+
     return (
         <motion.div
-            className="glass-panel border border-white/10 rounded-xl overflow-hidden group relative h-[400px] flex flex-col"
-            whileHover={{ y: -5 }}
+            className={`glass-panel border rounded-xl overflow-hidden group relative h-[400px] flex flex-col ${isPremium
+                    ? 'border-neon-blue/40 shadow-[0_0_15px_rgba(0,243,255,0.1)]'
+                    : 'border-white/10'
+                }`}
+            whileHover={{
+                y: -5,
+                boxShadow: isPremium ? '0 0 25px rgba(0,243,255,0.2)' : 'none'
+            }}
             transition={{ type: 'spring', stiffness: 300 }}
         >
             {/* Main Card Link Overlay */}
@@ -36,11 +44,16 @@ function ProjectCard({ project }: { project: Project }) {
                 <span className="sr-only">View {project.title}</span>
             </Link>
 
+            {isPremium && (
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon-blue to-transparent opacity-50" />
+            )}
+
             <div className="relative h-48 overflow-hidden">
                 <Image
                     src={project.image}
                     alt={project.title}
                     fill
+                    priority={index < 6}
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-panel-bg via-transparent to-transparent opacity-60" />
@@ -54,7 +67,8 @@ function ProjectCard({ project }: { project: Project }) {
             </div>
 
             <div className="p-6 flex flex-col flex-1 relative z-0 bg-gradient-to-b from-black/50 to-transparent">
-                <h3 className="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-neon-blue transition-colors">
+                <h3 className={`text-xl font-bold font-orbitron mb-2 transition-colors ${isPremium ? 'text-white group-hover:text-neon-blue drop-shadow-[0_0_5px_rgba(0,243,255,0.3)]' : 'text-white group-hover:text-neon-blue'
+                    }`}>
                     {project.title}
                 </h3>
 
@@ -68,7 +82,10 @@ function ProjectCard({ project }: { project: Project }) {
                         {project.techStack.slice(0, 3).map((tech) => (
                             <span
                                 key={tech}
-                                className="px-2 py-1 rounded text-[10px] uppercase font-mono bg-white/5 text-gray-400 border border-white/10 group-hover:border-neon-blue/30 group-hover:text-neon-blue transition-colors"
+                                className={`px-2 py-1 rounded text-[10px] uppercase font-mono bg-white/5 border transition-colors ${isPremium
+                                        ? 'text-neon-blue border-neon-blue/20 group-hover:bg-neon-blue/10'
+                                        : 'text-gray-400 border-white/10 group-hover:border-neon-blue/30 group-hover:text-neon-blue'
+                                    }`}
                             >
                                 {tech}
                             </span>
@@ -129,14 +146,14 @@ export default function ProjectsPage() {
                                 (Standard then Featured? Or Featured then Standard? Usually Featured First).
                                 Let's put Featured First for better UX. 
                             */}
-                            {featuredProjects.map((project) => (
+                            {featuredProjects.map((project, i) => (
                                 <StaggerItem key={project.slug}>
-                                    <ProjectCard project={project} />
+                                    <ProjectCard project={project} index={i} />
                                 </StaggerItem>
                             ))}
-                            {otherProjects.map((project) => (
+                            {otherProjects.map((project, i) => (
                                 <StaggerItem key={project.slug}>
-                                    <ProjectCard project={project} />
+                                    <ProjectCard project={project} index={i + featuredProjects.length} />
                                 </StaggerItem>
                             ))}
                         </StaggerContainer>

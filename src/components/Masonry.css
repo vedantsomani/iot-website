@@ -1,0 +1,73 @@
+.list {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* Define defaults for CSS vars */
+    --x: 50%;
+    --y: 50%;
+    --r: 250px;
+    /* Radius of flashlight */
+}
+
+.item-wrapper {
+    position: absolute;
+    will-change: transform, width, height, opacity;
+    padding: 6px;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+}
+
+.item-wrapper>.item-img {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    text-transform: uppercase;
+    font-size: 10px;
+    line-height: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
+    /* Removed individual grayscale filter in favor of chroma overlay */
+}
+
+/* Chroma Effect Styles */
+.chroma-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    backdrop-filter: grayscale(1) brightness(0.78);
+    -webkit-backdrop-filter: grayscale(1) brightness(0.78);
+    background: rgba(0, 0, 0, 0.001);
+
+    mask-image: radial-gradient(circle var(--r) at var(--x) var(--y),
+            transparent 0%,
+            transparent 15%,
+            rgba(0, 0, 0, 0.1) 30%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(0, 0, 0, 0.35) 60%,
+            rgba(0, 0, 0, 0.5) 75%,
+            rgba(0, 0, 0, 0.68) 88%,
+            white 100%);
+    -webkit-mask-image: radial-gradient(circle var(--r) at var(--x) var(--y),
+            transparent 0%,
+            transparent 15%,
+            rgba(0, 0, 0, 0.1) 30%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(0, 0, 0, 0.35) 60%,
+            rgba(0, 0, 0, 0.5) 75%,
+            rgba(0, 0, 0, 0.68) 88%,
+            white 100%);
+}
+
+.chroma-fade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 4;
+    /* Adjust opacity/brightness as needed for the 'light' beam */
+    background: radial-gradient(circle var(--r) at var(--x) var(--y), rgba(255, 255, 255, 0.1), transparent 70%);
+    opacity: 1;
+}

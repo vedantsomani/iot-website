@@ -40,6 +40,16 @@
         "github": "#"
     },
     {
+        "id": "vishal",
+        "name": "Vishal",
+        "role": "Tech Team Member",
+        "team": "Tech",
+        "image": "/images/tech/Vishal.jpg",
+        "bio": "Contributing to technical projects.",
+        "linkedin": "#",
+        "github": "#"
+    },
+    {
         "id": "harshit",
         "name": "Harshit",
         "role": "Tech Team Member",
