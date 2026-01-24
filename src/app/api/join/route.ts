@@ -23,30 +23,7 @@ export async function POST(req: Request) {
 
         let resumeUrl = '';
 
-        // ... (resume upload logic remains same, skipping for brevity in replacement if possible, but line numbers need to match) -> 
-        // actually I need to be careful not to cut the upload logic. 
-        // The replace_file_content tool replaces a block.
-        // I will just fetch the linkedin header and update the object construction later.
 
-        // Let's do it in two chunks or one big one if contiguous.
-        // The variables are at the top. The object construction is at the bottom.
-        // The file is small enough (100 lines). I can probably do 2 edits.
-
-        // Edit 1: Extract variable
-        // Edit 2: Update storage and email calls
-
-        // Actually, let's just do it in one go if I can match the context.
-        // Lines 20-21:
-        // const portfolio = formData.get('portfolio') as string;
-        // const resumeFile = formData.get('resume') as File | null;
-
-        // Lines 48-60: appendRecruitmentApplication call
-        // Lines 63-75: applicationData object
-
-        // It's spread out. I'll use multi_replace.
-
-
-        let resumeUrl = '';
 
         // Upload Resume to Supabase if present
         if (resumeFile) {
