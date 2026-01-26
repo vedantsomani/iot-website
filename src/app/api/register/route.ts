@@ -102,7 +102,12 @@ export async function POST(req: Request) {
     const fullTicketUrl = `${baseUrl}${ticketPath}`;
 
     // Send Notification to Admin
+    let emailsSent = false;
     try {
+      console.log('Attempting to send admin notification email...');
+      console.log('EMAIL_USER:', process.env.EMAIL_USER ? 'SET' : 'NOT SET');
+      console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'SET' : 'NOT SET');
+      
       await transporter.sendMail({
         ...mailOptions,
         to: process.env.EMAIL_USER,
@@ -119,24 +124,21 @@ export async function POST(req: Request) {
           TicketURL: fullTicketUrl,
         }),
       });
+      console.log('Admin notification sent successfully');
 
-      // Broadcast Confirmation to ALL Squad Members with ticket URL
-      const uniqueEmails = new Set(
-        members.filter((m: { email?: string }) => m.email).map((m: { email: string }) => m.email)
-      );
-
-      const emailPromises = Array.from(uniqueEmails).map(async (email) => {
-        return transporter.sendMail({
-          ...mailOptions,
-          to: email as string,
-          subject: `REWIRE MISSION CONFIRMED: ${teamName}`,
-          html: generateTeamConfirmation(teamName, track, members, fullTicketUrl),
-        });
+      // Send ONE confirmation email to Team Lead only
+      console.log('Sending confirmation to team lead:', leadEmail);
+      await transporter.sendMail({
+        ...mailOptions,
+        to: leadEmail,
+        subject: `REWIRE MISSION CONFIRMED: ${teamName}`,
+        html: generateTeamConfirmation(teamName, track, members, fullTicketUrl),
       });
-
-      await Promise.all(emailPromises);
+      console.log('Team confirmation email sent to lead');
+      emailsSent = true;
     } catch (emailError) {
       console.error('Failed to send emails:', emailError);
+      console.error('Email error details:', JSON.stringify(emailError, null, 2));
       // Don't fail the registration if email fails
     }
 

@@ -21,6 +21,18 @@ const orbitron = Orbitron({
   display: "swap",
 });
 
+export const metadata: Metadata = {
+  title: "IoT & Robotics Club",
+  description: "Where innovation meets passion. Build smart devices, autonomous robots, and shape the future of technology at Bennett University.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo-iot.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: "/logo-iot.png",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

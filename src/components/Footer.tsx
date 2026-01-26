@@ -29,10 +29,10 @@ export default function Footer() {
                     <div>
                         <h4 className="text-lg font-semibold text-white mb-4">Connect With Us</h4>
                         <div className="flex space-x-4">
-                            <Link href="https://instagram.com" target="_blank" className="text-gray-400 hover:text-neon-purple transition-colors">
+                            <Link href="https://www.instagram.com/iot_and_robotics_bu/" target="_blank" className="text-gray-400 hover:text-neon-purple transition-colors">
                                 <Instagram className="h-6 w-6" />
                             </Link>
-                            <Link href="https://linkedin.com" target="_blank" className="text-gray-400 hover:text-neon-blue transition-colors">
+                            <Link href="https://www.linkedin.com/in/iot-and-robotics-club-bu-8a4858299/" target="_blank" className="text-gray-400 hover:text-neon-blue transition-colors">
                                 <Linkedin className="h-6 w-6" />
                             </Link>
                             <Link href="https://github.com" target="_blank" className="text-gray-400 hover:text-white transition-colors">

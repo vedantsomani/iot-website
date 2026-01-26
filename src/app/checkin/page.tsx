@@ -350,17 +350,17 @@ export default function CheckInPage() {
                 {/* Terminal Body */}
                 <div className="bg-black/90 border-x border-b border-green-500/50 rounded-b-lg p-4">
                     {/* ASCII Art Header */}
-                    <pre className="text-green-400 text-xs mb-4 leading-tight">
-                        {`╔═══════════════════════════════════╗
-║  ██████╗ ███████╗██╗    ██╗██╗██████╗ ███████╗  ║
-║  ██╔══██╗██╔════╝██║    ██║██║██╔══██╗██╔════╝  ║
-║  ██████╔╝█████╗  ██║ █╗ ██║██║██████╔╝█████╗    ║
-║  ██╔══██╗██╔══╝  ██║███╗██║██║██╔══██╗██╔══╝    ║
-║  ██║  ██║███████╗╚███╔███╔╝██║██║  ██║███████╗  ║
-║  ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚═╝╚═╝  ╚═╝╚══════╝  ║
-║        [ CHECK-IN TERMINAL ]        ║
-╚═══════════════════════════════════╝`}
-                    </pre>
+                    <div className="border-2 border-green-500 rounded p-3 mb-4 bg-black/50">
+                        <pre className="text-green-400 text-[5px] sm:text-[7px] leading-tight text-center overflow-x-auto">
+{`██████╗ ███████╗██╗    ██╗██╗██████╗ ███████╗
+██╔══██╗██╔════╝██║    ██║██║██╔══██╗██╔════╝
+██████╔╝█████╗  ██║ █╗ ██║██║██████╔╝█████╗  
+██╔══██╗██╔══╝  ██║███╗██║██║██╔══██╗██╔══╝  
+██║  ██║███████╗╚███╔███╔╝██║██║  ██║███████╗
+╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚═╝╚═╝  ╚═╝╚══════╝`}
+                        </pre>
+                        <p className="text-green-400 text-center text-xs mt-2 tracking-widest">[ CHECK-IN TERMINAL ]</p>
+                    </div>
 
                     {/* Camera View */}
                     <div className="relative bg-gray-900 rounded border border-green-500/30 mb-4 overflow-hidden">
