@@ -4,7 +4,35 @@ import { STAFF_USERS } from '@/config/staff';
 
 export async function POST(req: NextRequest) {
     try {
-        const { username, password } = await req.json();
+        const body = await req.json();
+        const { username, password, pin } = body;
+
+        // Legacy PIN auth
+        if (pin) {
+            const validPin = process.env.STAFF_GLOBAL_PIN || '1234';
+            if (pin === validPin) {
+                await setSessionCookie({
+                    username: 'staff',
+                    role: 'head',
+                    department: 'general',
+                    displayName: 'Staff Member'
+                });
+
+                return NextResponse.json({
+                    success: true,
+                    user: {
+                        username: 'staff',
+                        role: 'head',
+                        department: 'general'
+                    }
+                });
+            }
+
+            return NextResponse.json(
+                { error: 'Invalid PIN' },
+                { status: 401 }
+            );
+        }
 
         if (!username || !password) {
             return NextResponse.json(

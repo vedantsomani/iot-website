@@ -96,56 +96,72 @@ export const generateRecruitmentConfirmation = (name: string, team: string, role
   return `
     <!DOCTYPE html>
     <html>
-      <body style="background-color: #050505; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px;">
-        <div style="max-width: 600px; margin: 0 auto; background: #0a0a0a; border: 1px solid #333; border-radius: 12px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      </head>
+      <body style="background-color: #f4f4f4; color: #333333; font-family: 'Segoe UI', Helvetica, Arial, sans-serif; padding: 0; margin: 0; line-height: 1.6;">
+        <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-top: 20px; margin-bottom: 20px;">
           
           <!-- Header -->
-          <div style="background: #000; padding: 30px; text-align: center; border-bottom: 2px solid #00d4ff; position: relative; overflow: hidden;">
-             <div style="position: relative; z-index: 2;">
-                 <h1 style="color: #fff; margin: 0; font-family: 'Courier New', monospace; letter-spacing: 3px; font-size: 24px;">APPLICATION <span style="color: #00d4ff;">RECEIVED</span></h1>
-                 <div style="color: #666; font-size: 10px; font-family: monospace; margin-top: 8px;">TRANSMISSION ID: ${Date.now().toString().slice(-8)}</div>
-             </div>
+          <div style="background: #111111; padding: 40px 30px; text-align: center;">
+             <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 600; letter-spacing: 0.5px;">IoT & Robotics Club</h1>
+             <p style="color: #888888; font-size: 14px; margin-top: 8px; font-weight: 400;">Bennett University</p>
           </div>
 
-          <!-- Body -->
-          <div style="padding: 40px 30px; background: #0a0a0a;">
-            <p style="color: #ccc; line-height: 1.6; font-size: 16px; margin-top: 0;">
-              Greetings <strong>${name}</strong>,
-            </p>
-            <p style="color: #aaa; line-height: 1.6; font-size: 15px;">
-              Your data packet has been successfully uploaded to the <strong>IoT & Robotics Club</strong> mainframe. Our recruitment protocols have initiated the review process.
+          <!-- Content -->
+          <div style="padding: 40px 30px;">
+            <h2 style="color: #111111; font-size: 20px; margin-top: 0; margin-bottom: 20px;">Application Received</h2>
+            
+            <p style="color: #555555; font-size: 16px; margin-bottom: 24px;">
+              Dear <strong>${name}</strong>,
             </p>
             
-            <div style="background: #111; padding: 20px; border-left: 3px solid #00d4ff; margin: 30px 0; border-radius: 4px;">
-              <div style="color: #00d4ff; font-size: 11px; font-family: monospace; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">// APPLICATION MANIFEST</div>
+            <p style="color: #555555; font-size: 16px; margin-bottom: 30px;">
+              Thank you for your interest in joining the IoT & Robotics Club. We have successfully received your application. Our team is excited to review your profile.
+            </p>
+            
+            <!-- Application Details -->
+            <div style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 25px; margin-bottom: 30px;">
+              <h3 style="color: #333333; font-size: 14px; text-transform: uppercase; margin: 0 0 15px 0; letter-spacing: 1px; font-weight: 600;">Application Details</h3>
+              
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td style="color: #666; font-size: 14px; padding-bottom: 8px; width: 80px;">TARGET:</td>
-                  <td style="color: #fff; font-weight: bold; font-size: 14px; padding-bottom: 8px;">${team.toUpperCase()} TEAM</td>
+                  <td style="padding: 8px 0; color: #666666; font-size: 14px;">Team Selection:</td>
+                  <td style="padding: 8px 0; color: #111111; font-weight: 600; text-align: right; font-size: 14px;">${team} Team</td>
                 </tr>
                 <tr>
-                  <td style="color: #666; font-size: 14px;">ROLE:</td>
-                  <td style="color: #fff; font-weight: bold; font-size: 14px;">${role.toUpperCase()}</td>
+                  <td style="padding: 8px 0; border-top: 1px solid #eaeaea; color: #666666; font-size: 14px;">Role Applied:</td>
+                  <td style="padding: 8px 0; border-top: 1px solid #eaeaea; color: #111111; font-weight: 600; text-align: right; font-size: 14px;">${role}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; border-top: 1px solid #eaeaea; color: #666666; font-size: 14px;">Status:</td>
+                  <td style="padding: 8px 0; border-top: 1px solid #eaeaea; color: #2ecc71; font-weight: 600; text-align: right; font-size: 14px;">Under Review</td>
                 </tr>
               </table>
             </div>
 
-            <p style="color: #aaa; line-height: 1.6; font-size: 15px;">
-              <strong>NEXT PHASE:</strong><br/>
-              Our core unit is currently decrypting submissions. If your profile matches our operational requirements, you will receive an encrypted transmission (interview invite) shortly.
+            <h3 style="color: #111111; font-size: 18px; margin-bottom: 12px;">Next Steps</h3>
+            <p style="color: #555555; font-size: 15px; margin-bottom: 10px;">
+              Our recruitment team is currently reviewing all applications. If your profile aligns with our requirements, you will receive an email invitation for the next round of interviews shortly.
+            </p>
+            <p style="color: #555555; font-size: 15px;">
+              We appreciate your patience and look forward to potentially welcomimg you to the community.
             </p>
             
-            <p style="color: #666; font-size: 13px; margin-top: 40px; font-family: monospace; border-top: 1px solid #222; padding-top: 20px;">
-              > STATUS: PENDING REVIEW<br/>
-              > PRIORITY: NORMAL<br/>
-              > END TRANSMISSION
-            </p>
+            <div style="margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;">
+              <p style="color: #555555; font-size: 15px; margin: 0;">
+                Best Regards,<br/>
+                <strong>The Recruitment Team</strong><br/>
+                <span style="color: #888888; font-size: 14px;">IoT & Robotics Club</span>
+              </p>
+            </div>
           </div>
 
           <!-- Footer -->
-          <div style="background: #000; padding: 15px; text-align: center; color: #444; font-size: 11px; font-family: monospace;">
-            IoT & ROBOTICS CLUB // BENNETT UNIVERSITY<br/>
-            AUTOMATED NOTIFICATION SYSTEM
+          <div style="background: #f4f4f4; padding: 20px; text-align: center; border-top: 1px solid #e0e0e0;">
+            <p style="color: #999999; font-size: 12px; margin: 0;">
+              &copy; ${new Date().getFullYear()} IoT & Robotics Club, Bennett University. All rights reserved.
+            </p>
           </div>
         </div>
       </body>
