@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Orbitron } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import SecurityProvider from "@/components/SecurityProvider";
 
@@ -54,6 +55,7 @@ export default function RootLayout({
             {children}
           </ClientLayoutWrapper>
         </SecurityProvider>
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
