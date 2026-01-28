@@ -244,7 +244,7 @@ export const generateTeamConfirmation = (teamName: string, track: string, member
                     </tr>
                     <tr>
                       <td style="padding: 12px 16px; color: #777777; font-size: 13px; border-top: 1px solid #252525;">Venue</td>
-                      <td style="padding: 12px 16px; color: #ffffff; font-weight: 600; text-align: right; font-size: 13px; border-top: 1px solid #252525;">Lab 105, Block B</td>
+                      <td style="padding: 12px 16px; color: #ffffff; font-weight: 600; text-align: right; font-size: 13px; border-top: 1px solid #252525;">LH 103, Block P</td>
                     </tr>
                   </table>
                 </td>

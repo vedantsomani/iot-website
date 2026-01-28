@@ -188,7 +188,7 @@ export default function IdeathonPage() {
                                         <li>We provide the Problem Statements (P.S). Teams of 4.</li>
                                         <li>Event Flow: Judge Intro &gt; Presentation Requirements.</li>
                                         <li>Teams prepare presentation (2-3 hours).</li>
-                                        <li>Judging Round: Top 6 Teams Shortlisted for Day 2.</li>
+                                        <li>Judging Round: Top 10 Teams Shortlisted for Day 2.</li>
                                     </ul>
                                 </div>
                                 <div>
@@ -504,7 +504,7 @@ export default function IdeathonPage() {
                                     </div>
                                     <div className="p-4 bg-white/5 rounded-lg border border-white/10 mb-8 font-mono text-sm text-neon-blue">
                                         &gt; DEPLOYMENT DATE: FEB 03, 2026<br />
-                                        &gt; LOCATION: SECTOR B, LA 105<br />
+                                        &gt; LOCATION: SECTOR P ,Lh 103<br />
                                         &gt; STATUS: STANDBY
                                     </div>
 
