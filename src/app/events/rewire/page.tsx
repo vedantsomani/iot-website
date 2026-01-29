@@ -221,6 +221,23 @@ export default function IdeathonPage() {
                 </Container>
             </Section>
 
+            {/* SPONSORS SECTION */}
+            <Section className="relative z-20 bg-black/60 border-t border-white/5 backdrop-blur-md" spacing="small">
+                <Container className="max-w-2xl text-center">
+                    <h2 className="text-lg font-bold font-orbitron text-gray-400 mb-8 tracking-widest">MISSION SPONSORS</h2>
+                    <div className="flex justify-center items-center gap-8">
+                        <div className="p-8 rounded-xl bg-white/5 border border-white/10 hover:border-neon-blue/50 transition-colors group">
+                            <img
+                                src="/images/sponsors/memory-magnet.png"
+                                alt="Memory Magnet"
+                                className="h-40 w-auto object-contain mx-auto mb-4 opacity-90 group-hover:opacity-100 transition-opacity transform group-hover:scale-105 duration-300"
+                            />
+                            <p className="text-sm text-gray-400 font-mono group-hover:text-neon-blue transition-colors">The Memory Magnets</p>
+                        </div>
+                    </div>
+                </Container>
+            </Section>
+
             {/* TACTICAL RESOURCES */}
             <Section className="border-t border-white/5 bg-black/50 backdrop-blur-sm" spacing="small">
                 <Container>
@@ -231,23 +248,32 @@ export default function IdeathonPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { title: "MISSION BRIEF", size: "2.4 MB", icon: FileText },
-                            { title: "CODE OF CONDUCT", size: "1.1 MB", icon: Shield },
-                            { title: "FIELD ASSET PACK", size: "45 MB", icon: Download },
+                            { title: "MISSION BRIEF", size: "ENCRYPTED", icon: Lock, locked: true },
+                            { title: "CODE OF CONDUCT", size: "RESTRICTED", icon: Lock, locked: true },
+                            { title: "FIELD ASSET PACK", size: "LOCKED", icon: Lock, locked: true },
                         ].map((resource, i) => (
                             <motion.div
                                 key={i}
                                 whileHover={{ scale: 1.02 }}
-                                className="glass-panel p-6 rounded-lg border border-white/10 hover:border-neon-purple/50 transition-colors group cursor-pointer"
+                                className={`glass-panel p-6 rounded-lg border transition-colors group cursor-pointer ${resource.locked
+                                    ? 'border-red-500/20 hover:border-red-500/50'
+                                    : 'border-white/10 hover:border-neon-purple/50'
+                                    }`}
                             >
                                 <div className="flex justify-between items-start mb-4">
-                                    <resource.icon className="w-8 h-8 text-gray-500 group-hover:text-neon-purple transition-colors" />
-                                    <span className="text-xs text-gray-500 font-mono">{resource.size}</span>
+                                    <resource.icon className={`w-8 h-8 transition-colors ${resource.locked ? 'text-red-500/50 group-hover:text-red-500' : 'text-gray-500 group-hover:text-neon-purple'
+                                        }`} />
+                                    <span className={`text-xs font-mono ${resource.locked ? 'text-red-400' : 'text-gray-500'
+                                        }`}>{resource.size}</span>
                                 </div>
-                                <h3 className="text-lg font-bold text-white mb-2">{resource.title}</h3>
-                                <div className="flex items-center gap-2 text-xs text-neon-purple opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span>DOWNLOAD SECURE FILE</span>
-                                    <ArrowRight className="w-3 h-3" />
+                                <h3 className={`text-lg font-bold mb-2 ${resource.locked ? 'text-gray-400' : 'text-white'
+                                    }`}>{resource.title}</h3>
+                                <div className={`flex items-center gap-2 text-xs transition-opacity ${resource.locked
+                                    ? 'text-red-500 opacity-100'
+                                    : 'text-neon-purple opacity-0 group-hover:opacity-100'
+                                    }`}>
+                                    <span>{resource.locked ? "ACCESS DENIED" : "DOWNLOAD SECURE FILE"}</span>
+                                    {!resource.locked && <ArrowRight className="w-3 h-3" />}
                                 </div>
                             </motion.div>
                         ))}

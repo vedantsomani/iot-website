@@ -54,18 +54,18 @@
         "name": "Harshit",
         "role": "Tech Team Member",
         "team": "Tech",
-        "image": "/images/member-placeholder.png",
+        "image": "/images/tech/IMG_1922_(1).jpg.jpeg",
         "bio": "Contributing to technical projects.",
         "linkedin": "#",
         "github": "#"
     },
     {
-        "id": "Vedant Somani",
+        "id": "vedant",
         "name": "Vedant Somani",
         "role": "Tech Team Member",
         "team": "Tech",
         "image": "/images/tech/Vedant Somani.jpg",
-        "bio": "Contributing to technical projects.",
+        "bio": "The creator of this website. Passionate about drones, IoT, and building cool stuff.",
         "linkedin": "#",
         "github": "#"
     },

@@ -61,7 +61,12 @@ function EventModal({ event, onClose }: { event: Event; onClose: () => void }) {
 
                 {/* Event image */}
                 <div className="relative h-64">
-                    <Image src={event.image} alt={event.title} fill className="object-cover" />
+                    <Image
+                        src={event.image}
+                        alt={event.title}
+                        fill
+                        className="object-cover"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel-bg to-transparent" />
 
                     {/* Tags */}
