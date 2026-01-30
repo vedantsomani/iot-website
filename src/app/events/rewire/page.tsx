@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, CheckCircle, User, Users, Shield, FileText, Lock, Unlock, AlertTriangle, Zap, Edit, Download, Crosshair, ArrowRight } from 'lucide-react';
+import { ChevronRight, CheckCircle, User, Users, Shield, FileText, Lock, Unlock, AlertTriangle, Zap, ArrowRight, Crosshair, Mail, Phone } from 'lucide-react';
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import ParticleBackground from "@/components/ParticleBackground";
@@ -10,9 +10,37 @@ import { CyberLock } from "@/components/CyberLock";
 import { Section } from "@/components/ui/Section";
 import { MissionTimer } from "@/components/MissionTimer";
 
-export default function IdeathonPage() {
+type RegistrationStep = 'form' | 'success';
+
+export default function RewirePage() {
     const [protocolsRead, setProtocolsRead] = useState(false);
-    const [step, setStep] = useState(1);
+    const [registrationStep, setRegistrationStep] = useState<RegistrationStep>('form');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [generalError, setGeneralError] = useState('');
+    const [participantId, setParticipantId] = useState<string | null>(null);
+
+    // Form data
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        skills: [] as string[],
+        consent: false,
+        source: 'ONLINE' as 'ONLINE' | 'STALL'
+    });
+
+    // Skills options
+    const skillsOptions = [
+        "Programming (Python/C++)",
+        "Web Development",
+        "Machine Learning/AI",
+        "Electronics/Hardware",
+        "IoT/Embedded Systems",
+        "Robotics",
+        "3D Printing/CAD",
+        "UI/UX Design",
+        "Other"
+    ];
 
     // Force scroll to top on mount
     useEffect(() => {
@@ -21,43 +49,102 @@ export default function IdeathonPage() {
 
     // Check for existing registration
     useEffect(() => {
-        const savedRegistration = localStorage.getItem('ideathon_registration');
-        if (savedRegistration) {
-            try {
-                const parsedData = JSON.parse(savedRegistration);
-                if (parsedData.teamName && parsedData.members) {
-                    setFormData({ ...parsedData, teamLeadMobile: parsedData.teamLeadMobile || '' });
-                    setProtocolsRead(true);
-                    setStep(3); // Jump to success screen
-                }
-            } catch (e) {
-                console.error("Failed to parse saved registration", e);
-            }
+        const savedId = localStorage.getItem('rewire_participant_id');
+        if (savedId) {
+            setParticipantId(savedId);
+            setProtocolsRead(true);
+            setRegistrationStep('success');
         }
     }, []);
 
-    const [activeMember, setActiveMember] = useState(0);
-    const [formData, setFormData] = useState({
-        teamName: '',
-        teamLeadMobile: '',
-        members: [
-            { name: '', email: '' },
-            { name: '', email: '' },
-            { name: '', email: '' },
-            { name: '', email: '' }
-        ],
-        track: ''
-    });
-
-    const nextStep = () => setStep(s => s + 1);
-
-    const handleMemberInput = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-        const newMembers = [...formData.members];
-        newMembers[index] = { ...newMembers[index], [e.target.name]: e.target.value };
-        setFormData({ ...formData, members: newMembers });
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
     };
 
-    const isStep1Valid = formData.members.every(m => m.name && m.email);
+    const handleSkillToggle = (skill: string) => {
+        setFormData(prev => ({
+            ...prev,
+            skills: prev.skills.includes(skill)
+                ? prev.skills.filter(s => s !== skill)
+                : [...prev.skills, skill]
+        }));
+    };
+
+    // Direct registration - no OTP
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setGeneralError('');
+
+        // Basic validation
+        if (!formData.name || formData.name.trim().length < 2) {
+            setGeneralError('Please enter your name');
+            setIsSubmitting(false);
+            return;
+        }
+        if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            setGeneralError('Please enter a valid email address');
+            setIsSubmitting(false);
+            return;
+        }
+        if (!formData.phone || !/^[6-9]\d{9}$/.test(formData.phone.replace(/[\s-]/g, '').replace(/^\+91/, ''))) {
+            setGeneralError('Please enter a valid 10-digit phone number');
+            setIsSubmitting(false);
+            return;
+        }
+        if (formData.skills.length === 0) {
+            setGeneralError('Please select at least one skill');
+            setIsSubmitting(false);
+            return;
+        }
+        if (!formData.consent) {
+            setGeneralError('Please accept the terms to continue');
+            setIsSubmitting(false);
+            return;
+        }
+
+        try {
+            // Direct registration to Apps Script
+            const response = await fetch('/api/rewire/profile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name.trim(),
+                    email: formData.email.trim().toLowerCase(),
+                    phone: formData.phone.replace(/[\s-]/g, '').replace(/^\+91/, ''),
+                    skills: formData.skills,
+                    consent: formData.consent,
+                    source: formData.source,
+                    // Optional fields - empty since we removed them
+                    college: '',
+                    year: ''
+                })
+            });
+
+            const result = await response.json();
+
+            if (!result.ok) {
+                setGeneralError(result.message || 'Registration failed. Please try again.');
+                return;
+            }
+
+            // Success!
+            const pid = result.data?.participant_id;
+            if (pid) {
+                setParticipantId(pid);
+                localStorage.setItem('rewire_participant_id', pid);
+                setRegistrationStep('success');
+            }
+        } catch {
+            setGeneralError('Network error. Please check your connection and try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-black relative">
@@ -101,7 +188,7 @@ export default function IdeathonPage() {
                                 <FileText className="w-5 h-5 mr-2" /> Review Mission Protocols
                             </Button>
                         ) : (
-                            step === 3 ? (
+                            registrationStep === 'success' ? (
                                 <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg backdrop-blur-md animate-fade-in">
                                     <p className="text-green-400 font-bold font-orbitron flex items-center justify-center gap-2">
                                         <CheckCircle className="w-5 h-5" /> STATUS: REGISTERED
@@ -113,7 +200,7 @@ export default function IdeathonPage() {
                                     size="lg"
                                     className="bg-neon-blue text-black hover:bg-white border-none animate-pulse"
                                 >
-                                    <Shield className="w-5 h-5 mr-2" /> DEPLOY SQUAD
+                                    <Shield className="w-5 h-5 mr-2" /> REGISTER AS AGENT
                                 </Button>
                             )
                         )}
@@ -142,7 +229,7 @@ export default function IdeathonPage() {
                                 1. SQUAD COMPOSITION
                             </h3>
                             <p className="text-gray-300 ml-7">
-                                Each squad must consist of exactly <strong>4 Agents</strong>. Cross-department alliances are permitted and encouraged. All agents must be physically present at Sector B (Lab 105) for the duration of the operation.
+                                Each squad must consist of exactly <strong>4 Agents</strong>. Cross-department alliances are permitted and encouraged. All agents must be physically present at P LH 101 for the duration of the operation.
                             </p>
                         </motion.div>
 
@@ -285,230 +372,146 @@ export default function IdeathonPage() {
             <Section id="enlist" className={`relative z-20 transition-opacity duration-1000 ${protocolsRead ? 'opacity-100' : 'opacity-30 grayscale pointer-events-none'}`}>
                 <Container className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-                    {/* Left: Squad Visualizer */}
+                    {/* Left: Info */}
                     <div className="text-center lg:text-left">
-                        {/* Squad Avatars */}
                         <div className="mb-10 p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
                             <h3 className="text-neon-blue font-orbitron text-sm mb-4 tracking-widest flex items-center gap-2">
-                                <Users className="w-4 h-4" /> SQUAD MANIFEST
+                                <User className="w-4 h-4" /> AGENT REGISTRATION
                             </h3>
-                            <div className="grid grid-cols-4 gap-4">
-                                {formData.members.map((member, i) => (
-                                    <div key={i} className="flex flex-col items-center">
-                                        <div
-                                            className={`w-16 h-16 rounded-full border-2 flex items-center justify-center mb-2 transition-all duration-300 ${member.name
-                                                ? 'bg-neon-blue/20 border-neon-blue text-neon-blue'
-                                                : i === activeMember
-                                                    ? 'bg-white/10 border-white text-white animate-pulse'
-                                                    : 'bg-black/50 border-white/10 text-gray-600'
-                                                }`}
-                                        >
-                                            <User className="w-8 h-8" />
-                                        </div>
-                                        <span className={`text-[10px] font-mono tracking-wider uppercase transition-colors ${member.name ? 'text-white' : 'text-gray-600'}`}>
-                                            {member.name ? member.name.split(' ')[0] : `AGENT 0${i + 1}`}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
+                            <p className="text-gray-300 text-sm">
+                                Register yourself first, then form or join a squad. Confirmation will be sent to your email.
+                            </p>
                         </div>
 
                         <h2 className="text-4xl md:text-5xl font-bold font-orbitron text-white mb-4">
-                            SQUAD <span className="text-neon-blue">ENLISTMENT</span>
+                            AGENT <span className="text-neon-blue">ENLISTMENT</span>
                         </h2>
                         <p className="text-lg text-gray-300 max-w-md">
-                            Assemble your 4-person elite squad. Registration requires a full roster.
+                            Register individually first. After registration, you can create or join a squad.
                         </p>
                     </div>
 
-                    {/* Right: Gamified Form */}
+                    {/* Right: Registration Form */}
                     <div className="w-full max-w-md mx-auto">
                         <AnimatePresence mode="wait">
-                            {step === 1 && (
+                            {/* FORM STEP */}
+                            {registrationStep === 'form' && (
                                 <motion.div
-                                    key="step1"
+                                    key="form"
                                     initial={{ opacity: 0, x: 50 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -50 }}
                                     className="glass-panel p-8 rounded-2xl border-2 border-neon-blue/20"
                                 >
                                     <h2 className="text-2xl font-bold font-orbitron text-white mb-6 flex items-center gap-3">
-                                        <span className="bg-neon-blue/20 text-neon-blue px-3 py-1 rounded text-sm">01</span>
-                                        SQUAD ROSTER
+                                        <Shield className="w-6 h-6 text-neon-blue" />
+                                        AGENT DETAILS
                                     </h2>
 
-                                    {/* Member Tabs */}
-                                    <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-                                        {formData.members.map((_, i) => (
-                                            <button
-                                                key={i}
-                                                onClick={() => setActiveMember(i)}
-                                                className={`px-3 py-1 rounded text-xs font-mono transition-colors whitespace-nowrap ${activeMember === i
-                                                    ? 'bg-neon-blue text-black font-bold'
-                                                    : 'bg-white/10 text-gray-400 hover:bg-white/20'
-                                                    }`}
-                                            >
-                                                AGENT 0{i + 1}
-                                            </button>
-                                        ))}
-                                    </div>
+                                    {generalError && (
+                                        <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
+                                            {generalError}
+                                        </div>
+                                    )}
 
-                                    <div className="space-y-4">
-                                        <div className="relative">
-                                            <div className="absolute -left-3 top-0 bottom-0 w-1 bg-neon-blue/50 rounded-full" />
-                                            <p className="text-xs text-neon-blue mb-4 font-mono pl-2">
-                                                ENTERING DATA FOR: AGENT 0{activeMember + 1}
-                                            </p>
-
-                                            <div className="space-y-4">
-                                                <div>
-                                                    <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Agent Name</label>
-                                                    <input
-                                                        name="name"
-                                                        value={formData.members[activeMember].name}
-                                                        onChange={(e) => handleMemberInput(activeMember, e)}
-                                                        type="text"
-                                                        autoFocus
-                                                        className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:border-neon-blue focus:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all outline-none"
-                                                        placeholder="Codename or Real Name"
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Secure Comms (Email)</label>
-                                                    <input
-                                                        name="email"
-                                                        value={formData.members[activeMember].email}
-                                                        onChange={(e) => handleMemberInput(activeMember, e)}
-                                                        type="email"
-                                                        className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:border-neon-blue focus:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all outline-none"
-                                                        placeholder="agent@bennett.edu.in"
-                                                    />
-                                                </div>
+                                    <form onSubmit={handleSubmit} className="space-y-4">
+                                        <div>
+                                            <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Agent Name</label>
+                                            <input
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleInputChange}
+                                                type="text"
+                                                className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:border-neon-blue focus:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all outline-none"
+                                                placeholder="Your Name"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
+                                                <Mail className="w-3 h-3" /> Secure Comms (Email)
+                                            </label>
+                                            <input
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleInputChange}
+                                                type="email"
+                                                className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:border-neon-blue focus:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all outline-none"
+                                                placeholder="agent@email.com"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
+                                                <Phone className="w-3 h-3" /> Contact Frequency
+                                            </label>
+                                            <div className="flex">
+                                                <span className="inline-flex items-center px-3 py-3 bg-white/5 border border-white/10 border-r-0 rounded-l-lg text-gray-400 text-sm">
+                                                    +91
+                                                </span>
+                                                <input
+                                                    name="phone"
+                                                    value={formData.phone}
+                                                    onChange={handleInputChange}
+                                                    type="tel"
+                                                    maxLength={10}
+                                                    className="w-full bg-black/50 border border-white/10 rounded-r-lg p-3 text-white focus:border-neon-blue focus:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all outline-none"
+                                                    placeholder="9876543210"
+                                                />
                                             </div>
                                         </div>
 
-                                        <div className="pt-4 flex gap-3">
-                                            {activeMember > 0 && (
-                                                <Button variant="outline" onClick={() => setActiveMember(m => m - 1)}>Prev Agent</Button>
-                                            )}
-                                            {activeMember < 3 ? (
-                                                <Button className="flex-1" onClick={() => setActiveMember(m => m + 1)}>
-                                                    Next Agent <ChevronRight className="w-4 h-4 ml-1" />
-                                                </Button>
-                                            ) : (
-                                                <Button
-                                                    onClick={nextStep}
-                                                    className="flex-1 group"
-                                                    disabled={!isStep1Valid}
-                                                >
-                                                    Proceed to Loadout <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                                </Button>
-                                            )}
-                                        </div>
-
-                                        {!isStep1Valid && activeMember === 3 && (
-                                            <p className="text-red-400 text-xs text-center mt-2">
-                                                * All 4 agents must be registered
-                                            </p>
-                                        )}
-                                    </div>
-                                </motion.div>
-                            )}
-
-                            {step === 2 && (
-                                <motion.div
-                                    key="step2"
-                                    initial={{ opacity: 0, x: 50 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -50 }}
-                                    className="glass-panel p-8 rounded-2xl border-2 border-neon-purple/20"
-                                >
-                                    <h2 className="text-2xl font-bold font-orbitron text-white mb-6 flex items-center gap-3">
-                                        <span className="bg-neon-purple/20 text-neon-purple px-3 py-1 rounded text-sm">02</span>
-                                        CHOOSE LOADOUT
-                                    </h2>
-                                    <div className="space-y-4">
                                         <div>
-                                            <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Squad Name</label>
-                                            <input
-                                                name="teamName"
-                                                value={formData.teamName}
-                                                onChange={(e) => setFormData({ ...formData, teamName: e.target.value })}
-                                                type="text"
-                                                className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:border-neon-purple focus:shadow-[0_0_15px_rgba(189,0,255,0.3)] transition-all outline-none"
-                                                placeholder="e.g. CyberNauts"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Team Lead Mobile No</label>
-                                            <input
-                                                name="teamLeadMobile"
-                                                value={formData.teamLeadMobile}
-                                                onChange={(e) => setFormData({ ...formData, teamLeadMobile: e.target.value })}
-                                                type="tel"
-                                                className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:border-neon-purple focus:shadow-[0_0_15px_rgba(189,0,255,0.3)] transition-all outline-none"
-                                                placeholder="+91 98765 43210"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Mission Track</label>
-                                            <div className="grid grid-cols-2 gap-3">
-                                                {['Robotics', 'IoT', 'Software', 'Open Innovation'].map((track) => (
+                                            <label className="block text-gray-400 text-xs uppercase tracking-widest mb-2">Skill Matrix</label>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                {skillsOptions.map((skill) => (
                                                     <button
-                                                        key={track}
-                                                        onClick={() => setFormData({ ...formData, track })}
-                                                        className={`p-3 rounded-lg border text-sm transition-all ${formData.track === track
-                                                            ? 'bg-neon-purple/20 border-neon-purple text-white shadow-[0_0_10px_rgba(189,0,255,0.2)]'
+                                                        key={skill}
+                                                        type="button"
+                                                        onClick={() => handleSkillToggle(skill)}
+                                                        className={`p-2 rounded-lg border text-xs transition-all text-left ${formData.skills.includes(skill)
+                                                            ? 'bg-neon-blue/20 border-neon-blue text-white shadow-[0_0_10px_rgba(0,212,255,0.2)]'
                                                             : 'bg-black/30 border-white/10 text-gray-400 hover:border-white/30'
                                                             }`}
                                                     >
-                                                        {track}
+                                                        {skill}
                                                     </button>
                                                 ))}
                                             </div>
                                         </div>
-                                        <div className="flex gap-3 mt-4">
-                                            <Button variant="outline" onClick={() => setStep(1)} className="flex-1">Back</Button>
-                                            <Button
-                                                onClick={async () => {
-                                                    // Validate Emails
-                                                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                                                    const invalidMember = formData.members.find(m => !emailRegex.test(m.email.trim()));
 
-                                                    if (invalidMember) {
-                                                        alert(`Agent ${invalidMember.name || 'Unknown'} has an invalid email credentials. Only @bennett.edu.in and @gmail.com domains are authorized.`);
-                                                        return;
-                                                    }
-
-                                                    try {
-                                                        const res = await fetch('/api/register', {
-                                                            method: 'POST',
-                                                            headers: { 'Content-Type': 'application/json' },
-                                                            body: JSON.stringify(formData),
-                                                        });
-                                                        if (res.ok) {
-                                                            // Save to localStorage
-                                                            localStorage.setItem('ideathon_registration', JSON.stringify(formData));
-                                                            nextStep();
-                                                        }
-                                                        else throw new Error('Failed');
-                                                    } catch (e) {
-                                                        alert('Registration failed. Please try again.');
-                                                    }
-                                                }}
-                                                className="flex-[2] bg-neon-purple text-white hover:bg-neon-purple/80 border-none"
-                                                disabled={!formData.teamName || !formData.track || !formData.teamLeadMobile}
-                                            >
-                                                Confirm Loadout
-                                            </Button>
+                                        <div className="pt-2">
+                                            <label className="flex items-start gap-3 cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    name="consent"
+                                                    checked={formData.consent}
+                                                    onChange={handleInputChange}
+                                                    className="w-5 h-5 mt-0.5 rounded bg-black/50 border-white/20"
+                                                />
+                                                <span className="text-xs text-gray-400">
+                                                    I acknowledge the mission protocols and consent to receive tactical updates from IoT & Robotics Club, Bennett.
+                                                </span>
+                                            </label>
                                         </div>
-                                    </div>
+
+                                        <Button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            className="w-full bg-neon-blue text-black hover:bg-white border-none font-bold mt-4"
+                                        >
+                                            {isSubmitting ? (
+                                                <>Registering...</>
+                                            ) : (
+                                                <>COMPLETE REGISTRATION <ChevronRight className="w-4 h-4 ml-1" /></>
+                                            )}
+                                        </Button>
+                                    </form>
                                 </motion.div>
                             )}
 
-                            {step === 3 && (
+                            {/* SUCCESS STEP */}
+                            {registrationStep === 'success' && (
                                 <motion.div
-                                    key="step3"
+                                    key="success"
                                     initial={{ scale: 0.9, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
                                     className="glass-panel p-10 rounded-2xl border-2 border-green-500/30 text-center"
@@ -516,36 +519,29 @@ export default function IdeathonPage() {
                                     <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
                                         <CheckCircle className="w-10 h-10 text-green-500" />
                                     </div>
-                                    <h2 className="text-3xl font-bold font-orbitron text-white mb-2">MISSION ACCEPTED</h2>
+                                    <h2 className="text-3xl font-bold font-orbitron text-white mb-2">AGENT REGISTERED</h2>
                                     <p className="text-gray-400 mb-6">
-                                        Squad <strong>{formData.teamName}</strong> is fully registered.
+                                        Confirmation sent to your email. You are now cleared to form or join a squad.
                                     </p>
-                                    <div className="grid grid-cols-2 gap-2 mb-6 text-left">
-                                        {formData.members.map((m, i) => (
-                                            <div key={i} className="bg-white/5 p-2 rounded text-xs text-gray-300 border border-white/10 flex items-center gap-2">
-                                                <Shield className="w-3 h-3 text-neon-blue" />
-                                                {m.name}
-                                            </div>
-                                        ))}
-                                    </div>
+
                                     <div className="p-4 bg-white/5 rounded-lg border border-white/10 mb-8 font-mono text-sm text-neon-blue">
                                         &gt; DEPLOYMENT DATE: FEB 03, 2026<br />
-                                        &gt; LOCATION: SECTOR P ,Lh 103<br />
+                                        &gt; LOCATION: P LH 101<br />
                                         &gt; STATUS: STANDBY
                                     </div>
+
+                                    <Button asChild size="lg" className="w-full mb-3 bg-neon-blue text-black hover:bg-white border-none font-bold">
+                                        <a href={`/events/rewire/team?participant_id=${participantId}`}>
+                                            <Users className="w-4 h-4 mr-2" /> PROCEED TO SQUAD SETUP
+                                        </a>
+                                    </Button>
 
                                     <Button asChild size="lg" className="w-full mb-3 bg-[#25D366] text-white hover:bg-[#128C7E] border-none font-bold">
                                         <a href="https://chat.whatsapp.com/CO8iYjd3NuiKjekVUNZWiU" target="_blank" rel="noopener noreferrer">
                                             Join Mission Updates (WhatsApp)
                                         </a>
                                     </Button>
-                                    <Button
-                                        onClick={() => setStep(1)}
-                                        variant="outline"
-                                        className="w-full mb-3 border-dashed border-white/20 hover:border-white text-gray-400 hover:text-white"
-                                    >
-                                        <Edit className="w-4 h-4 mr-2" /> Modify Squad Roster
-                                    </Button>
+
                                     <Button asChild size="lg" className="w-full bg-green-600 text-white hover:bg-green-500 border-none">
                                         <a href="/">Return to HQ</a>
                                     </Button>
@@ -555,6 +551,6 @@ export default function IdeathonPage() {
                     </div>
                 </Container>
             </Section>
-        </div >
+        </div>
     );
 }
