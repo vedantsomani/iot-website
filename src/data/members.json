@@ -34,7 +34,7 @@
         "name": "Rishabh Raj",
         "role": "Tech Head",
         "team": "Tech",
-        "image": "/images/tech/Rishabh_Raj_(Tech Head).jpeg",
+        "image": "/images/tech/Rishabh_Raj.png",
         "bio": "Driving technical innovation and project development.",
         "linkedin": "#",
         "github": "#"
@@ -302,6 +302,15 @@
         "team": "PR",
         "image": "/images/pr/Rakshika PR subhead (1).jpeg",
         "bio": "Coordinating public relations and outreach.",
+        "linkedin": "#"
+    },
+    {
+        "id": "joel",
+        "name": "Joel",
+        "role": "PR Team Member",
+        "team": "PR",
+        "image": "/images/pr/Joel.jpg",
+        "bio": "Assisting with PR activities.",
         "linkedin": "#"
     }
 ]
