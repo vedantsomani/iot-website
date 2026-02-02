@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Orbitron } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import SecurityProvider from "@/components/SecurityProvider";
 
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
@@ -53,6 +54,7 @@ export default function RootLayout({
             {children}
           </ClientLayoutWrapper>
         </SecurityProvider>
+        <Analytics />
       </body>
     </html>
   );
