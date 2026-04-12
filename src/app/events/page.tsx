@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Clock, X, ChevronRight, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, Clock, X, ExternalLink, Filter } from 'lucide-react';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '@/components/ScrollReveal';
 import eventsData from '@/data/events.json';
 import { Container } from "@/components/ui/Container";
@@ -36,7 +36,7 @@ function EventModal({ event, onClose }: { event: Event; onClose: () => void }) {
         >
             {/* Backdrop */}
             <motion.div
-                className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                className="absolute inset-0 bg-black/85 backdrop-blur-md"
                 onClick={onClose}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -45,7 +45,7 @@ function EventModal({ event, onClose }: { event: Event; onClose: () => void }) {
 
             {/* Modal */}
             <motion.div
-                className="relative max-w-2xl w-full max-h-[90vh] overflow-y-auto glass-panel border border-white/10 rounded-2xl"
+                className="relative max-w-2xl w-full max-h-[90vh] overflow-y-auto card-solid rounded-2xl"
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -60,32 +60,32 @@ function EventModal({ event, onClose }: { event: Event; onClose: () => void }) {
                 </button>
 
                 {/* Event image */}
-                <div className="relative h-64">
+                <div className="relative h-72">
                     <Image
                         src={event.image}
                         alt={event.title}
                         fill
                         className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-panel-bg to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] to-transparent" />
 
                     {/* Tags */}
-                    <div className="absolute bottom-4 left-4 flex gap-2">
+                    <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
                         {event.tags.map((tag) => (
-                            <Badge key={tag} variant="default" className="bg-neon-blue/20 text-neon-blue px-3">
+                            <span key={tag} className="text-[10px] px-2.5 py-1 rounded-full bg-accent-primary/15 text-accent-primary font-mono uppercase tracking-wide">
                                 {tag}
-                            </Badge>
+                            </span>
                         ))}
                     </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
-                    <h2 className="text-2xl font-bold font-orbitron text-white mb-4">{event.title}</h2>
+                    <h2 className="text-2xl font-bold font-display text-white mb-4">{event.title}</h2>
 
                     <div className="space-y-3 mb-6">
-                        <div className="flex items-center gap-3 text-gray-300">
-                            <Calendar className="w-5 h-5 text-neon-blue" />
+                        <div className="flex items-center gap-3 text-text-secondary text-sm">
+                            <Calendar className="w-4 h-4 text-accent-primary" />
                             <span>{new Date(event.date).toLocaleDateString('en-US', {
                                 weekday: 'long',
                                 year: 'numeric',
@@ -93,22 +93,22 @@ function EventModal({ event, onClose }: { event: Event; onClose: () => void }) {
                                 day: 'numeric'
                             })}</span>
                         </div>
-                        <div className="flex items-center gap-3 text-gray-300">
-                            <Clock className="w-5 h-5 text-neon-purple" />
+                        <div className="flex items-center gap-3 text-text-secondary text-sm">
+                            <Clock className="w-4 h-4 text-accent-secondary" />
                             <span>{event.time}</span>
                         </div>
-                        <div className="flex items-center gap-3 text-gray-300">
-                            <MapPin className="w-5 h-5 text-green-400" />
+                        <div className="flex items-center gap-3 text-text-secondary text-sm">
+                            <MapPin className="w-4 h-4 text-accent-success" />
                             <span>{event.location}</span>
                         </div>
                     </div>
 
-                    <p className="text-gray-300 mb-6 leading-relaxed">{event.description}</p>
+                    <p className="text-text-secondary mb-6 leading-relaxed">{event.description}</p>
 
                     {/* Gallery (for past events) */}
                     {event.gallery && event.gallery.length > 0 && (
                         <div className="mb-6">
-                            <h3 className="text-lg font-bold text-white mb-3">Event Photos</h3>
+                            <h3 className="text-sm font-bold text-white mb-3 font-display">Event Photos</h3>
                             <div className="grid grid-cols-3 gap-2">
                                 {event.gallery.map((img, i) => (
                                     <div key={i} className="relative aspect-square rounded-lg overflow-hidden">
@@ -121,19 +121,85 @@ function EventModal({ event, onClose }: { event: Event; onClose: () => void }) {
 
                     {/* Registration button (for upcoming events) */}
                     {event.type === 'upcoming' && event.registrationLink && (
-                        <Button asChild>
-                            <a
-                                href={event.registrationLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Register Now
-                                <ExternalLink className="w-4 h-4 ml-2" />
-                            </a>
-                        </Button>
+                        event.registrationLink.startsWith('http') ? (
+                            <Button asChild className="w-full bg-white text-black hover:bg-white/90">
+                                <a
+                                    href={event.registrationLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Visit Event Website
+                                    <ExternalLink className="w-4 h-4 ml-2" />
+                                </a>
+                            </Button>
+                        ) : (
+                            <Button asChild className="w-full bg-white text-black hover:bg-white/90">
+                                <a href={event.registrationLink}>
+                                    Register
+                                    <ExternalLink className="w-4 h-4 ml-2" />
+                                </a>
+                            </Button>
+                        )
                     )}
                 </div>
             </motion.div>
+        </motion.div>
+    );
+}
+
+// Upcoming event hero card — full width, dramatic
+function UpcomingEventHero({ event, onClick }: { event: Event; onClick: () => void }) {
+    const isExternal = event.registrationLink?.startsWith('http');
+
+    return (
+        <motion.div
+            className="card-accent-left relative w-full rounded-2xl overflow-hidden min-h-[300px] md:min-h-[400px] cursor-pointer group"
+            style={{ borderLeftColor: 'var(--accent-warm)' }}
+            onClick={onClick}
+        >
+            <Image src={event.image} alt={event.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+                <div className="flex flex-wrap gap-2 mb-3">
+                    {event.tags.map(tag => (
+                        <span key={tag} className="text-[10px] px-2.5 py-1 rounded-full bg-accent-primary/15 text-accent-primary font-mono uppercase tracking-wide">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+                <h3 className="text-2xl md:text-4xl font-bold font-display text-white mb-2">{event.title}</h3>
+                <div className="flex items-center gap-4 text-text-secondary text-sm mb-4">
+                    <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                    <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" />{event.location}</span>
+                </div>
+                <p className="text-text-secondary max-w-xl text-sm mb-5 line-clamp-2">{event.description}</p>
+
+                <div className="flex gap-3">
+                    {isExternal && (
+                        <Button
+                            asChild
+                            size="lg"
+                            onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                        >
+                            <a href={event.registrationLink} target="_blank" rel="noopener noreferrer">
+                                Register Now <ExternalLink className="w-4 h-4 ml-2" />
+                            </a>
+                        </Button>
+                    )}
+                    <Button variant="outline" size="lg" className="border-white/20">
+                        Event Details
+                    </Button>
+                </div>
+            </div>
+
+            {/* Registrations Open badge */}
+            <div className="absolute top-4 right-4">
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-accent-success bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-accent-success/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent-success animate-pulse" />
+                    Registrations Open
+                </span>
+            </div>
         </motion.div>
     );
 }
@@ -142,63 +208,47 @@ function EventModal({ event, onClose }: { event: Event; onClose: () => void }) {
 function YearDivider({ year }: { year: string }) {
     return (
         <motion.div
-            className="flex items-center gap-4 my-12"
+            className="flex items-center gap-4 my-10"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
         >
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            <span className="text-2xl font-bold font-orbitron text-white/50">{year}</span>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border-default to-transparent" />
+            <span className="text-xl font-bold font-display text-text-tertiary">{year}</span>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border-default to-transparent" />
         </motion.div>
     );
 }
 
-function EventCard({ event, onClick }: { event: Event; onClick: () => void }) {
-    const isUpcoming = event.type === 'upcoming';
-
+function PastEventCard({ event, onClick }: { event: Event; onClick: () => void }) {
     return (
         <motion.div
-            className={`glass-panel border rounded-xl overflow-hidden cursor-pointer group ${isUpcoming ? 'border-neon-blue/30' : 'border-white/10'
-                }`}
-            whileHover={{ y: -5, scale: 1.02 }}
-            transition={{ type: 'spring', stiffness: 300 }}
+            className="card-solid rounded-xl overflow-hidden cursor-pointer group"
             onClick={onClick}
         >
-            <div className="relative h-48">
+            <div className="relative h-44">
                 <Image src={event.image} alt={event.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-panel-bg to-transparent" />
-
-                {/* Event status badge */}
-                <div className="absolute top-4 left-4 z-10">
-                    <Badge variant={isUpcoming ? "default" : "outline"} className={isUpcoming ? "" : "text-white/70 border-white/20"}>
-                        {isUpcoming ? 'Upcoming' : 'Past Event'}
-                    </Badge>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] to-transparent" />
             </div>
 
-            <div className="p-5">
-                <div className="flex items-center gap-2 text-neon-blue text-sm mb-2">
-                    <Calendar className="w-4 h-4" />
+            <div className="p-4">
+                <div className="flex items-center gap-2 text-text-tertiary text-xs mb-2">
+                    <Calendar className="w-3 h-3" />
                     <span>{new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                 </div>
 
-                <h3 className="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-neon-blue transition-colors">
+                <h3 className="text-base font-bold text-white mb-1.5 group-hover:text-accent-primary transition-colors font-display line-clamp-1">
                     {event.title}
                 </h3>
 
-                <p className="text-gray-400 text-sm line-clamp-2 mb-4">{event.description}</p>
+                <p className="text-text-tertiary text-xs line-clamp-2 mb-3">{event.description}</p>
 
-                <div className="flex items-center justify-between">
-                    <div className="flex gap-2">
-                        {event.tags.slice(0, 2).map((tag) => (
-                            <span key={tag} className="px-2 py-1 rounded text-xs bg-white/5 text-gray-400">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-
-                    <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-neon-blue group-hover:translate-x-1 transition-all" />
+                <div className="flex gap-1.5 flex-wrap">
+                    {event.tags.slice(0, 2).map((tag) => (
+                        <span key={tag} className="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-text-tertiary font-mono">
+                            {tag}
+                        </span>
+                    ))}
                 </div>
             </div>
         </motion.div>
@@ -207,13 +257,27 @@ function EventCard({ event, onClick }: { event: Event; onClick: () => void }) {
 
 export default function EventsPage() {
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+    const [activeFilter, setActiveFilter] = useState<string>('All');
     const events = eventsData as Event[];
 
     const upcomingEvents = events.filter((e) => e.type === 'upcoming');
     const pastEvents = events.filter((e) => e.type === 'past');
 
-    // Group past events by year
-    const pastEventsByYear = pastEvents.reduce((acc, event) => {
+    // Collect all unique tags
+    const allTags = useMemo(() => {
+        const tags = new Set<string>();
+        pastEvents.forEach(e => e.tags.forEach(t => tags.add(t)));
+        return ['All', ...Array.from(tags).sort()];
+    }, [pastEvents]);
+
+    // Filter past events by tag
+    const filteredPastEvents = useMemo(() => {
+        if (activeFilter === 'All') return pastEvents;
+        return pastEvents.filter(e => e.tags.includes(activeFilter));
+    }, [pastEvents, activeFilter]);
+
+    // Group filtered past events by year
+    const pastEventsByYear = filteredPastEvents.reduce((acc, event) => {
         const year = new Date(event.date).getFullYear().toString();
         if (!acc[year]) acc[year] = [];
         acc[year].push(event);
@@ -223,21 +287,21 @@ export default function EventsPage() {
     const sortedYears = Object.keys(pastEventsByYear).sort((a, b) => parseInt(b) - parseInt(a));
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-dots">
             {/* Header */}
-            <Section className="bg-gradient-to-b from-black to-panel-bg border-b border-white/5" spacing="small">
+            <Section spacing="small" className="border-b border-border-subtle">
                 <Container>
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="text-center"
+                        className="text-left"
                     >
-                        <h1 className="text-5xl md:text-7xl font-bold font-orbitron text-white mb-6">
-                            EVENTS & <span className="text-neon-purple">WORKSHOPS</span>
+                        <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-white mb-4">
+                            Events
                         </h1>
-                        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                            From hands-on workshops to hackathons and competitions — discover what's happening at the club.
+                        <p className="text-text-secondary text-lg max-w-2xl font-display">
+                            Workshops, hackathons, and competitions we've hosted.
                         </p>
                     </motion.div>
                 </Container>
@@ -245,47 +309,73 @@ export default function EventsPage() {
 
             <Section>
                 <Container>
-                    {/* Upcoming Events */}
+                    {/* Upcoming Events — Hero Cards */}
                     {upcomingEvents.length > 0 && (
                         <div className="mb-20">
                             <ScrollReveal>
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="h-12 w-2 bg-neon-blue rounded-full animate-pulse" />
-                                    <h2 className="text-3xl font-bold font-orbitron text-white">Upcoming Events</h2>
+                                <div className="flex items-center gap-3 mb-8">
+                                    <span className="text-xs font-mono uppercase tracking-widest text-accent-primary">Upcoming</span>
+                                    <div className="h-px flex-1 bg-border-subtle" />
                                 </div>
                             </ScrollReveal>
 
-                            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="space-y-6">
                                 {upcomingEvents.map((event) => (
-                                    <StaggerItem key={event.id}>
-                                        <EventCard event={event} onClick={() => setSelectedEvent(event)} />
-                                    </StaggerItem>
+                                    <ScrollReveal key={event.id}>
+                                        <UpcomingEventHero event={event} onClick={() => setSelectedEvent(event)} />
+                                    </ScrollReveal>
                                 ))}
-                            </StaggerContainer>
+                            </div>
                         </div>
                     )}
 
-                    {/* Past Events */}
+                    {/* Past Events — with filter */}
                     <div>
                         <ScrollReveal>
-                            <div className="flex items-center gap-4 mb-8">
-                                <div className="h-12 w-2 bg-gray-500 rounded-full" />
-                                <h2 className="text-3xl font-bold font-orbitron text-white">Past Events</h2>
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-xs font-mono uppercase tracking-widest text-text-tertiary">Past Events</span>
+                                    <div className="h-px flex-1 bg-border-subtle sm:hidden" />
+                                </div>
+
+                                {/* Tag Filter */}
+                                <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                                    <Filter className="w-3.5 h-3.5 text-text-tertiary shrink-0" />
+                                    {allTags.map((tag) => (
+                                        <button
+                                            key={tag}
+                                            onClick={() => setActiveFilter(tag)}
+                                            className={`px-3 py-1 rounded-full text-xs font-medium transition-all whitespace-nowrap ${
+                                                activeFilter === tag
+                                                    ? 'bg-accent-primary text-black'
+                                                    : 'bg-white/5 text-text-tertiary hover:text-white hover:bg-white/10'
+                                            }`}
+                                        >
+                                            {tag}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </ScrollReveal>
 
                         {sortedYears.map((year) => (
                             <div key={year}>
                                 <YearDivider year={year} />
-                                <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                                     {pastEventsByYear[year].map((event) => (
                                         <StaggerItem key={event.id}>
-                                            <EventCard event={event} onClick={() => setSelectedEvent(event)} />
+                                            <PastEventCard event={event} onClick={() => setSelectedEvent(event)} />
                                         </StaggerItem>
                                     ))}
                                 </StaggerContainer>
                             </div>
                         ))}
+
+                        {filteredPastEvents.length === 0 && (
+                            <div className="text-center py-20 text-text-tertiary">
+                                No events found for "{activeFilter}" tag.
+                            </div>
+                        )}
                     </div>
                 </Container>
             </Section>

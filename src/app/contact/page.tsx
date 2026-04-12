@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Mail, MapPin, Phone, Send, CheckCircle } from "lucide-react";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
@@ -38,110 +37,114 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen">
-            <Section className="bg-panel-bg border-b border-white/5" spacing="small">
-                <Container className="text-center">
+        <div className="min-h-screen bg-dots">
+            <Section spacing="small" className="border-b border-border-subtle">
+                <Container className="text-left">
                     <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-white mb-4">
-                        CONTACT <span className="text-neon-blue">US</span>
+                        Contact
                     </h1>
-                    <p className="text-gray-400 max-w-2xl mx-auto">
-                        Get in touch with us for collaborations, membership queries, or just to say hi!
+                    <p className="text-text-secondary max-w-2xl font-display">
+                        Get in touch for collaborations, membership queries, or just to say hi!
                     </p>
                 </Container>
             </Section>
 
             <Section>
                 <Container>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Contact Info */}
-                        <div className="space-y-12">
-
-
+                        <div className="space-y-8">
                             <div>
-                                <h2 className="text-3xl font-bold font-orbitron text-white mb-6">Get In Touch</h2>
-                                <p className="text-gray-300 mb-8">
-                                    Have a question about our workshops? Want to sponsor an event? Or are you a student looking to join? Drop us a message!
+                                <span className="text-xs font-mono uppercase tracking-widest text-accent-primary mb-4 block">Get in touch</span>
+                                <h2 className="text-2xl font-bold font-display text-white mb-4">We'd love to hear from you</h2>
+                                <p className="text-text-secondary text-sm leading-relaxed">
+                                    Have a question about our workshops? Want to sponsor an event? Or are you looking to join? Drop us a message!
                                 </p>
+                            </div>
 
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4">
-                                        <div className="bg-white/5 p-3 rounded-lg text-neon-blue">
-                                            <Mail className="h-6 w-6" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-white font-bold mb-1">Email Us</h3>
-                                            <p className="text-gray-400">technotix.club@bennett.edu.in</p>
-                                        </div>
+                            <div className="space-y-4">
+                                <div className="flex items-start gap-4 card-outline rounded-xl p-4">
+                                    <div className="p-2.5 rounded-lg bg-accent-primary/10 text-accent-primary shrink-0">
+                                        <Mail className="h-5 w-5" />
                                     </div>
-
-                                    <div className="flex items-start gap-4">
-                                        <div className="bg-white/5 p-3 rounded-lg text-neon-purple">
-                                            <Phone className="h-6 w-6" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-white font-bold mb-1">Call Us</h3>
-                                            <p className="text-gray-400">+91 9219145820 (President)</p>
-                                        </div>
+                                    <div>
+                                        <h3 className="text-white font-bold text-sm mb-0.5">Email</h3>
+                                        <p className="text-text-tertiary text-sm">technotix.club@bennett.edu.in</p>
                                     </div>
+                                </div>
 
-                                    <div className="flex items-start gap-4">
-                                        <div className="bg-white/5 p-3 rounded-lg text-green-400">
-                                            <MapPin className="h-6 w-6" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-white font-bold mb-1">Visit Us</h3>
-                                            <p className="text-gray-400">
-                                                IoT & Robotics Lab (B La 105)<br />
-                                                Bennett University, Greater Noida<br />
-                                                Uttar Pradesh, India
-                                            </p>
-                                        </div>
+                                <div className="flex items-start gap-4 card-outline rounded-xl p-4">
+                                    <div className="p-2.5 rounded-lg bg-accent-secondary/10 text-accent-secondary shrink-0">
+                                        <Phone className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-white font-bold text-sm mb-0.5">Phone</h3>
+                                        <p className="text-text-tertiary text-sm">+91 9219145820 (President)</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4 card-outline rounded-xl p-4">
+                                    <div className="p-2.5 rounded-lg bg-accent-success/10 text-accent-success shrink-0">
+                                        <MapPin className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-white font-bold text-sm mb-0.5">Visit Us</h3>
+                                        <p className="text-text-tertiary text-sm">
+                                            IoT & Robotics Lab (B La 105)<br />
+                                            Bennett University, Greater Noida<br />
+                                            Uttar Pradesh, India
+                                        </p>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Map Placeholder */}
-                            <div className="h-64 rounded-xl overflow-hidden glass-panel border border-white/10 relative">
-                                <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
-                                    <span className="text-gray-500 flex items-center gap-2">
-                                        <MapPin className="h-5 w-5" /> Google Map Embed Placeholder
-                                    </span>
-                                </div>
+                            {/* Google Maps Embed */}
+                            <div className="h-56 rounded-xl overflow-hidden border border-border-subtle">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.3850119853965!2d77.58223617549704!3d28.457850875760594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cbf94deb6bc39%3A0x7ba6bedc9a2b537f!2sBennett%20University%20(Times%20of%20India%20Group)!5e0!3m2!1sen!2sin!4v1713500854341!5m2!1sen!2sin"
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    allowFullScreen
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    title="Bennett University Location"
+                                />
                             </div>
                         </div>
 
                         {/* Contact Form */}
-                        <div className="glass-panel p-8 rounded-2xl border border-white/10">
+                        <div className="card-solid p-6 md:p-8 rounded-2xl">
                             {submitted ? (
                                 <div className="text-center py-12">
-                                    <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                                    <h2 className="text-2xl font-bold text-white mb-2">Message Sent!</h2>
-                                    <p className="text-gray-400">We'll get back to you shortly.</p>
+                                    <CheckCircle className="w-14 h-14 text-accent-success mx-auto mb-4" />
+                                    <h2 className="text-xl font-bold text-white mb-2 font-display">Message Sent!</h2>
+                                    <p className="text-text-tertiary text-sm">We'll get back to you shortly.</p>
                                     <Button onClick={() => setSubmitted(false)} variant="outline" className="mt-6">Send Another</Button>
                                 </div>
                             ) : (
                                 <>
-                                    <h2 className="text-2xl font-bold font-orbitron text-white mb-6">Send a Message</h2>
-                                    <form className="space-y-6" onSubmit={handleSubmit}>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <h2 className="text-xl font-bold font-display text-white mb-6">Send a Message</h2>
+                                    <form className="space-y-5" onSubmit={handleSubmit}>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                             <div>
-                                                <label className="block text-gray-400 text-sm mb-2">First Name</label>
-                                                <input name="firstName" required type="text" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="John" />
+                                                <label className="block text-text-tertiary text-xs mb-1.5 font-mono uppercase tracking-wide">First Name</label>
+                                                <input name="firstName" required type="text" className="w-full bg-surface-0 border border-border-default rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-accent-primary transition-colors" placeholder="John" />
                                             </div>
                                             <div>
-                                                <label className="block text-gray-400 text-sm mb-2">Last Name</label>
-                                                <input name="lastName" required type="text" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="Doe" />
+                                                <label className="block text-text-tertiary text-xs mb-1.5 font-mono uppercase tracking-wide">Last Name</label>
+                                                <input name="lastName" required type="text" className="w-full bg-surface-0 border border-border-default rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-accent-primary transition-colors" placeholder="Doe" />
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label className="block text-gray-400 text-sm mb-2">Email Address</label>
-                                            <input name="email" required type="email" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors" placeholder="john@example.com" />
+                                            <label className="block text-text-tertiary text-xs mb-1.5 font-mono uppercase tracking-wide">Email</label>
+                                            <input name="email" required type="email" className="w-full bg-surface-0 border border-border-default rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-accent-primary transition-colors" placeholder="you@bennett.edu.in" />
                                         </div>
 
                                         <div>
-                                            <label className="block text-gray-400 text-sm mb-2">Subject</label>
-                                            <select name="subject" className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors">
+                                            <label className="block text-text-tertiary text-xs mb-1.5 font-mono uppercase tracking-wide">Subject</label>
+                                            <select name="subject" className="w-full bg-surface-0 border border-border-default rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-accent-primary transition-colors">
                                                 <option>Membership Inquiry</option>
                                                 <option>Collaboration</option>
                                                 <option>General Question</option>
@@ -149,8 +152,8 @@ export default function ContactPage() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-gray-400 text-sm mb-2">Message</label>
-                                            <textarea name="message" required className="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-neon-blue transition-colors h-32" placeholder="Your message here..."></textarea>
+                                            <label className="block text-text-tertiary text-xs mb-1.5 font-mono uppercase tracking-wide">Message</label>
+                                            <textarea name="message" required className="w-full bg-surface-0 border border-border-default rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-accent-primary transition-colors h-28 resize-none" placeholder="Your message here..." />
                                         </div>
 
                                         <Button className="w-full gap-2">

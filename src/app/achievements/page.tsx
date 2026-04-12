@@ -3,10 +3,9 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trophy, Award, Star, Calendar, Users, ChevronRight } from 'lucide-react';
+import { Trophy, Award, Calendar, Users } from 'lucide-react';
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { Badge } from "@/components/ui/Badge";
 import achievementsData from '@/data/achievements.json';
 
 export default function AchievementsPage() {
@@ -18,73 +17,68 @@ export default function AchievementsPage() {
     ).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     return (
-        <main className="min-h-screen bg-black pt-24 pb-20 relative overflow-hidden">
-            {/* Background Effects */}
-            <div className="fixed inset-0 z-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-neon-purple/5 rounded-full blur-[100px]" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-neon-blue/5 rounded-full blur-[100px]" />
-            </div>
-
-            <Container className="relative z-10">
-                <Section>
-                    <div className="text-center mb-16">
-                        <motion.h1
-                            className="text-4xl md:text-6xl font-black font-orbitron mb-6 text-transparent bg-clip-text bg-gradient-to-r from-neon-blue via-white to-neon-purple"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                        >
-                            Hall of Fame
-                        </motion.h1>
-                        <motion.p
-                            className="text-lg text-gray-400 max-w-2xl mx-auto"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                        >
-                            Celebrating the victories, research breakthroughs, and milestones of our exceptional members.
-                        </motion.p>
-                    </div>
+        <main className="min-h-screen bg-dots">
+            {/* Header */}
+            <Section spacing="small" className="border-b border-border-subtle">
+                <Container className="text-left">
+                    <motion.h1
+                        className="text-4xl md:text-6xl font-bold font-orbitron text-white mb-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                    >
+                        Hall of Fame
+                    </motion.h1>
+                    <motion.p
+                        className="text-text-secondary max-w-2xl mx-auto mb-8"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                    >
+                        Celebrating victories, research breakthroughs, and milestones.
+                    </motion.p>
 
                     {/* Filters */}
-                    <div className="flex justify-center gap-4 mb-12">
+                    <div className="flex justify-start gap-3">
                         {['All', 'Competition', 'Research'].map((item) => (
                             <button
                                 key={item}
-                                onClick={() => setFilter(item as any)}
-                                className={`px-6 py-2 rounded-full font-orbitron text-sm transition-all duration-300 ${filter === item
-                                    ? 'bg-neon-blue text-black shadow-[0_0_20px_rgba(0,243,255,0.4)]'
-                                    : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
-                                    }`}
+                                onClick={() => setFilter(item as 'All' | 'Competition' | 'Research')}
+                                className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${filter === item
+                                    ? 'bg-accent-primary text-black'
+                                    : 'bg-white/5 text-text-tertiary hover:bg-white/10 hover:text-white'
+                                }`}
                             >
                                 {item}
                             </button>
                         ))}
                     </div>
+                </Container>
+            </Section>
 
-                    {/* Timeline Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+            <Section>
+                <Container>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
                         {/* Central Line (Desktop) */}
-                        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-neon-blue/0 via-neon-blue/30 to-neon-blue/0 transform -translate-x-1/2" />
+                        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-accent-primary/0 via-accent-primary/20 to-accent-primary/0 transform -translate-x-1/2" />
 
                         <AnimatePresence mode='popLayout'>
                             {filteredAchievements.map((item, index) => (
                                 <motion.div
                                     key={item.id}
                                     layout
-                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    className={`relative ${index % 2 === 0 ? 'md:mr-12' : 'md:ml-12 md:mt-24'}`}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    className={`relative ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8 md:mt-16'}`}
                                 >
-                                    {/* Timeline Node (Desktop) */}
-                                    <div className={`hidden md:flex absolute top-8 w-4 h-4 rounded-full bg-neon-blue shadow-[0_0_10px_rgba(0,243,255,0.8)] z-10
-                                        ${index % 2 === 0 ? '-right-[56px]' : '-left-[56px]'}
+                                    {/* Timeline Node */}
+                                    <div className={`hidden md:flex absolute top-8 w-3 h-3 rounded-full bg-accent-primary shadow-[0_0_8px_rgba(0,212,255,0.6)] z-10
+                                        ${index % 2 === 0 ? '-right-[44px]' : '-left-[44px]'}
                                     `} />
 
-                                    <div className="glass-panel border border-white/10 rounded-xl overflow-hidden group hover:border-neon-blue/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.1)]">
-
-                                        {/* Image Section */}
-                                        <div className="relative h-64 overflow-hidden">
+                                    <div className="card-solid rounded-xl overflow-hidden group hover:border-accent-primary/20 transition-all duration-300">
+                                        {/* Image */}
+                                        <div className="relative h-56 overflow-hidden">
                                             {item.image ? (
                                                 <Image
                                                     src={item.image}
@@ -93,49 +87,48 @@ export default function AchievementsPage() {
                                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
                                             ) : (
-                                                <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
-                                                    <Trophy className="w-16 h-16 text-white/10" />
+                                                <div className="w-full h-full bg-gradient-to-br from-surface-1 to-surface-0 flex items-center justify-center">
+                                                    <Trophy className="w-14 h-14 text-border-subtle" />
                                                 </div>
                                             )}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-panel-bg via-transparent to-transparent opacity-90" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent opacity-80" />
 
-                                            {/* Badge */}
-                                            <div className="absolute top-4 left-4">
-                                                <Badge variant="outline" className="bg-black/50 backdrop-blur-md border-neon-blue/30 text-neon-blue">
+                                            <div className="absolute top-3 left-3">
+                                                <span className="text-[10px] px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-white font-mono uppercase tracking-wide border border-white/20">
                                                     {item.category}
-                                                </Badge>
+                                                </span>
                                             </div>
                                         </div>
 
-                                        {/* Content Section */}
-                                        <div className="p-6 relative">
-                                            <div className="flex items-center gap-3 text-gray-400 text-sm mb-3 font-mono">
-                                                <Calendar className="w-4 h-4 text-neon-purple" />
+                                        {/* Content */}
+                                        <div className="p-5">
+                                            <div className="flex items-center gap-2 text-text-tertiary text-xs mb-2 font-mono">
+                                                <Calendar className="w-3 h-3 text-accent-secondary" />
                                                 <span>{new Date(item.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
                                             </div>
 
-                                            <h3 className="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-neon-blue transition-colors">
+                                            <h3 className="text-base font-bold font-display text-white mb-1.5 group-hover:text-accent-primary transition-colors">
                                                 {item.title}
                                             </h3>
 
-                                            <div className="flex items-center gap-2 mb-4">
-                                                <Award className="w-5 h-5 text-yellow-400" />
-                                                <span className="text-yellow-400 font-bold">{item.result}</span>
+                                            <div className="flex items-center gap-1.5 mb-3">
+                                                <Award className="w-4 h-4 text-yellow-400" />
+                                                <span className="text-yellow-400 font-bold text-sm">{item.result}</span>
                                             </div>
 
-                                            <p className="text-gray-300 mb-6 leading-relaxed text-sm">
+                                            <p className="text-text-tertiary text-xs leading-relaxed mb-4">
                                                 {item.description}
                                             </p>
 
                                             {item.team.length > 0 && (
-                                                <div className="border-t border-white/10 pt-4">
-                                                    <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
-                                                        <Users className="w-4 h-4" />
-                                                        <span className="font-semibold">Team Members</span>
+                                                <div className="border-t border-border-subtle pt-3">
+                                                    <div className="flex items-center gap-1.5 text-text-tertiary text-[10px] mb-2">
+                                                        <Users className="w-3 h-3" />
+                                                        <span className="font-mono uppercase tracking-wide">Team</span>
                                                     </div>
-                                                    <div className="flex flex-wrap gap-2">
+                                                    <div className="flex flex-wrap gap-1.5">
                                                         {item.team.map((member, i) => (
-                                                            <span key={`${member}-${i}`} className="text-xs px-2 py-1 rounded bg-white/5 text-gray-400 border border-white/5">
+                                                            <span key={`${member}-${i}`} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-text-tertiary border border-border-subtle">
                                                                 {member}
                                                             </span>
                                                         ))}
@@ -148,8 +141,8 @@ export default function AchievementsPage() {
                             ))}
                         </AnimatePresence>
                     </div>
-                </Section>
-            </Container>
+                </Container>
+            </Section>
         </main>
     );
 }

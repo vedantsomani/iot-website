@@ -1,24 +1,5 @@
 [
     {
-        "slug": "ai-integrated-car",
-        "title": "AI Integrated Car",
-        "shortDesc": "Intelligent Navigation & Interactive System.",
-        "description": "An autonomous vehicle featuring intelligent navigation and a fully interactive system capable of effective obstacle avoidance in complex environments.",
-        "image": "/images/projects/ai-car/primary.jpg",
-        "gallery": [],
-        "techStack": [
-            "AI/ML",
-            "Computer Vision",
-            "Robotics",
-            "Autonomous Navigation"
-        ],
-        "team": [
-            "Pushp"
-        ],
-        "githubLink": "#",
-        "featured": true
-    },
-    {
         "slug": "fixed-wing-plane",
         "title": "Fixed Wing Plane",
         "shortDesc": "Custom built fixed-wing aircraft.",

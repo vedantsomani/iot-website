@@ -9,6 +9,7 @@ interface ScrollRevealProps {
     delay?: number;
     direction?: 'up' | 'down' | 'left' | 'right' | 'none';
     duration?: number;
+    blur?: boolean;
 }
 
 export default function ScrollReveal({
@@ -17,6 +18,7 @@ export default function ScrollReveal({
     delay = 0,
     direction = 'up',
     duration = 0.6,
+    blur = false,
 }: ScrollRevealProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-50px' });
@@ -24,29 +26,31 @@ export default function ScrollReveal({
     const getInitialPosition = () => {
         switch (direction) {
             case 'up':
-                return { y: 50, x: 0 };
+                return { y: 40, x: 0 };
             case 'down':
-                return { y: -50, x: 0 };
+                return { y: -40, x: 0 };
             case 'left':
-                return { x: 50, y: 0 };
+                return { x: 40, y: 0 };
             case 'right':
-                return { x: -50, y: 0 };
+                return { x: -40, y: 0 };
             case 'none':
                 return { x: 0, y: 0 };
             default:
-                return { y: 50, x: 0 };
+                return { y: 40, x: 0 };
         }
     };
 
     const variants: Variants = {
         hidden: {
             opacity: 0,
+            filter: blur ? 'blur(10px)' : 'blur(0px)',
             ...getInitialPosition(),
         },
         visible: {
             opacity: 1,
             x: 0,
             y: 0,
+            filter: 'blur(0px)',
             transition: {
                 duration,
                 delay,
@@ -78,7 +82,7 @@ interface StaggerContainerProps {
 export function StaggerContainer({
     children,
     className = '',
-    staggerDelay = 0.1,
+    staggerDelay = 0.08,
 }: StaggerContainerProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-50px' });
@@ -115,7 +119,7 @@ interface StaggerItemProps {
 
 export function StaggerItem({ children, className = '' }: StaggerItemProps) {
     const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 25 },
         visible: {
             opacity: 1,
             y: 0,

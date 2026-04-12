@@ -24,7 +24,7 @@
         "location": "PLH 101, Bennett University",
         "description": "Connect. Innovate. Breakfree. An innovative Ideathon (Open Innovation) on Day 1, followed by a thrilling technical Escape Room challenge for top teams on Day 2.",
         "image": "/images/events/rewire-2026/rewire-poster.png",
-        "type": "upcoming",
+        "type": "past",
         "registrationLink": "/events/rewire",
         "sponsors": [
             {
@@ -37,6 +37,19 @@
             "Escape Room",
             "Competition"
         ]
+    },
+    {
+        "id": "gtr-2026",
+        "title": "Grand Theft Racing 2026",
+        "date": "2026-04-22",
+        "time": "10:00 AM Onwards",
+        "location": "Bennett University Campus",
+        "description": "The ultimate robotics racing showdown — build, race, and compete with custom-built RC cars and autonomous vehicles. Multiple race categories, massive prizes, and an electrifying atmosphere. Open to all colleges.",
+        "image": "/images/events/gtr-2026/gtr-poster.png",
+        "type": "upcoming",
+        "registrationLink": "https://gtr-2026.vercel.app",
+        "tags": ["Racing", "Robotics", "Competition", "Autonomous"],
+        "gallery": []
     },
     {
         "id": "3d-fusion-workshop-nov-2025",

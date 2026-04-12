@@ -1,49 +1,92 @@
 @import "tailwindcss";
 
 :root {
-  /* Phase 0: Black-first foundation */
-  --background: #000000;
-  --foreground: #ededed;
+  /* Foundation — warm dark, not clinical black */
+  --background: #070709;
+  --foreground: #e8e6e3;
 
-  /* Phase 1: Design System Tokens */
-  --surface: rgba(0, 0, 0, 0.45);
-  --surface-elevated: rgba(0, 0, 0, 0.60);
-  --border: rgba(255, 255, 255, 0.10);
-  --text-primary: rgba(255, 255, 255, 0.90);
-  --text-muted: rgba(255, 255, 255, 0.70);
+  /* Accent System — 4 colors, one dominant (primary) */
+  --accent-primary: #00d4ff;     /* Cyan — hero, links, primary CTAs */
+  --accent-secondary: #a855f7;   /* Purple — badges, secondary highlights */
+  --accent-warm: #f97316;        /* Orange — energy, warnings, urgency */
+  --accent-green: #22c55e;       /* Green — success, live indicators */
 
-  /* Accent Colors */
-  --neon-blue: #00f3ff;
-  --neon-purple: #bc13fe;
+  /* Surfaces — layered depth */
+  --surface-0: #0a0a0f;
+  --surface-1: #111118;
+  --surface-2: #1a1a24;
+  --surface-3: #242432;
 
-  /* Legacy mappings (for existing components) */
-  --glass-bg: var(--surface);
-  --panel-bg: var(--surface-elevated);
+  /* Text — clear hierarchy */
+  --text-1: rgba(232, 230, 227, 0.95);
+  --text-2: rgba(232, 230, 227, 0.60);
+  --text-3: rgba(232, 230, 227, 0.35);
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+
+  /* BACKWARD COMPAT — old names still work */
+  --neon-blue: var(--accent-primary);
+  --neon-purple: var(--accent-secondary);
+  --glass-bg: var(--surface-1);
+  --panel-bg: var(--surface-1);
+
+  /* Mapping old variables to new ones for compatibility */
+  --surface: var(--surface-1);
+  --surface-elevated: var(--surface-2);
+  --border: var(--border-default);
+  --text-primary: var(--text-1);
+  --text-secondary: var(--text-2);
+  --text-tertiary: var(--text-3);
+  --accent-success: var(--accent-green);
+  --accent-muted: var(--text-2);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Design System */
-  --color-surface: var(--surface);
-  --color-surface-elevated: var(--surface-elevated);
-  --color-border: var(--border);
-  --color-text-primary: var(--text-primary);
-  --color-text-muted: var(--text-muted);
+  /* New Design System */
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-warm: var(--accent-warm);
+  --color-accent-green: var(--accent-green);
 
-  /* Accents */
-  --color-neon-blue: var(--neon-blue);
-  --color-neon-purple: var(--neon-purple);
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
 
-  /* Legacy aliases */
-  --color-glass: var(--surface);
-  --color-panel: var(--surface-elevated);
+  /* Extended legacy mapping for @theme */
+  --color-text-primary: var(--text-1);
+  --color-text-secondary: var(--text-2);
+  --color-text-tertiary: var(--text-3);
+  --color-text-1: var(--text-1);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  
+  --color-surface: var(--surface-1);
+  --color-surface-elevated: var(--surface-2);
+  --color-border: var(--border-default);
+  --color-text-muted: var(--text-2);
+
+  --color-neon-blue: var(--accent-primary);
+  --color-neon-purple: var(--accent-secondary);
+  --color-glass: var(--surface-1);
+  --color-panel: var(--surface-0);
+  --color-panel-bg: var(--surface-0);
 
   /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-orbitron: var(--font-orbitron);
+  --font-display: var(--font-display);
 }
 
 body {
@@ -53,19 +96,153 @@ body {
   overflow-x: hidden;
 }
 
-/* Utilities for glowing effects */
+/* ===================================================================
+   CARD VARIANTS
+   =================================================================== */
+
 @layer utilities {
+  /* Legacy glass-panel — backward compat */
+  .glass-panel {
+    background: var(--surface-1);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-default);
+  }
+
+  /* NEW: Solid card — DEFAULT card style going forward */
+  .card-solid {
+    background: var(--surface-1);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+  }
+  .card-solid:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-2);
+  }
+
+  /* NEW: Outline card — minimal, for secondary info */
+  .card-outline {
+    background: transparent;
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+  }
+
+  /* NEW: Left-accent card — colored left border */
+  .card-accent-left {
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--accent-primary);
+    border-radius: 12px;
+  }
+
+  /* ===================================================================
+     GLOW & TEXT EFFECTS — warmer
+     =================================================================== */
+
   .text-glow {
-    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+    text-shadow: 0 0 10px var(--accent-primary), 0 0 20px var(--accent-primary);
   }
 
   .box-glow {
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+    box-shadow: 0 0 15px rgba(212, 168, 83, 0.25);
   }
 
-  .glass-panel {
-    background: var(--surface);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border);
+  /* ===================================================================
+     BACKGROUND TEXTURES
+     =================================================================== */
+
+  /* Background textures */
+  .bg-dots {
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
+
+  .bg-grid-lines {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .bg-noise {
+    position: relative;
+  }
+  .bg-noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===================================================================
+     MICRO-INTERACTIONS
+     =================================================================== */
+
+  .btn-press {
+    transition: transform 0.1s ease;
+  }
+  .btn-press:active {
+    transform: scale(0.97);
+  }
+
+  .link-underline {
+    position: relative;
+    text-decoration: none;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-primary);
+    transition: width 0.3s ease;
+  }
+  .link-underline:hover::after {
+    width: 100%;
+  }
+
+  .card-tilt {
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+  }
+  .card-tilt:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-4px);
+  }
+
+  /* scrollbar hide for horizontal scrolls */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ===================================================================
+   DISPLAY FONT STYLES
+   =================================================================== */
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }

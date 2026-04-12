@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Terminal from "@/components/Terminal";
 import SystemCrash from "@/components/SystemCrash";
-import AiChatBot from "@/components/AiChatBot";
 import { useEffect, useState } from "react";
 
 export default function ClientLayoutWrapper({
@@ -37,7 +36,6 @@ export default function ClientLayoutWrapper({
             {!isMicrosite && <Navbar />}
             <main className={`flex-grow ${!isMicrosite ? "pt-16" : ""}`}>{children}</main>
             {!isMicrosite && <Footer />}
-            <AiChatBot />
         </>
     );
 }

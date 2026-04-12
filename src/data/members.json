@@ -1,316 +1,39 @@
 [
-    {
-        "id": "rudrakshi-rai",
-        "name": "Rudrakshi Rai",
-        "role": "President",
-        "team": "Executive",
-        "image": "/images/executive/Rudrakshi Rai.JPG",
-        "bio": "Leading the club's vision and strategy.",
-        "linkedin": "#",
-        "instagram": "#"
-    },
-    {
-        "id": "annya",
-        "name": "Annya",
-        "role": "Vice President",
-        "team": "Executive",
-        "image": "/images/executive/annya.jpeg",
-        "bio": "Coordinating club activities and partnerships.",
-        "linkedin": "#",
-        "github": "#"
-    },
-    {
-        "id": "pushp",
-        "name": "Pushp",
-        "role": "General Secretary",
-        "team": "Executive",
-        "image": "/images/executive/Pushp.jpg",
-        "bio": "Managing communications and documentation.",
-        "linkedin": "#",
-        "instagram": "#"
-    },
-    {
-        "id": "rishabh-raj",
-        "name": "Rishabh Raj",
-        "role": "Tech Head",
-        "team": "Tech",
-        "image": "/images/tech/Rishabh_Raj.png",
-        "bio": "Driving technical innovation and project development.",
-        "linkedin": "#",
-        "github": "#"
-    },
-    {
-        "id": "vishal",
-        "name": "Vishal",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/Vishal.jpg",
-        "bio": "Contributing to technical projects.",
-        "linkedin": "#",
-        "github": "#"
-    },
-    {
-        "id": "harshit",
-        "name": "Harshit",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/IMG_1922_(1).jpg.jpeg",
-        "bio": "Contributing to technical projects.",
-        "linkedin": "#",
-        "github": "#"
-    },
-    {
-        "id": "vedant",
-        "name": "Vedant Somani",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/Vedant Somani.jpg",
-        "bio": "The creator of this website. Passionate about drones, IoT, and building cool stuff.",
-        "linkedin": "#",
-        "github": "#"
-    },
-    {
-        "id": "Vishrut",
-        "name": "Vishrut",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/Vishrut.jpg",
-        "bio": "Contributing to technical projects.",
-        "linkedin": "#",
-        "github": "#"
-    },
-    {
-        "id": "Ishant",
-        "name": "Ishant",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/Ishant.jpg",
-        "bio": "Contributing to technical projects.",
-        "linkedin": "#"
-    },
-    {
-        "id": "Sujal Gupta",
-        "name": "Sujal Gupta",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/Sujal gupta.png",
-        "bio": "Contributing to technical projects.",
-        "linkedin": "#"
-    },
-    {
-        "id": "daksh",
-        "name": "Daksh Malav",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/Daksh Malav.jpg",
-        "bio": "Contributing to technical projects.",
-        "github": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "priyanshu",
-        "name": "Priyanshu Yadav",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/PRIYANSHU YADAV.jpg",
-        "bio": "Contributing to technical projects.",
-        "github": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "umang",
-        "name": "Umang Agrawal",
-        "role": "Tech Team Member",
-        "team": "Tech",
-        "image": "/images/tech/umang agrawal(S25CSERY0430).jpg",
-        "bio": "Contributing to technical projects.",
-        "github": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "lakshit",
-        "name": "Lakshit",
-        "role": "Management Head",
-        "team": "Management",
-        "image": "/images/management/Lakshit Gupta.jpg",
-        "bio": "Managing club operations and logistics.",
-        "linkedin": "#"
-    },
-    {
-        "id": "pranjal",
-        "name": "Pranjal",
-        "role": "Management Team Member",
-        "team": "Management",
-        "image": "/images/management/PranjalMishra_SubHead_Management.jpg",
-        "bio": "Managing club operations and logistics.",
-        "linkedin": "#"
-    },
-    {
-        "id": "tanya",
-        "name": "Tanya",
-        "role": "Management Sub-Head",
-        "team": "Management",
-        "image": "/images/management/Tanya (management sub-head).jpg",
-        "bio": "Assisting in management operations.",
-        "linkedin": "#"
-    },
-    {
-        "id": "Kanishka",
-        "name": "Kanishka",
-        "role": "Management",
-        "team": "Management",
-        "image": "/images/management/Kanishka.png",
-        "bio": "Assisting in management operations.",
-        "linkedin": "#"
-    },
-    {
-        "id": "Aval",
-        "name": "Aval",
-        "role": "Management",
-        "team": "Management",
-        "image": "/images/management/Aval.jpg",
-        "bio": "Assisting in management operations.",
-        "linkedin": "#"
-    },
-    {
-        "id": "Nikhil",
-        "name": "Nikhil",
-        "role": "Management",
-        "team": "Management",
-        "image": "/images/management/Nikhil.jpg",
-        "bio": "Assisting in management operations.",
-        "linkedin": "#"
-    },
-    {
-        "id": "Tanmay sahai",
-        "name": "Tanmay Sahai",
-        "role": "Management Team Member",
-        "team": "Management",
-        "image": "/images/tech/Tanmay_sahai.jpg",
-        "bio": "Coordinating club logistics and operations.",
-        "linkedin": "#",
-        "github": "#"
-    },
-    {
-        "id": "yashi",
-        "name": "Yashi",
-        "role": "Social Media Head",
-        "team": "Social Media",
-        "image": "/images/social_media/Yashi Pandey (Social Media sub-head).jpg",
-        "bio": "Managing social media presence.",
-        "instagram": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "samar",
-        "name": "Samar Pratap",
-        "role": "Social Media Team Member",
-        "team": "Social Media",
-        "image": "/images/social_media/SAMAR_PRATAP_iOS.jpg",
-        "bio": "Managing social media content.",
-        "instagram": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "sujal",
-        "name": "Sujal Raj",
-        "role": "Social Media Team Member",
-        "team": "Social Media",
-        "image": "/images/social_media/SUJAL_RAJ_iOS.jpg",
-        "bio": "Managing social media content.",
-        "instagram": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "shivansh",
-        "name": "Shivansh",
-        "role": "Multimedia Head",
-        "team": "Multimedia",
-        "image": "/images/multimedia/Shivansh.jpeg",
-        "bio": "Leading multimedia content creation.",
-        "instagram": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "shanthan",
-        "name": "Shanthan",
-        "role": "Multimedia Team Member",
-        "team": "Multimedia",
-        "image": "/images/multimedia/Shanthan.jpeg",
-        "bio": "Creating multimedia content.",
-        "instagram": "#",
-        "linkedin": "#"
-    },
-    {
-        "id": "roshan-gupta",
-        "name": "Roshan Gupta",
-        "role": "Design Head",
-        "team": "Design",
-        "image": "/images/design/Roshan Gupta ( Design Head ).jpg",
-        "bio": "Leading design initiatives.",
-        "instagram": "#"
-    },
-    {
-        "id": "astha-kranwal",
-        "name": "Astha Kranwal",
-        "role": "PR Head",
-        "team": "PR",
-        "image": "/images/pr/Astha Kranwal PR Head.jpg",
-        "bio": "Managing public relations.",
-        "linkedin": "#"
-    },
-    {
-        "id": "shubham-singh",
-        "name": "Shubham Singh",
-        "role": "PR Team Member",
-        "team": "PR",
-        "image": "/images/pr/Shubham singh PR.jpg",
-        "bio": "Assisting with PR activities.",
-        "linkedin": "#"
-    },
-    {
-        "id": "Ansh",
-        "name": "Ansh",
-        "role": "PR Team Member",
-        "team": "PR",
-        "image": "/images/pr/Ansh.png",
-        "bio": "Assisting with PR activities.",
-        "linkedin": "#"
-    },
-    {
-        "id": "gargi-gupta",
-        "name": "Gargi Gupta",
-        "role": "Design Team Member",
-        "team": "Design",
-        "image": "/images/design/Gargi Gupta design .JPG",
-        "bio": "Contributing to design visual identity.",
-        "instagram": "#"
-    },
-    {
-        "id": "saniya",
-        "name": "Saniya",
-        "role": "Design Team Member",
-        "team": "Design",
-        "image": "/images/design/saniya.jpg",
-        "bio": "Creating visual assets for the club.",
-        "instagram": "#"
-    },
-    {
-        "id": "rakshika",
-        "name": "Rakshika",
-        "role": "PR Sub-Head",
-        "team": "PR",
-        "image": "/images/pr/Rakshika PR subhead (1).jpeg",
-        "bio": "Coordinating public relations and outreach.",
-        "linkedin": "#"
-    },
-    {
-        "id": "joel",
-        "name": "Joel",
-        "role": "PR Team Member",
-        "team": "PR",
-        "image": "/images/pr/Joel.jpg",
-        "bio": "Assisting with PR activities.",
-        "linkedin": "#"
-    }
+    {"id":"rudrakshi-rai","name":"Rudrakshi Rai","role":"President","team":"Executive","image":"/images/executive/Rudrakshi Rai.JPG","bio":"Leading the club's vision and strategy.","linkedin":"#","instagram":"#"},
+    {"id":"pushp","name":"Pushp","role":"General Secretary","team":"Executive","image":"/images/executive/Pushp.jpg","bio":"Managing communications and documentation.","linkedin":"#","instagram":"#"},
+    {"id":"rishabh-raj","name":"Rishabh Raj","role":"Tech Head","team":"Tech","image":"/images/tech/Rishabh_Raj.png","bio":"Driving technical innovation and project development.","linkedin":"#","github":"#"},
+    {"id":"Vishrut","name":"Vishrut","role":"Tech Sub-Head","team":"Tech","image":"/images/tech/Vishrut.jpg","bio":"Supporting technical initiatives and project development.","linkedin":"#"},
+    {"id":"vishal","name":"Vishal","role":"Tech Team Member","team":"Tech","image":"/images/tech/Vishal.jpg","bio":"Contributing to technical projects.","linkedin":"#","github":"#"},
+    {"id":"harshit","name":"Harshit","role":"Tech Team Member","team":"Tech","image":"/images/tech/IMG_1922_(1).jpg.jpeg","bio":"Contributing to technical projects.","linkedin":"#","github":"#"},
+    {"id":"Ishant","name":"Ishant","role":"Tech Team Member","team":"Tech","image":"/images/tech/Ishant.jpg","imagePosition":"center 30%","bio":"Contributing to technical projects.","linkedin":"#"},
+    {"id":"Sujal Gupta","name":"Sujal Gupta","role":"Tech Team Member","team":"Tech","image":"/images/tech/Sujal gupta.png","bio":"Contributing to technical projects.","linkedin":"#"},
+    {"id":"daksh","name":"Daksh Malav","role":"Tech Team Member","team":"Tech","image":"/images/tech/Daksh Malav.jpg","bio":"Contributing to technical projects.","github":"#","linkedin":"#"},
+    {"id":"priyanshu","name":"Priyanshu Yadav","role":"Tech Team Member","team":"Tech","image":"/images/tech/PRIYANSHU YADAV.jpg","bio":"Contributing to technical projects.","github":"#","linkedin":"#"},
+    {"id":"umang","name":"Umang Agrawal","role":"Tech Team Member","team":"Tech","image":"/images/tech/umang agrawal(S25CSERY0430).jpg","bio":"Contributing to technical projects.","github":"#","linkedin":"#"},
+    {"id":"vedant","name":"Vedant Somani","role":"Research Head","team":"Research","image":"/images/research/Vedant Somani.jpg","bio":"Leading the research division. Passionate about drones, IoT, and building cool stuff. Also the creator of this website.","linkedin":"#","github":"#"},
+    {"id":"krish","name":"Krish","role":"Research Sub-Head","team":"Research","image":"/images/research/krish.png","bio":"Supporting research initiatives and academic collaborations.","linkedin":"#"},
+    {"id":"anish","name":"Anish","role":"Research Team Member","team":"Research","image":"/images/member-placeholder.png","bio":"Contributing to research experiments and documentation.","linkedin":"#"},
+    {"id":"aditya","name":"Aditya","role":"Research Team Member","team":"Research","image":"/images/member-placeholder.png","bio":"Contributing to research experiments and documentation.","linkedin":"#"},
+    {"id":"arham-tabish","name":"Arham Tabish","role":"Research Team Member","team":"Research","image":"/images/member-placeholder.png","bio":"Contributing to research experiments and documentation.","linkedin":"#"},
+    {"id":"saksham-yadav","name":"Saksham Yadav","role":"Research Team Member","team":"Research","image":"/images/research/Screenshot 2026-04-13 021900.png","bio":"Contributing to research experiments and documentation.","linkedin":"#"},
+    {"id":"yashaswini-mohanty","name":"Yashaswini Mohanty","role":"Research Team Member","team":"Research","image":"/images/research/Screenshot 2026-04-13 021924.png","bio":"Contributing to research experiments and documentation.","linkedin":"#"},
+    {"id":"lakshit","name":"Lakshit","role":"Management Head","team":"Management","image":"/images/management/Lakshit Gupta.jpg","bio":"Managing club operations and logistics.","linkedin":"#"},
+    {"id":"pranjal","name":"Pranjal","role":"Management Team Member","team":"Management","image":"/images/management/PranjalMishra_SubHead_Management.jpg","bio":"Managing club operations and logistics.","linkedin":"#"},
+    {"id":"tanya","name":"Tanya","role":"Management Sub-Head","team":"Management","image":"/images/management/Tanya (management sub-head).jpg","bio":"Assisting in management operations.","linkedin":"#"},
+    {"id":"Kanishka","name":"Kanishka","role":"Management Team Member","team":"Management","image":"/images/management/Kanishka.png","bio":"Assisting in management operations.","linkedin":"#"},
+    {"id":"Aval","name":"Aval","role":"Management Team Member","team":"Management","image":"/images/management/Aval.jpg","bio":"Assisting in management operations.","linkedin":"#"},
+    {"id":"Nikhil","name":"Nikhil","role":"Management Team Member","team":"Management","image":"/images/management/Nikhil.jpg","bio":"Assisting in management operations.","linkedin":"#"},
+    {"id":"Tanmay sahai","name":"Tanmay Sahai","role":"Management Team Member","team":"Management","image":"/images/tech/Tanmay_sahai.jpg","bio":"Coordinating club logistics and operations.","linkedin":"#","github":"#"},
+    {"id":"yashi","name":"Yashi","role":"Social Media Head","team":"Social Media","image":"/images/social_media/Yashi Pandey (Social Media sub-head).jpg","bio":"Managing social media presence.","instagram":"#","linkedin":"#"},
+    {"id":"samar","name":"Samar Pratap","role":"Social Media Team Member","team":"Social Media","image":"/images/social_media/SAMAR_PRATAP_iOS.jpg","bio":"Managing social media content.","instagram":"#","linkedin":"#"},
+    {"id":"sujal","name":"Sujal Raj","role":"Social Media Team Member","team":"Social Media","image":"/images/social_media/SUJAL_RAJ_iOS.jpg","bio":"Managing social media content.","instagram":"#","linkedin":"#"},
+    {"id":"shivansh","name":"Shivansh","role":"Multimedia Head","team":"Multimedia","image":"/images/multimedia/Shivansh.jpeg","bio":"Leading multimedia content creation.","instagram":"#","linkedin":"#"},
+    {"id":"shanthan","name":"Shanthan","role":"Multimedia Team Member","team":"Multimedia","image":"/images/multimedia/Shanthan.jpeg","bio":"Creating multimedia content.","instagram":"#","linkedin":"#"},
+    {"id":"roshan-gupta","name":"Roshan Gupta","role":"Design Head","team":"Design","image":"/images/design/Roshan Gupta ( Design Head ).jpg","bio":"Leading design initiatives.","instagram":"#"},
+    {"id":"gargi-gupta","name":"Gargi Gupta","role":"Design Team Member","team":"Design","image":"/images/design/Gargi Gupta design .JPG","bio":"Contributing to design visual identity.","instagram":"#"},
+    {"id":"saniya","name":"Saniya","role":"Design Team Member","team":"Design","image":"/images/design/saniya.jpg","bio":"Creating visual assets for the club.","instagram":"#"},
+    {"id":"astha-kranwal","name":"Astha Kranwal","role":"PR Head","team":"PR","image":"/images/pr/Astha Kranwal PR Head.jpg","bio":"Managing public relations.","linkedin":"#"},
+    {"id":"shubham-singh","name":"Shubham Singh","role":"PR Team Member","team":"PR","image":"/images/pr/Shubham singh PR.jpg","bio":"Assisting with PR activities.","linkedin":"#"},
+    {"id":"Ansh","name":"Ansh","role":"PR Team Member","team":"PR","image":"/images/pr/Ansh.png","bio":"Assisting with PR activities.","linkedin":"#"},
+    {"id":"joel","name":"Joel","role":"PR Team Member","team":"PR","image":"/images/pr/Joel.jpg","bio":"Assisting with PR activities.","linkedin":"#"}
 ]

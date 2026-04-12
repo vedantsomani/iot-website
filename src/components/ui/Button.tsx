@@ -4,15 +4,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Slot } from "@radix-ui/react-slot";
 
 const buttonVariants = cva(
-    "inline-flex items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue disabled:opacity-50 disabled:pointer-events-none active:scale-95",
+    "inline-flex items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60 disabled:opacity-50 disabled:pointer-events-none active:scale-95",
     {
         variants: {
             variant: {
-                default: "bg-neon-blue text-black hover:bg-white hover:text-black hover:scale-105 shadow-[0_0_15px_rgba(0,243,255,0.3)] hover:shadow-[0_0_25px_rgba(0,243,255,0.5)]",
+                default: "bg-neon-blue text-black hover:bg-white hover:text-black hover:scale-105 shadow-[0_0_15px_rgba(212,168,83,0.25)] hover:shadow-[0_0_25px_rgba(212,168,83,0.4)]",
                 outline: "border border-white/20 text-white hover:border-neon-purple hover:text-neon-purple bg-transparent",
                 ghost: "text-gray-400 hover:text-white hover:bg-white/5",
                 link: "text-neon-blue hover:text-white underline-offset-4 hover:underline p-0 h-auto",
-                glow: "bg-neon-purple text-white shadow-[0_0_15px_rgba(188,19,254,0.3)] hover:bg-neon-purple/90 hover:shadow-[0_0_25px_rgba(188,19,254,0.5)]",
+                glow: "bg-neon-purple text-white shadow-[0_0_15px_rgba(45,212,168,0.25)] hover:bg-neon-purple/90 hover:shadow-[0_0_25px_rgba(45,212,168,0.4)]",
             },
             size: {
                 default: "h-11 px-6 py-2",

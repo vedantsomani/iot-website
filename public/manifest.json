@@ -1,0 +1,16 @@
+{
+  "name": "IoT & Robotics Club",
+  "short_name": "IoT Club",
+  "description": "Bennett University's IoT & Robotics Club",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "/logo-iot.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iot-robotics-bu.vercel.app/sitemap.xml

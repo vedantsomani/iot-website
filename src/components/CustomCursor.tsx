@@ -7,6 +7,7 @@ export default function CustomCursor() {
     const [isHovering, setIsHovering] = useState(false);
     const [isRobotEye, setIsRobotEye] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [isTouch, setIsTouch] = useState(false);
 
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
@@ -17,8 +18,11 @@ export default function CustomCursor() {
 
     useEffect(() => {
         // Only show custom cursor on non-touch devices
-        const isTouchDevice = 'ontouchstart' in window;
-        if (isTouchDevice) return;
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (isTouchDevice) {
+            setIsTouch(true);
+            return;
+        }
 
         const moveCursor = (e: MouseEvent) => {
             cursorX.set(e.clientX);
@@ -65,7 +69,7 @@ export default function CustomCursor() {
         };
     }, [cursorX, cursorY]);
 
-    if (!isVisible) return null;
+    if (!isVisible || isTouch) return null;
 
     return (
         <>

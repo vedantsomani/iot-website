@@ -182,7 +182,7 @@ export function NavBrand({ children, href = "/", className }: NavBrandProps) {
             href={href}
             className={cn(
                 "text-lg md:text-xl font-bold font-orbitron text-white z-50",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60 rounded",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60 rounded",
                 className
             )}
         >
@@ -201,7 +201,6 @@ interface NavListProps {
 
 export function NavList({ className }: NavListProps) {
     const { items, activeIndex } = useNav();
-    const prefersReduced = usePrefersReducedMotion();
 
     return (
         <nav
@@ -215,17 +214,11 @@ export function NavList({ className }: NavListProps) {
                         <li key={item.href} className="relative">
                             {/* Active Pill (behind link) */}
                             {isActive && (
-                                <motion.div
-                                    layoutId={prefersReduced ? undefined : "nav-active-pill"}
+                                <div
                                     className={cn(
                                         "absolute inset-0 rounded-full bg-neon-blue",
-                                        !prefersReduced && "shadow-[0_0_20px_rgba(0,243,255,0.4)]"
+                                        "shadow-[0_0_15px_rgba(212,168,83,0.35)]"
                                     )}
-                                    transition={
-                                        prefersReduced
-                                            ? { duration: 0 }
-                                            : { type: "spring", stiffness: 400, damping: 30 }
-                                    }
                                 />
                             )}
                             {/* Link */}
@@ -236,7 +229,7 @@ export function NavList({ className }: NavListProps) {
                                     isActive
                                         ? "text-black font-semibold"
                                         : "text-white/70 hover:text-white hover:bg-white/5",
-                                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+                                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
                                 )}
                             >
                                 {item.name}
@@ -270,7 +263,7 @@ export function NavMobileToggle({ className }: NavMobileToggleProps) {
             className={cn(
                 "md:hidden p-2 text-white rounded-lg",
                 "hover:bg-white/10 transition-colors",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60",
                 className
             )}
         >
@@ -359,7 +352,7 @@ export function NavMobileMenu({ className }: NavMobileMenuProps) {
                                 type="button"
                                 onClick={() => setIsOpen(false)}
                                 aria-label="Close menu"
-                                className="p-2 text-white rounded-lg hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+                                className="p-2 text-white rounded-lg hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
                             >
                                 <X className="w-6 h-6" />
                             </button>
@@ -380,7 +373,7 @@ export function NavMobileMenu({ className }: NavMobileMenuProps) {
                                                 isActive
                                                     ? "bg-neon-blue/20 text-neon-blue border-l-4 border-neon-blue"
                                                     : "text-white/70 hover:text-white hover:bg-white/5",
-                                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+                                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60"
                                             )}
                                         >
                                             {item.name}

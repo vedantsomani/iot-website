@@ -59,7 +59,8 @@ export default function ProjectDetailPage({ params }: PageProps) {
                             transition={{ duration: 0.6 }}
                         >
                             {project.featured && (
-                                <span className="inline-block px-3 py-1 mb-4 rounded-full text-xs font-bold bg-neon-purple text-white">
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 mb-4 rounded-full text-[10px] font-bold bg-accent-primary/10 text-accent-primary uppercase tracking-widest">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-accent-primary animate-pulse" />
                                     Featured Project
                                 </span>
                             )}
@@ -78,9 +79,9 @@ export default function ProjectDetailPage({ params }: PageProps) {
                                         href={project.githubLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white hover:text-black transition-colors"
+                                        className="inline-flex items-center gap-2 px-6 py-3 border border-border-strong text-white rounded-full hover:bg-white/5 transition-colors font-medium text-sm"
                                     >
-                                        <Github className="w-5 h-5" />
+                                        <Github className="w-4 h-4" />
                                         View Source
                                     </a>
                                 )}
@@ -89,9 +90,9 @@ export default function ProjectDetailPage({ params }: PageProps) {
                                         href={project.demoLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-6 py-3 bg-neon-blue text-black font-bold rounded-lg hover:bg-white transition-colors"
+                                        className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold rounded-full hover:bg-white/90 transition-colors text-sm"
                                     >
-                                        <ExternalLink className="w-5 h-5" />
+                                        <ExternalLink className="w-4 h-4" />
                                         Live Demo
                                     </a>
                                 )}
@@ -104,7 +105,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
                         >
-                            <div className="relative h-80 lg:h-96 rounded-2xl overflow-hidden glass-panel border border-white/10">
+                            <div className="relative h-80 lg:h-96 rounded-2xl overflow-hidden card-solid border border-border-default">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
@@ -125,16 +126,16 @@ export default function ProjectDetailPage({ params }: PageProps) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Tech Stack */}
                         <ScrollReveal>
-                            <div className="glass-panel p-6 rounded-xl border border-white/10">
+                            <div className="card-outline p-6 rounded-xl border border-border-default">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <Cpu className="w-6 h-6 text-neon-blue" />
-                                    <h3 className="text-xl font-bold font-orbitron text-white">Tech Stack</h3>
+                                    <Cpu className="w-5 h-5 text-accent-primary" />
+                                    <h3 className="text-xl font-bold font-display text-white">Tech Stack</h3>
                                 </div>
                                 <div className="flex flex-wrap gap-2">
                                     {project.techStack.map((tech) => (
                                         <span
                                             key={tech}
-                                            className="px-4 py-2 rounded-lg text-sm bg-neon-blue/10 text-neon-blue border border-neon-blue/20"
+                                            className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-white/10 text-white backdrop-blur-md"
                                         >
                                             {tech}
                                         </span>
@@ -145,16 +146,16 @@ export default function ProjectDetailPage({ params }: PageProps) {
 
                         {/* Team */}
                         <ScrollReveal delay={0.1}>
-                            <div className="glass-panel p-6 rounded-xl border border-white/10">
+                            <div className="card-outline p-6 rounded-xl border border-border-default">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <Users className="w-6 h-6 text-neon-purple" />
-                                    <h3 className="text-xl font-bold font-orbitron text-white">Team</h3>
+                                    <Users className="w-5 h-5 text-accent-secondary" />
+                                    <h3 className="text-xl font-bold font-display text-white">Team</h3>
                                 </div>
                                 <div className="flex flex-wrap gap-2">
                                     {project.team.map((member) => (
                                         <span
                                             key={member}
-                                            className="px-4 py-2 rounded-lg text-sm bg-neon-purple/10 text-neon-purple border border-neon-purple/20"
+                                            className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-white/10 text-white backdrop-blur-md"
                                         >
                                             {member}
                                         </span>
@@ -178,7 +179,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
                             {project.gallery.map((img, i) => (
                                 <motion.div
                                     key={i}
-                                    className="relative aspect-video rounded-xl overflow-hidden glass-panel border border-white/10"
+                                    className="relative aspect-video rounded-xl overflow-hidden card-solid border border-border-default"
                                     whileHover={{ scale: 1.02 }}
                                     transition={{ type: 'spring', stiffness: 300 }}
                                 >
@@ -209,7 +210,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
                                 >
                                     <Link
                                         href={`/projects/${p.slug}`}
-                                        className="block glass-panel border border-white/10 rounded-xl overflow-hidden group"
+                                        className="block card-outline rounded-xl overflow-hidden group h-full"
                                     >
                                         <div className="relative h-40">
                                             <Image src={p.image} alt={p.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
